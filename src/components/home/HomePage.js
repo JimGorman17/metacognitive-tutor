@@ -3,14 +3,17 @@ import {Link} from 'react-router-dom';
 import {Labels} from '../../constants';
 
 class HomePage extends React.Component {
-  componentDidMount() {
+  /*
+  componentDidMount() {    
     // TODO: Remove - Exists to test CORS.
     fetch(`${process.env.__API_URL__}/hello/bob?format=json`)
       .then(response => response.json())
       .then(data => alert(data.result));
   }
+  */
 
   render() {
+    debugger; // eslint-disable-line
     return (
       <div className="jumbotron">
         <h1>{Labels.app_title}</h1>

@@ -8,7 +8,7 @@ export default function loginReducer(state = initialState.loginStatus, action) {
   } else if (action.type == types.LOGIN_STUDENT_SUCCESS) {
     return LoginTypeEnum.student;
   } else if (action.type == types.LOGOUT_SUCCESS) {
-    return null;
+    return LoginTypeEnum.logged_out;
   }
 
   return state;

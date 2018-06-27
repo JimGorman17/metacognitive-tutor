@@ -15,7 +15,7 @@ const Labels = {
     }
 }
 
-const LoginTypeEnum = Object.freeze({ teacher: {}, student: {} }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+const LoginTypeEnum = Object.freeze({ logged_out: 0, teacher: 1, student: 2 }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 
 export {  
     Labels,

@@ -1,4 +1,6 @@
+import {LoginTypeEnum} from '../constants';
+
 export default {
-    loginStatus: null,
+    loginStatus: LoginTypeEnum.logged_out,
     ajaxCallsInProgress: 0
 }
