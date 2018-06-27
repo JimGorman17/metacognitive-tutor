@@ -3,7 +3,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'; 
 
-export default {
+const GLOBALS = {
+  'process.env.__API_URL__': JSON.stringify('http://localhost:61360')
+};
+
+export default {  
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
@@ -26,6 +30,7 @@ export default {
     new HardSourceWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin(GLOBALS),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
       template: 'src/index.ejs',
       minify: {

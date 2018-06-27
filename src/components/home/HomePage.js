@@ -3,15 +3,21 @@ import {Link} from 'react-router-dom';
 import {Labels} from '../../constants';
 
 class HomePage extends React.Component {
+  componentDidMount() {
+    fetch(`${process.env.__API_URL__}/hello/bob?format=json`)
+      .then(response => response.json())
+      .then(data => alert(data));
+  }
+
   render() {
     return (
       <div className="jumbotron">
         <h1>{Labels.app_title}</h1>
         <p>{Labels.app_description}</p>
-        <Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
+        <Link to="about" className="btn btn-primary btn-lg">{Labels.home.learn_more}</Link>
       </div>
     );
-  }
+  }  
 }
 
 export default HomePage;

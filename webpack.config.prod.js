@@ -8,6 +8,7 @@ import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
+  'process.env.__API_URL__': JSON.stringify('https://metacognitive-tutor.azurewebsites.net/'),
   __DEV__: false
 };
 
