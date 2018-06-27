@@ -4,6 +4,7 @@ import {Labels} from '../../constants';
 
 class HomePage extends React.Component {
   componentDidMount() {
+    // TODO: Remove - Exists to test CORS.
     fetch(`${process.env.__API_URL__}/hello/bob?format=json`)
       .then(response => response.json())
       .then(data => alert(data.result));

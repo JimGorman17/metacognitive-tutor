@@ -15,6 +15,9 @@ const Labels = {
     }
 }
 
+const LoginTypeEnum = Object.freeze({ teacher: {}, student: {} }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+
 export {  
-    Labels      
+    Labels,
+    LoginTypeEnum
 };

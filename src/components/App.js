@@ -5,7 +5,8 @@ import Header from './common/Header';
 import { Route, Switch } from "react-router-dom";
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
-import NotFoundPage from "./NotFoundPage";
+import NotFoundPage from './NotFoundPage';
+import SamplePage from './login/SamplePage'; // TODO: Remove - Just for proof of concept.
 import { hot } from 'react-hot-loader';
 
 // This is a class-based component because the current
@@ -22,6 +23,7 @@ class App extends React.Component {
         <Switch>          
             <Route exact path="/" component={HomePage} />    
             <Route path="/about" component={AboutPage} />
+            <Route path="/helloworld" component={() => <SamplePage name="Sally" />} />
             <Route component={NotFoundPage} />          
         </Switch>
         {this.props.children}
