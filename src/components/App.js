@@ -29,15 +29,14 @@ class App extends React.Component {
             <PrivateRoute path="/about" component={AboutPage} />
             <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
             <PrivateRoute component={NotFoundPage} />          
-        </Switch>
-        {this.props.children}
+        </Switch>        
       </div>
     );
   }
 }
 
 App.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.element,
   loading: PropTypes.bool.isRequired,
   loginStatus: PropTypes.number.isRequired
 };

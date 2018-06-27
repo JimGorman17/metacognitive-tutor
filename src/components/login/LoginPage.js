@@ -18,8 +18,7 @@ class LoginPage extends React.Component {
     
     login = () => {
         this.props.actions.loginTeacher()
-        .then(() => {
-            debugger;  
+        .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });      
     }
