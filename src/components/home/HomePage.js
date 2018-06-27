@@ -6,7 +6,7 @@ class HomePage extends React.Component {
   componentDidMount() {
     fetch(`${process.env.__API_URL__}/hello/bob?format=json`)
       .then(response => response.json())
-      .then(data => alert(data));
+      .then(data => alert(data.result));
   }
 
   render() {
