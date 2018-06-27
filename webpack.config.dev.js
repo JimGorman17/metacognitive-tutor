@@ -4,7 +4,7 @@ import path from 'path';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'; 
 
 const GLOBALS = {
-  'process.env.__API_URL__': JSON.stringify('http://localhost:61360')
+  'process.env.__API_URL__': JSON.stringify('http://localhost:61360') // no trailing slashes please
 };
 
 export default {  
