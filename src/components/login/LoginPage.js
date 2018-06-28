@@ -43,10 +43,10 @@ class LoginPage extends React.Component {
       return ( // TODO: Refactor - A container component shouldn't render markup.        
         <div className="container">            
             <div className="row justify-content-center mb-4">         
-                <button type="button" className="btn btn-primary" onClick={this.loginAsTeacher}>Log in as a Teacher</button>                    
+                <button type="button" className="btn btn-primary" onClick={this.loginAsTeacher}>{Labels.login.log_in_as_a_teacher}</button>                    
             </div>
             <div className="row justify-content-center">         
-                <button type="button" className="btn btn-primary" onClick={this.loginAsStudent}>Log in as a Student</button>                    
+                <button type="button" className="btn btn-primary" onClick={this.loginAsStudent}>{Labels.login.log_in_as_a_student}</button>                    
             </div>
         </div>        
       )
