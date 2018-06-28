@@ -1,5 +1,5 @@
 const Labels = {
-    app_title: 'Metacognitive Tutor', // Don't forget to change the title in index.html too. 
+    app_title: 'Metacognitive Tutor', // Don't forget to change the title in index.html and index.ejs too. 
     app_description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     home: {
         title: 'Home',
