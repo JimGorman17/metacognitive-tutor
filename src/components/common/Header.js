@@ -4,6 +4,11 @@ import { NavLink } from 'react-router-dom';
 import LoadingDots from './LoadingDots';
 import {Labels, LoginTypeEnum} from '../../constants';
 
+// TODO: Cleanup
+// <NavLink to="/teacher_admin" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
+// <NavLink to="/create_lesson" className="nav-link" activeClassName="active">{Labels.teacher.create_lesson_page.title}</NavLink>
+// <NavLink to="/student_main_menu" className="nav-link" activeClassName="active">{Labels.student.main_menu.title}</NavLink>
+
 const Header = ({loading, loginStatus}) => {  
   return (    
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">      
@@ -15,17 +20,17 @@ const Header = ({loading, loginStatus}) => {
           </li>
           {loginStatus == LoginTypeEnum.teacher &&
           <li className="nav-item">
-            <NavLink to="/teacher_admin" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
+            <NavLink to="/lessons" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
           </li>
           }
           {loginStatus == LoginTypeEnum.teacher &&
           <li className="nav-item">
-            <NavLink to="/create_lesson" className="nav-link" activeClassName="active">{Labels.teacher.create_lesson_page.title}</NavLink>
+            <NavLink to="/lesson" className="nav-link" activeClassName="active">{Labels.teacher.create_lesson_page.title}</NavLink>
           </li>
           }          
           {loginStatus == LoginTypeEnum.student &&
           <li className="nav-item">
-            <NavLink to="/student_main_menu" className="nav-link" activeClassName="active">{Labels.student.main_menu.title}</NavLink>
+            <NavLink to="/lessons" className="nav-link" activeClassName="active">{Labels.student.main_menu.title}</NavLink>
           </li>
           }
           {loginStatus == LoginTypeEnum.student &&

@@ -28,6 +28,11 @@ const Labels = {
         create_lesson_page: {
             title: 'Create Lesson',
             description: 'Some Description...'
+        },
+        lesson_form: {
+            manage_lesson: {
+                title: "Manage Lesson"
+            }
         }
     },
     student: {
@@ -38,6 +43,11 @@ const Labels = {
         lesson_page: {
             title: 'Lesson Page',
             description: 'Some Description...'
+        }
+    },
+    shared: {
+        lessons_page: {
+            title: "Lessons"            
         }
     }
 }

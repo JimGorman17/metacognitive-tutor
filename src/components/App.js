@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import Header from './common/Header';
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
-import TeacherAdminPage from './teacherAdmin/TeacherAdminPage';
-import CreateLessonPage from './createLesson/CreateLessonPage';
-import StudentMainMenuPage from './studentMainMenu/StudentMainMenuPage';
+
+// import TeacherAdminPage from './teacherAdmin/TeacherAdminPage'; TODO: Cleanup
+// import CreateLessonPage from './createLesson/CreateLessonPage'; TODO: Cleanup
+// import StudentMainMenuPage from './studentMainMenu/StudentMainMenuPage'; TODO: Cleanup
+import LessonsPage from './lesson/LessonsPage';
+import ManageLessonPage from './lesson/ManageLessonPage'; //eslint-disable-line import/no-named-as-default
+
 import StudentLessonPage from './studentLesson/StudentLessonPage';
 import AboutPage from './about/AboutPage';
 import NotFoundPage from './NotFoundPage';
@@ -20,6 +24,11 @@ import {connect} from 'react-redux';
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
 
+// TODO: Cleanup
+// <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
+// <PrivateRoute path="/create_lesson" component={CreateLessonPage} />
+// <PrivateRoute path="/student_main_menu" component={StudentMainMenuPage} />
+
 class App extends React.Component {
   render() {
     return (
@@ -32,9 +41,9 @@ class App extends React.Component {
           <Switch>
               <Route path="/login" component={LoginPage} />
               <PrivateRoute exact path="/" component={HomePage} />
-              <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
-              <PrivateRoute path="/create_lesson" component={CreateLessonPage} />
-              <PrivateRoute path="/student_main_menu" component={StudentMainMenuPage} />
+              <PrivateRoute path="/lessons" component={LessonsPage} />              
+              <PrivateRoute path="/lesson" component={ManageLessonPage} />
+              <PrivateRoute path="/lesson/:id" component={ManageLessonPage} />
               <PrivateRoute path="/student_lesson" component={StudentLessonPage} />
               <PrivateRoute path="/about" component={AboutPage} />
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
