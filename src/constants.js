@@ -19,6 +19,22 @@ const Labels = {
     not_found: {
         title: '404 Page Not Found',
         message: 'Go back to homepage'
+    },
+    teacher: {
+        admin_page: {
+            title: 'Admin Page'
+        },
+        create_lesson_page: {
+            title: 'Create Lesson'
+        }
+    },
+    student: {
+        main_menu: {
+            title: 'Main Menu'
+        },
+        lesson_page: {
+            title: 'Lesson Page'
+        }
     }
 }
 
