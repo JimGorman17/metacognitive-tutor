@@ -1,18 +1,19 @@
 import React from 'react'
 import {  
   Route,  
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props) => (
-        props.loginStatus // TODO: Make this conditional passed on the loginType
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    return <Route {...rest} render={(props, loginStatus = rest.loginStatus) => {
+        return loginStatus // TODO: Make this conditional passed on the loginType
           ? <Component {...props} />
           : <Redirect to={{pathname: '/login', state: { from: props.location }}} />
-      )} />
-);
+      }} />
+};
 
 PrivateRoute.propTypes = {
     component: PropTypes.func.isRequired,
@@ -26,4 +27,4 @@ function mapStateToProps(state/*, ownProps*/) {
     };
 }
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

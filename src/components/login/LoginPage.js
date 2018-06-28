@@ -25,7 +25,7 @@ class LoginPage extends React.Component {
     render() {
       const { from } = this.props.location.state || { from: { pathname: '/' } }
       const { redirectToReferrer } = this.state
-      
+
       if (redirectToReferrer === true) {
         return <Redirect to={from} />
       }

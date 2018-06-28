@@ -13,7 +13,6 @@ class HomePage extends React.Component {
   */
 
   render() {
-    debugger; // eslint-disable-line
     return (
       <div className="jumbotron">
         <h1>{Labels.app_title}</h1>

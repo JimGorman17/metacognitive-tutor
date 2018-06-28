@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './common/Header';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
 import NotFoundPage from './NotFoundPage';
@@ -48,4 +48,4 @@ function mapStateToProps(state/*, ownProps*/) {
   };
 }
 
-export default connect(mapStateToProps)(hot(module)(App));
+export default withRouter(connect(mapStateToProps)(hot(module)(App)));
