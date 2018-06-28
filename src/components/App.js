@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Header from './common/Header';
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
+import TeacherAdminPage from './teacherAdmin/TeacherAdminPage';
+import CreateLessonPage from './createLesson/CreateLessonPage';
+import StudentMainMenuPage from './studentMainMenu/StudentMainMenuPage';
+import StudentLessonPage from './studentLesson/StudentLessonPage';
 import AboutPage from './about/AboutPage';
 import NotFoundPage from './NotFoundPage';
 import PrivateRoute from './PrivateRoute';
@@ -27,7 +31,11 @@ class App extends React.Component {
         <div className="jumbotron">
           <Switch>
               <Route path="/login" component={LoginPage} />
-              <PrivateRoute exact path="/" component={HomePage} />    
+              <PrivateRoute exact path="/" component={HomePage} />
+              <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
+              <PrivateRoute path="/create_lesson" component={CreateLessonPage} />
+              <PrivateRoute path="/student_main_menu" component={StudentMainMenuPage} />
+              <PrivateRoute path="/student_lesson" component={StudentLessonPage} />
               <PrivateRoute path="/about" component={AboutPage} />
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
               <PrivateRoute component={NotFoundPage} />          

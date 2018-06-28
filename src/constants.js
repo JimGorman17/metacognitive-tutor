@@ -22,18 +22,22 @@ const Labels = {
     },
     teacher: {
         admin_page: {
-            title: 'Admin Page'
+            title: 'Admin Page',
+            description: 'Some Description...'
         },
         create_lesson_page: {
-            title: 'Create Lesson'
+            title: 'Create Lesson',
+            description: 'Some Description...'
         }
     },
     student: {
         main_menu: {
-            title: 'Main Menu'
+            title: 'Main Menu',
+            description: 'Some Description...'
         },
         lesson_page: {
-            title: 'Lesson Page'
+            title: 'Lesson Page',
+            description: 'Some Description...'
         }
     }
 }
