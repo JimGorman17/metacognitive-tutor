@@ -40,12 +40,12 @@ class App extends React.Component {
         <div className="jumbotron">
           <Switch>
               <Route path="/login" component={LoginPage} />
+              <Route path="/about" component={AboutPage} />
               <PrivateRoute exact path="/" component={HomePage} />
               <PrivateRoute path="/lessons" component={LessonsPage} />              
               <PrivateRoute path="/lesson/:id" component={ManageLessonPage} />
               <PrivateRoute exact path="/lesson" component={ManageLessonPage} />
-              <PrivateRoute path="/student_lesson" component={StudentLessonPage} />
-              <PrivateRoute path="/about" component={AboutPage} />
+              <PrivateRoute path="/student_lesson" component={StudentLessonPage} />              
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
               <PrivateRoute component={NotFoundPage} />          
           </Switch>

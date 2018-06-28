@@ -9,7 +9,8 @@ const Labels = {
         title: 'About',
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
-    login: {        
+    login: {
+        title: "Log in",        
         log_in_as_a_teacher: 'Log in as a Teacher',
         log_in_as_a_student: 'Log in as a Student'
     },

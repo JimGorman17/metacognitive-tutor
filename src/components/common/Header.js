@@ -50,17 +50,15 @@ const Header = ({loading, loginStatus}) => {
         <a className="navbar-brand mx-auto" href="#">{Labels.app_title}</a>
         {loading && <LoadingDots interval={100} dots={20}/>}
       </div>
-      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        {loginStatus &&
+      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">        
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <NavLink to="/about" className="nav-link" activeClassName="active">{Labels.about.title}</NavLink>
           </li>
           <li className="nav-item">            
-            <NavLink to="/login" className="nav-link" activeClassName="active">{Labels.logout.title}</NavLink>            
+            <NavLink to="/login" className="nav-link" activeClassName="active">{loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>            
           </li>
-        </ul>
-        }
+        </ul>        
       </div>
     </nav>
   );
