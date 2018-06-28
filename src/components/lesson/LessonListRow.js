@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-const LessonListRow = ({lesson}) => {
+const LessonListRow = ({lesson}) => {  
   return (
     <tr>
       <td><a href={lesson.watchHref} target="_blank">Watch</a></td>

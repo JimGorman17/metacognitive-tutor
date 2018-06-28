@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonForm from './LessonForm';
 import {authorsFormattedForDropdown} from '../../selectors/selectors';
+import {Labels} from '../../constants';
 import toastr from 'toastr';
 
 export class ManageLessonPage extends React.Component {
@@ -68,8 +70,8 @@ export class ManageLessonPage extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    toastr.success('Lesson saved');
-    this.context.router.history.push('/lessons');
+    toastr.success(Labels.teacher.create_lesson_page.lesson_saved_success_message);
+    this.props.history.push('/lessons');
   }
 
   render() {
@@ -89,25 +91,21 @@ export class ManageLessonPage extends React.Component {
 ManageLessonPage.propTypes = {
   lesson: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-//Pull in the React Router context so router is available on this.context.router.
-ManageLessonPage.contextTypes = {
-  router: PropTypes.object
-};
-
-function getLessonById(lessons, id) {
+function getLessonById(lessons, id) {  
   const lesson = lessons.filter(lesson => lesson.id == id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
 }
 
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
   let lesson = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
-
+  
   if (lessonId && state.lessons.length > 0) {
     lesson = getLessonById(state.lessons, lessonId);
   }
@@ -124,4 +122,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageLessonPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ManageLessonPage));

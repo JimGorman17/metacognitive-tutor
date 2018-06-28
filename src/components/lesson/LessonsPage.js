@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
-import {browserHistory} from 'react-router';
 import {Labels} from '../../constants';
 
 class LessonsPage extends React.Component {
@@ -17,8 +17,8 @@ class LessonsPage extends React.Component {
     return <div key={index}>{lesson.title}</div>;
   }
 
-  redirectToAddLessonPage() {
-    browserHistory.push('/lesson');
+  redirectToAddLessonPage() {    
+    this.props.history.push('/lesson');
   }
 
   render() {
@@ -30,7 +30,7 @@ class LessonsPage extends React.Component {
         <input type="submit"
                value={Labels.teacher.create_lesson_page.title}
                className="btn btn-primary"
-               onClick={this.redirectToAddCoursePage}/>
+               onClick={this.redirectToAddLessonPage}/>
         <LessonList lessons={lessons}/>
       </div>
     );
@@ -39,7 +39,8 @@ class LessonsPage extends React.Component {
 
 LessonsPage.propTypes = {
   lessons: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {
@@ -54,4 +55,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LessonsPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LessonsPage));

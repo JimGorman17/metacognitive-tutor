@@ -42,8 +42,8 @@ class App extends React.Component {
               <Route path="/login" component={LoginPage} />
               <PrivateRoute exact path="/" component={HomePage} />
               <PrivateRoute path="/lessons" component={LessonsPage} />              
-              <PrivateRoute path="/lesson" component={ManageLessonPage} />
               <PrivateRoute path="/lesson/:id" component={ManageLessonPage} />
+              <PrivateRoute exact path="/lesson" component={ManageLessonPage} />
               <PrivateRoute path="/student_lesson" component={StudentLessonPage} />
               <PrivateRoute path="/about" component={AboutPage} />
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
