@@ -9,6 +9,9 @@ const Labels = {
         title: 'About',
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
+    login: {
+        title: 'Login'
+    },
     not_found: {
         title: '404 Page Not Found',
         message: 'Go back to homepage'

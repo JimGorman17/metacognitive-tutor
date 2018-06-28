@@ -5,12 +5,29 @@ import LoadingDots from './LoadingDots';
 import {Labels} from '../../constants';
 
 const Header = ({loading}) => {  
-  return (
-    <nav>
-      <NavLink exact to="/" activeClassName="active">{Labels.home.title}</NavLink>
-      {" | "}      
-      <NavLink to="/about" activeClassName="active">{Labels.about.title}</NavLink>
-      {loading && <LoadingDots interval={100} dots={20}/>}
+  return (   
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <NavLink exact to="/" className="nav-link" activeClassName="active">{Labels.home.title}</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/about" className="nav-link" activeClassName="active">{Labels.about.title}</NavLink>
+          </li>
+        </ul>
+      </div>
+      <div className="mx-auto order-0">
+        <span className="navbar-brand mx-auto">{Labels.app_title}</span>
+        {loading && <LoadingDots interval={100} dots={20}/>}
+      </div>
+      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <NavLink to="/login" className="nav-link" activeClassName="active">{Labels.login.title}</NavLink>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

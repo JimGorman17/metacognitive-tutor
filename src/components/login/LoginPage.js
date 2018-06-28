@@ -31,26 +31,18 @@ class LoginPage extends React.Component {
         return <Redirect to={from} />
       }
   
-      return ( // TODO: Refactor - A container component shouldn't render markup.
-        <div className="jumbotron">
-            <div className="container">
-                <div className="row form-group">
-                    <div className="col-md-offset-3 col-xs-offset-3 col-md-12 col-xs-12">
-                        <h1>{Labels.app_title}</h1>
-                    </div>
-                </div>
-                <div className="row form-group">
-                    <div className="col-md-offset-4 col-xs-offset-4 col-md-12 col-xs-12">
-                        <button type="button" className="btn btn-primary" onClick={this.login}>Log in as a Teacher</button>                        
-                    </div>
-                </div>
-                <div className="row form-group">
-                    <div className="col-md-offset-4 col-xs-offset-4 col-md-12 col-xs-12">                        
-                        <button type="button" className="btn btn-primary" onClick={this.login}>Log in as a Student</button>
-                    </div>
-                </div>
-            </div>            
-        </div>
+      return ( // TODO: Refactor - A container component shouldn't render markup.        
+        <div className="container">
+            <div className="row justify-content-center mb-4"> 
+                <h1>{Labels.app_title}</h1>                    
+            </div>
+            <div className="row justify-content-center mb-4">         
+                <button type="button" className="btn btn-primary" onClick={this.login}>Log in as a Teacher</button>                    
+            </div>
+            <div className="row justify-content-center">         
+                <button type="button" className="btn btn-primary" onClick={this.login}>Log in as a Student</button>                    
+            </div>
+        </div>        
       )
     }
   }

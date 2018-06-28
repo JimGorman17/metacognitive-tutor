@@ -23,13 +23,15 @@ class App extends React.Component {
         <Header
           loading={this.props.loading}
         />
-        <Switch>
-            <Route path="/login" component={LoginPage} />
-            <PrivateRoute exact path="/" component={HomePage} />    
-            <PrivateRoute path="/about" component={AboutPage} />
-            <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
-            <PrivateRoute component={NotFoundPage} />          
-        </Switch>        
+        <div className="jumbotron">
+          <Switch>
+              <Route path="/login" component={LoginPage} />
+              <PrivateRoute exact path="/" component={HomePage} />    
+              <PrivateRoute path="/about" component={AboutPage} />
+              <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
+              <PrivateRoute component={NotFoundPage} />          
+          </Switch>
+        </div>
       </div>
     );
   }
