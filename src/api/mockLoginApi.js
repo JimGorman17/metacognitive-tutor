@@ -42,6 +42,15 @@ class LoginApi {
             }, delay);            
         });
     }
+
+    static logout() {        
+        return new Promise((resolve/*, reject*/) => {
+            setTimeout(() => {
+                // Simulate server-side validation
+                resolve();
+            }, delay);            
+        });
+    }
 }
 
 export default LoginApi;

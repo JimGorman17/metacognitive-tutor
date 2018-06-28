@@ -22,6 +22,7 @@ class App extends React.Component {
       <div className="container-fluid">
         <Header
           loading={this.props.loading}
+          loginStatus={this.props.loginStatus}
         />
         <div className="jumbotron">
           <Switch>

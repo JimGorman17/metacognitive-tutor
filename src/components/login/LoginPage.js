@@ -17,6 +17,10 @@ class LoginPage extends React.Component {
         this.loginAsTeacher = this.loginAsTeacher.bind(this);
         this.loginAsStudent = this.loginAsStudent.bind(this);
     }
+
+    componentDidMount() {    
+        this.props.actions.logout();
+    }
     
     loginAsTeacher = () => {
         this.props.actions.loginTeacher()
@@ -29,7 +33,7 @@ class LoginPage extends React.Component {
         this.props.actions.loginStudent()
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
-        });      
+        });
     }
 
     render() {

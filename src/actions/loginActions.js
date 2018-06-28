@@ -37,3 +37,15 @@ export function loginTeacher(teacher) {
         });
     };
   }
+
+  export function logout() {
+    return function (dispatch) {
+      dispatch(beginAjaxCall());
+      return loginApi.logout()
+        .then(() => dispatch(logoutSuccess()))
+        .catch(error => {
+            dispatch(ajaxCallError(error));
+            throw(error);
+        });
+    };
+  }
