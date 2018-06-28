@@ -18,9 +18,14 @@ const Header = ({loading, loginStatus}) => {
           </li>
         </ul>
         }
-      </div>      
-      <div className="mx-auto order-0">
-        <span className="navbar-brand mx-auto">{Labels.app_title}</span>
+      </div>
+      <div class="mx-auto order-0">
+        {loginStatus &&
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        }
+        <a class="navbar-brand mx-auto" href="#">{Labels.app_title}</a>
         {loading && <LoadingDots interval={100} dots={20}/>}
       </div>
       <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
