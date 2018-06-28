@@ -30,7 +30,7 @@ export class ManageLessonPage extends React.Component {
 
   updateLessonState(event) {
     const field = event.target.name;
-    let lesson = Object.assign({}, this.lesson.course);
+    let lesson = Object.assign({}, this.state.lesson);
     lesson[field] = event.target.value;
     return this.setState({lesson: lesson});
   }
@@ -69,7 +69,7 @@ export class ManageLessonPage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('Lesson saved');
-    this.context.router.push('/lessons');
+    this.context.router.history.push('/lessons');
   }
 
   render() {
@@ -103,8 +103,8 @@ function getLessonById(lessons, id) {
   return null;
 }
 
-function mapStateToProps(state, ownProps) {
-  const lessonId = ownProps.params.id; // from the path `/lesson/:id`
+function mapStateToProps(state, ownProps) {  
+  const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
   let lesson = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
 
