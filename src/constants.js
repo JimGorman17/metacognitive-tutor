@@ -11,8 +11,9 @@ const Labels = {
     },
     login: {
         title: "Log in",        
-        log_in_as_a_teacher: 'Log in as a Teacher',
-        log_in_as_a_student: 'Log in as a Student'
+        log_in_with_google_as_a_teacher: 'Login with Google as a Student',        
+        log_in_with_google_as_a_student: 'Login with Google as a Student',
+        log_in_with_facebook_as_a_student: 'Login with Facebook as a Student'
     },
     logout: {
         title: 'Logout'        
@@ -20,6 +21,12 @@ const Labels = {
     not_found: {
         title: '404 Page Not Found',
         message: 'Go back to homepage'
+    },
+    privacy_policy: {
+        title: 'Privacy Policy',
+        website_url: 'https://metacognitive-tutor.azurewebsites.net',
+        phone_number: '781 205-9546',
+        email_address: 'jgorman30@gatech.edu'
     },
     teacher: {
         admin_page: {
