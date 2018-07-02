@@ -55,6 +55,9 @@ const Header = ({loading, loginStatus}) => {
           <li className="nav-item">
             <NavLink to="/about" className="nav-link" activeClassName="active">{Labels.about.title}</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/privacy_policy" className="nav-link" activeClassName="active">{Labels.privacy_policy.title}</NavLink>
+          </li>
           <li className="nav-item">            
             <NavLink to="/login" className="nav-link" activeClassName="active">{loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>            
           </li>

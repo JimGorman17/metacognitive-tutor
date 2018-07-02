@@ -13,6 +13,7 @@ import ManageLessonPage from './lesson/ManageLessonPage'; //eslint-disable-line 
 
 import StudentLessonPage from './studentLesson/StudentLessonPage';
 import AboutPage from './about/AboutPage';
+import PrivacyPolicyPage from './privacyPolicy/PrivacyPolicyPage';
 import NotFoundPage from './NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import LoginPage from './login/LoginPage';
@@ -41,6 +42,7 @@ class App extends React.Component {
           <Switch>
               <Route path="/login" component={LoginPage} />
               <Route path="/about" component={AboutPage} />
+              <Route path="/privacy_policy" component={PrivacyPolicyPage} />
               <PrivateRoute exact path="/" component={HomePage} />
               <PrivateRoute path="/lessons" component={LessonsPage} />              
               <PrivateRoute path="/lesson/:id" component={ManageLessonPage} />
