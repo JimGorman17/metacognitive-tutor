@@ -23,8 +23,7 @@ const Labels = {
         message: 'Go back to homepage'
     },
     privacy_policy: {
-        title: 'Privacy Policy',
-        website_url: 'https://metacognitive-tutor.azurewebsites.net',
+        title: 'Privacy Policy',        
         phone_number: '781 205-9546',
         email_address: 'jgorman30@gatech.edu'
     },
