@@ -10,7 +10,9 @@ const Labels = {
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
     login: {
-        title: "Log in",        
+        title: "Log in",
+        log_in_as_a_teacher: 'Log in as a Teacher', // Temporary - Please delete.
+        log_in_as_a_student: 'Log in as a Student', // Temporary - Please delete.
         log_in_with_google_as_a_teacher: 'Login with Google as a Student',        
         log_in_with_google_as_a_student: 'Login with Google as a Student',
         log_in_with_facebook_as_a_student: 'Login with Facebook as a Student'
