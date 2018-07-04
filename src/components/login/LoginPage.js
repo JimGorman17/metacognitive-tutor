@@ -62,7 +62,7 @@ class LoginPage extends React.Component {
         <div className="container">            
             <div className="row justify-content-center mb-4">                
                 <GoogleLogin                    
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
                     buttonText={Labels.login.log_in_with_google_as_a_teacher}
                     onSuccess={this.responseGoogleTeacher}
                     //onFailure={responseGoogle} // TODO: Implement
@@ -71,7 +71,7 @@ class LoginPage extends React.Component {
             <hr />
             <div className="row justify-content-center mb-4">                
                 <GoogleLogin                    
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
                     buttonText={Labels.login.log_in_with_google_as_a_student}
                     onSuccess={this.responseGoogleStudent}
                     // onFailure={responseGoogle} // TODO: Implement
