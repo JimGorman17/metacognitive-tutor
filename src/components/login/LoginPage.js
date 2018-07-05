@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Labels} from '../../constants';
+import {Labels, LoginServiceEnum} from '../../constants';
 import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import LoginModel from '../../models/Login';
 import * as loginActions from '../../actions/loginActions';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
@@ -21,22 +22,51 @@ class LoginPage extends React.Component {
         this.responseFacebookStudent = this.responseFacebookStudent.bind(this);        
     }
 
-    responseGoogleTeacher = (/*response*/) => {
-        this.props.actions.loginTeacher()
+    responseGoogleTeacher = (response) => {
+        const profileObj = response.profileObj;
+        this.props.actions.loginTeacher(new LoginModel({
+            Name: profileObj.name,
+            Token: response.accessToken,
+            Email: profileObj.email,
+            Provider: LoginServiceEnum.google,
+            ProviderId: response.googleId,
+            ProviderPic: profileObj.imageUrl,
+            IsTeacher: true,
+            IsStudent: false,
+        }))
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });
     }
 
-    responseGoogleStudent = (/*response*/) => {
-        this.props.actions.loginStudent()
+    responseGoogleStudent = (response) => {
+        const profileObj = response.profileObj;
+        this.props.actions.loginStudent(new LoginModel({
+            Name: profileObj.name,
+            Token: response.accessToken,
+            Email: profileObj.email,
+            Provider: LoginServiceEnum.google,
+            ProviderId: response.googleId,
+            ProviderPic: profileObj.imageUrl,
+            IsTeacher: false,
+            IsStudent: true,
+        }))
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });
     }
     
-    responseFacebookStudent = (/*response*/) => {
-        this.props.actions.loginStudent()
+    responseFacebookStudent = (response) => {
+        this.props.actions.loginStudent(new LoginModel({
+            Name: response.name,
+            Token: response.accessToken,
+            Email: response.email,
+            Provider: LoginServiceEnum.facebook,
+            ProviderId: response.id,
+            ProviderPic: response.picture.data.url,
+            IsTeacher: false,
+            IsStudent: true,
+        }))
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });

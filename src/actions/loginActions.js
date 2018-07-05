@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import loginApi from '../api/mockLoginApi';
+import loginApi from '../api/loginApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function loginTeacherSuccess(teacher){
@@ -14,10 +14,10 @@ export function logoutSuccess(){
     return {type: types.LOGOUT_SUCCESS};
 }
 
-export function loginTeacher(teacher) {
+export function loginTeacher(loginModel) {
     return function (dispatch) {
       dispatch(beginAjaxCall());
-      return loginApi.loginTeacher(teacher)
+      return loginApi.login(loginModel)
         .then(teacher => dispatch(loginTeacherSuccess(teacher)))
         .catch(error => {
             dispatch(ajaxCallError(error));
@@ -26,10 +26,10 @@ export function loginTeacher(teacher) {
     };
   }
 
-  export function loginStudent(student) {
+  export function loginStudent(loginModel) {
     return function (dispatch) {
       dispatch(beginAjaxCall());
-      return loginApi.loginStudent(student)
+      return loginApi.login(loginModel)
         .then(student => dispatch(loginStudentSuccess(student)))
         .catch(error => {
             dispatch(ajaxCallError(error));

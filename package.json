@@ -29,6 +29,7 @@
   "author": "Jim Gorman",
   "license": "MIT",
   "dependencies": {
+    "axios": "0.18.0",
     "bootstrap": "4.1.1",
     "jquery": "2.2.3",
     "object-assign": "4.1.0",
