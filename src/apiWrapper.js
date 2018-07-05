@@ -14,7 +14,7 @@ function getInitializedApi() {
   return (api = axios.create({
     baseURL: getBaseUrl(),
     responseType: 'json',
-    withCredentials: true
+    withCredentials: false
   }));
 }
 
