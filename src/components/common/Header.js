@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import LoadingDots from './LoadingDots';
 import {Labels, LoginTypeEnum} from '../../constants';
+import LoginModel from '../../models/Login';
 import {connect} from 'react-redux';
 
 // TODO: Cleanup
@@ -70,7 +71,8 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
 
 Header.propTypes = {
   loading: PropTypes.bool.isRequired,
-  loginStatus: PropTypes.number.isRequired
+  loginStatus: PropTypes.number.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {    
