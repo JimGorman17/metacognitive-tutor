@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import LoadingDots from './LoadingDots';
 import {Labels, LoginTypeEnum} from '../../constants';
+import {connect} from 'react-redux';
 
 // TODO: Cleanup
 // <NavLink to="/teacher_admin" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
 // <NavLink to="/create_lesson" className="nav-link" activeClassName="active">{Labels.teacher.create_lesson_page.title}</NavLink>
 // <NavLink to="/student_main_menu" className="nav-link" activeClassName="active">{Labels.student.main_menu.title}</NavLink>
 
-const Header = ({loading, loginStatus}) => {  
+const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-line
   return (    
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">      
       <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -72,4 +73,12 @@ Header.propTypes = {
   loginStatus: PropTypes.number.isRequired
 };
 
-export default Header;
+function mapStateToProps(state/*, ownProps*/) {    
+  return {
+      loading: state.ajaxCallsInProgress > 0,
+      loginStatus: state.loginStatus,
+      loggedInUser: state.loggedInUser
+  };
+}
+
+export default connect(mapStateToProps)(Header);

@@ -18,7 +18,7 @@ export function loginTeacher(loginModel) {
     return function (dispatch) {
       dispatch(beginAjaxCall());
       return loginApi.login(loginModel)
-        .then(teacher => dispatch(loginTeacherSuccess(teacher)))
+        .then(() => dispatch(loginTeacherSuccess(loginModel)))
         .catch(error => {
             dispatch(ajaxCallError(error));
             throw(error);
@@ -30,7 +30,7 @@ export function loginTeacher(loginModel) {
     return function (dispatch) {
       dispatch(beginAjaxCall());
       return loginApi.login(loginModel)
-        .then(student => dispatch(loginStudentSuccess(student)))
+        .then(() => dispatch(loginStudentSuccess(loginModel)))
         .catch(error => {
             dispatch(ajaxCallError(error));
             throw(error);

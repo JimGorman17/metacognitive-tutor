@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import loginStatus from './loginReducer';
+import loginStatus from './loginStatusReducer';
+import loggedInUser from './loggedInUserReducer';
 import lessons from './lessonReducer';
 import authors from './authorReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
     lessons,
     authors,
     loginStatus,
+    loggedInUser,
     ajaxCallsInProgress,
     routing: routerReducer
 });
