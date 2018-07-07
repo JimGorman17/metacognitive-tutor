@@ -109,7 +109,7 @@ class LoginPage extends React.Component {
                 <FacebookLogin
                     cssClass="loginBtn loginBtn--facebook"
                     appId="790631084658439"
-                    autoLoad={true}
+                    autoLoad={false}
                     fields="name,email,picture"
                     textButton={Labels.login.log_in_as_a_student}
                     // onClick={componentClicked} // TODO: Implement
