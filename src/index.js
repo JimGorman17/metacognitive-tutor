@@ -9,6 +9,7 @@ import {loadLessons} from './actions/lessonActions';
 import {loadAuthors} from './actions/authorActions';
 import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 const store = configureStore();

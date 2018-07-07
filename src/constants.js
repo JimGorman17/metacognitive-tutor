@@ -10,12 +10,9 @@ const Labels = {
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
     login: {
-        title: "Log in",
-        log_in_as_a_teacher: 'Log in as a Teacher', // Temporary - Please delete.
-        log_in_as_a_student: 'Log in as a Student', // Temporary - Please delete.
-        log_in_with_google_as_a_teacher: 'Login with Google as a Student',        
-        log_in_with_google_as_a_student: 'Login with Google as a Student',
-        log_in_with_facebook_as_a_student: 'Login with Facebook as a Student'
+        title: "Log in",        
+        log_in_as_a_teacher: 'Login as a Teacher',        
+        log_in_as_a_student: 'Login as a Student'
     },
     logout: {
         title: 'Logout'        
@@ -62,9 +59,11 @@ const Labels = {
     }
 }
 
-const LoginTypeEnum = Object.freeze({ logged_out: 0, teacher: 1, student: 2 }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+const LoginTypeEnum = Object.freeze({ logged_out: '', teacher: 'teacher', student: 'student' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+const LoginServiceEnum = Object.freeze({ logged_out: 0, google: 'google', facebook: 'facebook' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 
 export {  
     Labels,
-    LoginTypeEnum
+    LoginTypeEnum,
+    LoginServiceEnum
 };

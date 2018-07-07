@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import App from './App';
+import Analytics from 'react-router-ga';
 
 export default class Root extends Component {
     render() {
@@ -10,7 +11,9 @@ export default class Root extends Component {
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <App />
+                    <Analytics id="UA-121846089-1">
+                        <App />
+                    </Analytics>
                 </ConnectedRouter>
             </Provider>
         );

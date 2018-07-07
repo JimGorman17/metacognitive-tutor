@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Labels} from '../../constants';
+import {Labels, LoginServiceEnum} from '../../constants';
 import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import LoginModel from '../../models/Login';
 import * as loginActions from '../../actions/loginActions';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 class LoginPage extends React.Component {
     constructor(props, context) {
@@ -14,26 +17,63 @@ class LoginPage extends React.Component {
             redirectToReferrer: false
         }
 
-        this.loginAsTeacher = this.loginAsTeacher.bind(this);
-        this.loginAsStudent = this.loginAsStudent.bind(this);
+        this.responseGoogleTeacher = this.responseGoogleTeacher.bind(this);
+        this.responseGoogleStudent = this.responseGoogleStudent.bind(this);        
+        this.responseFacebookStudent = this.responseFacebookStudent.bind(this);        
     }
 
-    componentDidMount() {    
-        this.props.actions.logout();
-    }
-    
-    loginAsTeacher = () => {
-        this.props.actions.loginTeacher()
-        .then(() => {             
-            this.setState(() => ({redirectToReferrer: true}));
-        });      
-    }
-
-    loginAsStudent = () => {
-        this.props.actions.loginStudent()
+    responseGoogleTeacher = (response) => {
+        const profileObj = response.profileObj;
+        this.props.actions.loginTeacher(new LoginModel({
+            Name: profileObj.name,
+            Token: response.accessToken,
+            Email: profileObj.email,
+            Provider: LoginServiceEnum.google,
+            ProviderId: response.googleId,
+            ProviderPic: profileObj.imageUrl,
+            IsTeacher: true,
+            IsStudent: false,
+        }))
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });
+    }
+
+    responseGoogleStudent = (response) => {
+        const profileObj = response.profileObj;
+        this.props.actions.loginStudent(new LoginModel({
+            Name: profileObj.name,
+            Token: response.accessToken,
+            Email: profileObj.email,
+            Provider: LoginServiceEnum.google,
+            ProviderId: response.googleId,
+            ProviderPic: profileObj.imageUrl,
+            IsTeacher: false,
+            IsStudent: true,
+        }))
+        .then(() => {             
+            this.setState(() => ({redirectToReferrer: true}));
+        });
+    }
+    
+    responseFacebookStudent = (response) => {
+        this.props.actions.loginStudent(new LoginModel({
+            Name: response.name,
+            Token: response.accessToken,
+            Email: response.email,
+            Provider: LoginServiceEnum.facebook,
+            ProviderId: response.id,
+            ProviderPic: response.picture.data.url,
+            IsTeacher: false,
+            IsStudent: true,
+        }))
+        .then(() => {             
+            this.setState(() => ({redirectToReferrer: true}));
+        });
+    }   
+
+    componentDidMount() {    
+        this.props.actions.logout();
     }
 
     render() {
@@ -43,14 +83,37 @@ class LoginPage extends React.Component {
       if (redirectToReferrer === true) {
         return <Redirect to={from} />
       }
-  
+
       return ( // TODO: Refactor - A container component shouldn't render markup.        
         <div className="container">            
-            <div className="row justify-content-center mb-4">         
-                <button type="button" className="btn btn-primary" onClick={this.loginAsTeacher}>{Labels.login.log_in_as_a_teacher}</button>                    
+            <div className="row justify-content-center mb-4">                
+                <GoogleLogin
+                    className="loginBtn loginBtn--google"
+                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
+                    buttonText={Labels.login.log_in_as_a_teacher}
+                    onSuccess={this.responseGoogleTeacher}
+                    //onFailure={responseGoogle} // TODO: Implement
+                />
             </div>
-            <div className="row justify-content-center">         
-                <button type="button" className="btn btn-primary" onClick={this.loginAsStudent}>{Labels.login.log_in_as_a_student}</button>                    
+            <hr />
+            <div className="row justify-content-center mb-4">                
+                <GoogleLogin
+                    className="loginBtn loginBtn--google"
+                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
+                    buttonText={Labels.login.log_in_as_a_student}
+                    onSuccess={this.responseGoogleStudent}
+                    // onFailure={responseGoogle} // TODO: Implement
+                />
+            </div>
+            <div className="row justify-content-center">                
+                <FacebookLogin
+                    cssClass="loginBtn loginBtn--facebook"
+                    appId="790631084658439"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    textButton={Labels.login.log_in_as_a_student}
+                    // onClick={componentClicked} // TODO: Implement
+                    callback={this.responseFacebookStudent} />
             </div>
         </div>        
       )
@@ -59,7 +122,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
     location: PropTypes.object.isRequired,
-    loginStatus: PropTypes.number.isRequired,
+    loginStatus: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired
 };
 

@@ -43,7 +43,7 @@ LessonsPage.propTypes = {
   lessons: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  loginStatus: PropTypes.number.isRequired
+  loginStatus: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {
