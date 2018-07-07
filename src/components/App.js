@@ -60,7 +60,7 @@ class App extends React.Component {
 App.propTypes = {
   children: PropTypes.element,
   loading: PropTypes.bool.isRequired,
-  loginStatus: PropTypes.number.isRequired
+  loginStatus: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {

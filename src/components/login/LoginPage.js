@@ -122,7 +122,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
     location: PropTypes.object.isRequired,
-    loginStatus: PropTypes.number.isRequired,
+    loginStatus: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired
 };
 

@@ -80,11 +80,11 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
 
 Header.propTypes = {
   loading: PropTypes.bool.isRequired,
-  loginStatus: PropTypes.number.isRequired,
+  loginStatus: PropTypes.string.isRequired,
   loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
-function mapStateToProps(state/*, ownProps*/) {    
+function mapStateToProps(state/*, ownProps*/) {
   return {
       loading: state.ajaxCallsInProgress > 0,
       loginStatus: state.loginStatus,
