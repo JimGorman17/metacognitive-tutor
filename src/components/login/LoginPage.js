@@ -84,35 +84,34 @@ class LoginPage extends React.Component {
         return <Redirect to={from} />
       }
 
-      // TODO: Legacy, Cleanup
-      // <button type="button" className="btn btn-primary" onClick={this.loginAsTeacher}>{Labels.login.log_in_as_a_teacher}</button>
-         
-  
       return ( // TODO: Refactor - A container component shouldn't render markup.        
         <div className="container">            
             <div className="row justify-content-center mb-4">                
-                <GoogleLogin                    
+                <GoogleLogin
+                    className="loginBtn loginBtn--google"
                     clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
-                    buttonText={Labels.login.log_in_with_google_as_a_teacher}
+                    buttonText={Labels.login.log_in_as_a_teacher}
                     onSuccess={this.responseGoogleTeacher}
                     //onFailure={responseGoogle} // TODO: Implement
                 />
             </div>
             <hr />
             <div className="row justify-content-center mb-4">                
-                <GoogleLogin                    
+                <GoogleLogin
+                    className="loginBtn loginBtn--google"
                     clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
-                    buttonText={Labels.login.log_in_with_google_as_a_student}
+                    buttonText={Labels.login.log_in_as_a_student}
                     onSuccess={this.responseGoogleStudent}
                     // onFailure={responseGoogle} // TODO: Implement
                 />
             </div>
             <div className="row justify-content-center">                
-                <FacebookLogin                    
+                <FacebookLogin
+                    cssClass="loginBtn loginBtn--facebook"
                     appId="790631084658439"
                     autoLoad={true}
                     fields="name,email,picture"
-                    textButton={Labels.login.log_in_with_facebook_as_a_student}
+                    textButton={Labels.login.log_in_as_a_student}
                     // onClick={componentClicked} // TODO: Implement
                     callback={this.responseFacebookStudent} />
             </div>
