@@ -1,5 +1,5 @@
 const Labels = {
-    app_title: 'Metacognitive Tutor', // Don't forget to change the title in index.html and index.ejs too. 
+    app_title: 'Metacognitive Tutor', // Don't forget to change the title in index.html and index.ejs too.
     app_description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     home: {
         title: 'Home',
@@ -10,19 +10,21 @@ const Labels = {
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
     login: {
-        title: "Log in",        
-        log_in_as_a_teacher: 'Login as a Teacher',        
+        title: "Log in",
+        teachers: "Teachers",
+        students: "Students",
+        log_in_as_a_teacher: 'Login as a Teacher',
         log_in_as_a_student: 'Login as a Student'
     },
     logout: {
-        title: 'Logout'        
+        title: 'Logout'
     },
     not_found: {
         title: '404 Page Not Found',
         message: 'Go back to homepage'
     },
     privacy_policy: {
-        title: 'Privacy Policy',        
+        title: 'Privacy Policy',
         phone_number: '781 205-9546',
         email_address: 'jgorman30@gatech.edu'
     },
@@ -44,10 +46,10 @@ const Labels = {
                     title: "Title",
                     description: "Description",
                     image: "Image"
-                  },                 
+                  },
                   title: "Choose a YouTube Video",
                   watch: "Watch"
-                }                
+                }
             }
         }
     },
@@ -63,7 +65,7 @@ const Labels = {
     },
     shared: {
         lessons_page: {
-            title: "Lessons"            
+            title: "Lessons"
         }
     }
 }
@@ -71,7 +73,7 @@ const Labels = {
 const LoginTypeEnum = Object.freeze({ logged_out: '', teacher: 'teacher', student: 'student' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 const LoginServiceEnum = Object.freeze({ logged_out: 0, google: 'google', facebook: 'facebook' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 
-export {  
+export {
     Labels,
     LoginTypeEnum,
     LoginServiceEnum
