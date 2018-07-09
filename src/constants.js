@@ -38,7 +38,16 @@ const Labels = {
         },
         lesson_form: {
             manage_lesson: {
-                title: "Manage Lesson"
+                title: "Manage Lesson",
+                you_tube_video_selection: {
+                  column_headers: {
+                    title: "Title",
+                    description: "Description",
+                    image: "Image"
+                  },                 
+                  title: "Choose a YouTube Video",
+                  watch: "Watch"
+                }                
             }
         }
     },
