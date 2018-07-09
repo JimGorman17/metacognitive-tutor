@@ -46,6 +46,7 @@
     "react-youtube-autocomplete": "1.0.20",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
+    "scrape-it": "5.0.5",
     "toastr": "2.1.2"
   },
   "devDependencies": {

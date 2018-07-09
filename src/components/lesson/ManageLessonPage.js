@@ -12,6 +12,7 @@ import YoutubeAutocomplete from 'react-youtube-autocomplete';
 import {Modal, Button} from 'react-bootstrap/lib';
 import YouTubeVideoList from './YouTubeVideoList'
 import YouTubeVideoModel from '../../models/YouTubeVideo';
+import scrapeIt from 'scrape-it';
 
 export class ManageLessonPage extends React.Component {
   constructor(props, context) {
@@ -37,6 +38,19 @@ export class ManageLessonPage extends React.Component {
       // Necessary to populate form when existing lesson is loaded directly.
       this.setState({lesson: Object.assign({}, nextProps.lesson)});
     }
+  }
+
+  componentDidMount() {
+    scrapeIt("https://ionicabizau.net", {
+        title: ".header h1"
+      , desc: ".header h2"
+      , avatar: {
+            selector: ".header img"
+          , attr: "src"
+        }
+    }).then(page => { // eslint-disable-line
+        debugger; // eslint-disable-line
+    });
   }
 
   updateLessonState(event) {
