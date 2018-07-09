@@ -39,6 +39,22 @@ class LoginPage extends React.Component {
         });
     }
 
+    responseFacebookTeacher = (response) => {
+      this.props.actions.loginTeacher(new LoginModel({
+          Name: response.name,
+          Token: response.accessToken,
+          Email: response.email,
+          Provider: LoginServiceEnum.facebook,
+          ProviderId: response.id,
+          ProviderPic: response.picture.data.url,
+          IsTeacher: true,
+          IsStudent: false,
+      }))
+      .then(() => {             
+          this.setState(() => ({redirectToReferrer: true}));
+      });
+    }
+
     responseGoogleStudent = (response) => {
         const profileObj = response.profileObj;
         this.props.actions.loginStudent(new LoginModel({
@@ -70,7 +86,7 @@ class LoginPage extends React.Component {
         .then(() => {             
             this.setState(() => ({redirectToReferrer: true}));
         });
-    }   
+    }
 
     componentDidMount() {    
         this.props.actions.logout();
@@ -84,38 +100,61 @@ class LoginPage extends React.Component {
         return <Redirect to={from} />
       }
 
-      return ( // TODO: Refactor - A container component shouldn't render markup.        
-        <div className="container">            
-            <div className="row justify-content-center mb-4">                
-                <GoogleLogin
-                    className="loginBtn loginBtn--google"
-                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
-                    buttonText={Labels.login.log_in_as_a_teacher}
-                    onSuccess={this.responseGoogleTeacher}
-                    //onFailure={responseGoogle} // TODO: Implement
-                />
+      return ( // TODO: Refactor - A container component shouldn't render markup.
+        <div className="container">
+          <div className="row justify-content-center mb-2">
+            <div className="col-md-4">
+              <h5 className="text-center">Teacher</h5>
             </div>
-            <hr />
-            <div className="row justify-content-center mb-4">                
-                <GoogleLogin
-                    className="loginBtn loginBtn--google"
-                    clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
-                    buttonText={Labels.login.log_in_as_a_student}
-                    onSuccess={this.responseGoogleStudent}
-                    // onFailure={responseGoogle} // TODO: Implement
-                />
+            <div className="col-md-4">
+              <h5 className="text-center">Student</h5>
             </div>
-            <div className="row justify-content-center">                
-                <FacebookLogin
-                    cssClass="loginBtn loginBtn--facebook"
-                    appId="790631084658439"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    textButton={Labels.login.log_in_as_a_student}
-                    // onClick={componentClicked} // TODO: Implement
-                    callback={this.responseFacebookStudent} />
+          </div>        
+          <div className="row justify-content-center mb-2">
+            <div className="col-md-4">
+              <GoogleLogin
+                className="loginBtn loginBtn--google"
+                clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
+                buttonText={Labels.login.log_in_as_a_teacher}
+                onSuccess={this.responseGoogleTeacher}
+                //onFailure={responseGoogle} // TODO: Implement
+              />
             </div>
-        </div>        
+            <div className="col-md-4">
+              <GoogleLogin
+                className="loginBtn loginBtn--google"
+                clientId="484376358445-829ke8v1h3k9g1vr27doi1pcja8740t7.apps.googleusercontent.com"
+                buttonText={Labels.login.log_in_as_a_student}
+                onSuccess={this.responseGoogleStudent}
+                // onFailure={responseGoogle} // TODO: Implement
+              />              
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-md-4">
+              <FacebookLogin
+                cssClass="loginBtn loginBtn--facebook"
+                appId="790631084658439"
+                autoLoad={false}
+                fields="name,email,picture"
+                textButton={Labels.login.log_in_as_a_teacher}
+                // onClick={componentClicked} // TODO: Implement
+                callback={this.responseFacebookTeacher}
+              />              
+            </div>
+            <div className="col-md-4">
+              <FacebookLogin
+                cssClass="loginBtn loginBtn--facebook"
+                appId="790631084658439"
+                autoLoad={false}
+                fields="name,email,picture"
+                textButton={Labels.login.log_in_as_a_student}
+                // onClick={componentClicked} // TODO: Implement
+                callback={this.responseFacebookStudent}
+              />
+            </div>
+          </div>
+        </div>
       )
     }
 }
