@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
-import {Labels, LoginTypeEnum} from '../../constants';  // eslint-disable-line
+import {Labels} from '../../constants';
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
@@ -22,12 +22,12 @@ class LessonsPage extends React.Component {
   }
 
   render() {
-    const {lessons, loginStatus} = this.props; // eslint-disable-line
+    const {lessons, loginStatus} = this.props;
 
     return (
       <div>
         <h1>{Labels.shared.lessons_page.title}</h1>
-        <LessonList lessons={lessons}/>
+        <LessonList lessons={lessons} loginStatus={loginStatus} />
       </div>
     );
   }

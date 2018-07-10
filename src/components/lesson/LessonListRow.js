@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LessonModel from '../../models/Lesson';
-import {Labels, LoginTypeEnum} from '../../constants';  // eslint-disable-line
+import {Labels, LoginTypeEnum} from '../../constants';
 
-const LessonListRow = ({lesson}) => {
+const LessonListRow = ({lesson, loginStatus}) => {
   return (
     <tr className="d-flex">
       <td className="col-2">
@@ -20,7 +20,9 @@ const LessonListRow = ({lesson}) => {
       <td className="col-4">
         <div className="container">
           <div className="row">
-            <div className="col-md-5">{Labels.teacher.lesson_form.manage_lesson.preview}</div><div className="col-md-1">&nbsp;</div><div className="col-md-5">{Labels.teacher.lesson_form.manage_lesson.edit}</div>
+            <div className="col-md-5">{Labels.teacher.lesson_form.manage_lesson.preview}</div>
+            <div className="col-md-1">&nbsp;</div>
+            <div className="col-md-5">{loginStatus == LoginTypeEnum.student ? Labels.teacher.lesson_form.manage_lesson.complete_lesson : Labels.teacher.lesson_form.manage_lesson.edit}</div>
           </div>
         </div>
       </td>
@@ -29,7 +31,8 @@ const LessonListRow = ({lesson}) => {
 };
 
 LessonListRow.propTypes = {
-  lesson: PropTypes.instanceOf(LessonModel).isRequired
+  lesson: PropTypes.instanceOf(LessonModel).isRequired,
+  loginStatus: PropTypes.string.isRequired
 };
 
 export default LessonListRow;

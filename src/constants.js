@@ -43,6 +43,7 @@ const Labels = {
                 title: "Manage Lesson",
                 preview: "Preview",
                 edit: "Edit",
+                complete_lesson: "Complete Lesson",
                 lesson_author: "Lesson Author",
                 book_title: "Book Title",
                 you_tube_video_selection: {

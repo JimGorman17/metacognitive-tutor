@@ -4,7 +4,7 @@ import LessonListRow from './LessonListRow';
 import LessonModel from '../../models/Lesson';
 import {Labels} from '../../constants';
 
-const LessonList = ({lessons}) => {
+const LessonList = ({lessons, loginStatus}) => {
   return (
     <table className="table">
       <thead>
@@ -16,7 +16,7 @@ const LessonList = ({lessons}) => {
       </thead>
       <tbody>
         {lessons.map(lesson =>
-          <LessonListRow key={lesson.id} lesson={lesson}/>
+          <LessonListRow key={lesson.id} lesson={lesson} loginStatus={loginStatus} />
         )}
       </tbody>
     </table>
@@ -24,7 +24,8 @@ const LessonList = ({lessons}) => {
 };
 
 LessonList.propTypes = {
-  lessons: PropTypes.arrayOf(LessonModel).isRequired
+  lessons: PropTypes.arrayOf(LessonModel).isRequired,
+  loginStatus: PropTypes.string.isRequired
 };
 
 export default LessonList;
