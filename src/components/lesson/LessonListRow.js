@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LessonModel from '../../models/Lesson';
 import {Labels, LoginTypeEnum} from '../../constants';
+import {ButtonToolbar, Button} from 'react-bootstrap/lib';
 
 const LessonListRow = ({lesson, loginStatus}) => {
   return (
@@ -18,13 +19,10 @@ const LessonListRow = ({lesson, loginStatus}) => {
       </td>
       <td className="col-4"><a href={lesson.BookAmazonUrl} target="_blank">{lesson.BookTitle}</a></td>
       <td className="col-4">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-5">{Labels.teacher.lesson_form.manage_lesson.preview}</div>
-            <div className="col-md-1">&nbsp;</div>
-            <div className="col-md-5">{loginStatus == LoginTypeEnum.student ? Labels.teacher.lesson_form.manage_lesson.complete_lesson : Labels.teacher.lesson_form.manage_lesson.edit}</div>
-          </div>
-        </div>
+        <ButtonToolbar>
+          <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
+          <Button><i className={`fa ${loginStatus == LoginTypeEnum.student ? "fa-graduation-cap": "fa-edit" } fa-fw`} aria-hidden="true" />&nbsp; {loginStatus == LoginTypeEnum.student ? Labels.teacher.lesson_form.manage_lesson.complete_lesson : Labels.teacher.lesson_form.manage_lesson.edit}</Button>
+        </ButtonToolbar>
       </td>
     </tr>
   );
