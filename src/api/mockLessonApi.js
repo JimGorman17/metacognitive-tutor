@@ -8,6 +8,7 @@ import delay from './delay';
 // All calls return promises.
 const lessons = [
   new LessonModel({
+    id: 1,
     BookTitle: "Bob Books, Set 1: Beginning Readers",
     BookAmazonUrl: "https://www.amazon.com/Bob-Books-Set-Beginning-Readers/dp/0439845009/ref=sr_1_3?ie=UTF8&qid=1531180222&sr=8-3&keywords=bob+books",
     TheHookYouTubeVideo: new YouTubeVideoModel({
@@ -62,6 +63,7 @@ const lessons = [
     })
   }),
   new LessonModel({
+    id: 2,
     BookTitle: "Bob Books Set 2: Advancing Beginners",
     BookAmazonUrl: "https://www.amazon.com/Bob-Books-Set-2-Advancing-Beginners/dp/0439845025/ref=sr_1_1?ie=UTF8&qid=1531183140&sr=8-1&keywords=bob+books+set+2",
     TheHookYouTubeVideo: new YouTubeVideoModel({
@@ -116,6 +118,7 @@ const lessons = [
     })
   }),
   new LessonModel({
+    id: 3,
     BookTitle: "Bob Books Set 3: Word Families",
     BookAmazonUrl: "https://www.amazon.com/Bob-Books-Set-Word-Families/dp/0439845092/ref=sr_1_1?ie=UTF8&qid=1531184647&sr=8-1&keywords=bob+books+set+3",
     TheHookYouTubeVideo: new YouTubeVideoModel({

@@ -3,6 +3,7 @@ import PersonModel from '../models/Person';
 
 export default class Lesson {
   constructor(params) {
+    this.id = params ? params.id : null;
     this.BookTitle = params ? params.BookTitle : null;
     this.BookAmazonUrl = params ? params.BookAmazonUrl : null;
     this.TheHookYouTubeVideo = params && params.TheHookYouTubeVideo && params.TheHookYouTubeVideo instanceof YouTubeVideoModel ? params.TheHookYouTubeVideo : null;

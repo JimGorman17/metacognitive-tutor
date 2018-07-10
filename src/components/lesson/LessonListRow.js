@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import LessonModel from '../../models/Lesson';
 import {Labels, LoginTypeEnum} from '../../constants';
 import {ButtonToolbar, Button} from 'react-bootstrap/lib';
+import { NavLink } from 'react-router-dom';
 
 const LessonListRow = ({lesson, loginStatus}) => {
   return (
     <tr className="d-flex">
       <td className="col-2">
         <div className="container">
-          <div className="row">
+          <div className="row" key={lesson.id}>
             <img src={lesson.LessonAuthor.ProviderPic} className="img-thumbnail" alt="{lesson.LessonAuthor.Name}" />
           </div>
           <div className="row">
@@ -21,7 +22,12 @@ const LessonListRow = ({lesson, loginStatus}) => {
       <td className="col-4">
         <ButtonToolbar>
           <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
-          <Button><i className={`fa ${loginStatus == LoginTypeEnum.student ? "fa-graduation-cap": "fa-edit" } fa-fw`} aria-hidden="true" />&nbsp; {loginStatus == LoginTypeEnum.student ? Labels.teacher.lesson_form.manage_lesson.complete_lesson : Labels.teacher.lesson_form.manage_lesson.edit}</Button>
+          {loginStatus == LoginTypeEnum.student &&
+          <Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button>
+          }
+          {loginStatus == LoginTypeEnum.teacher &&
+          <NavLink to={'/lesson/' + lesson.id}><Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.edit}</Button></NavLink>
+          }
         </ButtonToolbar>
       </td>
     </tr>

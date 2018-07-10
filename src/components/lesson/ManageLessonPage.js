@@ -29,7 +29,7 @@ export class ManageLessonPage extends React.Component {
     this.updateLessonState = this.updateLessonState.bind(this);
     this.saveLesson = this.saveLesson.bind(this);
     this.onSearchResultsFound = this.onSearchResultsFound.bind(this);
-    this.handleClose = this.handleClose.bind(this);    
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -95,7 +95,7 @@ export class ManageLessonPage extends React.Component {
         VideoId: youtubevideo.id.videoId,
         Title: youtubevideo.snippet.title,
         Description: youtubevideo.snippet.description,
-        ImageUrl: youtubevideo.snippet.thumbnails.default.url        
+        ImageUrl: youtubevideo.snippet.thumbnails.default.url
       })), showModal: true, canDisplayYouTubeResults: false });
     }
   }
@@ -104,9 +104,9 @@ export class ManageLessonPage extends React.Component {
     return (
       <div>
         <YoutubeAutocomplete
-          apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"          
-          placeHolder="Search Youtube"          
-          callback={this.onSearchResultsFound}          
+          apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
+          placeHolder="Search Youtube"
+          callback={this.onSearchResultsFound}
         />
         <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
           <Modal.Header>
@@ -139,7 +139,7 @@ ManageLessonPage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-function getLessonById(lessons, id) {  
+function getLessonById(lessons, id) {
   const lesson = lessons.filter(lesson => lesson.id == id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
@@ -149,7 +149,7 @@ function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
   let lesson = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
-  
+
   if (lessonId && state.lessons.length > 0) {
     lesson = getLessonById(state.lessons, lessonId);
   }
