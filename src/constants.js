@@ -41,6 +41,10 @@ const Labels = {
         lesson_form: {
             manage_lesson: {
                 title: "Manage Lesson",
+                preview: "Preview",
+                edit: "Edit",
+                lesson_author: "Lesson Author",
+                book_title: "Book Title",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",

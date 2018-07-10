@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
-import {Labels, LoginTypeEnum} from '../../constants';
+import {Labels, LoginTypeEnum} from '../../constants';  // eslint-disable-line
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
@@ -17,22 +17,16 @@ class LessonsPage extends React.Component {
     return <div key={index}>{lesson.title}</div>;
   }
 
-  redirectToAddLessonPage() {    
+  redirectToAddLessonPage() {
     this.props.history.push('/lesson');
   }
 
   render() {
-    const {lessons, loginStatus} = this.props;
+    const {lessons, loginStatus} = this.props; // eslint-disable-line
 
     return (
       <div>
         <h1>{Labels.shared.lessons_page.title}</h1>
-        {loginStatus == LoginTypeEnum.teacher &&
-        <input type="submit"
-               value={Labels.teacher.create_lesson_page.title}
-               className="btn btn-primary"
-               onClick={this.redirectToAddLessonPage}/>
-        }
         <LessonList lessons={lessons}/>
       </div>
     );
