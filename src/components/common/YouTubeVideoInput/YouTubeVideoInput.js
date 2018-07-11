@@ -42,22 +42,22 @@ class YouTubeVideoInput extends React.Component {
     return (
       <div>
         <YoutubeAutocomplete
-            apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
-            placeHolder="Search Youtube"
-            callback={this.onSearchResultsFound}
-          />
-          <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
-            <Modal.Header>
-              <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{"height" : "40em", "overflow-y":"auto"}}>
-              <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
+          apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
+          placeHolder="Search Youtube"
+          callback={this.onSearchResultsFound}
+        />
+        <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
+          <Modal.Header>
+            <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{"height" : "35em", "overflow-y":"auto"}}>
+            <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }
