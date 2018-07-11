@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // eslint-disable-line
+import PropTypes from 'prop-types';
 import {Labels} from '../../../constants';
 import YoutubeAutocomplete from 'react-youtube-autocomplete';
 import {Modal, Button} from 'react-bootstrap/lib';
@@ -24,7 +24,7 @@ class YouTubeVideoInput extends React.Component {
     this.setState({ showModal: false });
     setTimeout(() => {
       this.setState({ canDisplayYouTubeResults: true });
-    }, 75);
+    }, 150);
   }
 
   onSearchResultsFound(results) {
@@ -39,27 +39,46 @@ class YouTubeVideoInput extends React.Component {
   }
 
   render() {
+    const {error, label, placeholder} = this.props;
+
+    let wrapperClass = 'form-group';
+    if (error && error.length > 0) {
+      wrapperClass += " " + 'has-error';
+    }
+
     return (
-      <div>
-        <YoutubeAutocomplete
-          apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
-          placeHolder="Search Youtube"
-          callback={this.onSearchResultsFound}
-        />
-        <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
-          <Modal.Header>
-            <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body style={{"height" : "35em", "overflow-y":"auto"}}>
-            <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleClose}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+      <div className={wrapperClass}>
+        <label htmlFor={name}>{label}</label>
+        <div className="field">
+          <YoutubeAutocomplete
+            apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
+            placeHolder={placeholder}
+            callback={this.onSearchResultsFound}
+          />
+          <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
+            <Modal.Header>
+              <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{"height" : "35em", "overflow-y":"auto"}}>
+              <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleClose}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
       </div>
     );
   }
 }
+
+YouTubeVideoInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string
+};
 
 export default YouTubeVideoInput;
