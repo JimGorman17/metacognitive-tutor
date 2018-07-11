@@ -50,6 +50,7 @@ const Labels = {
                 the_hook: "The Hook",
                 main_idea: "Main Idea",
                 supporting_idea: "Supporting Idea",
+                story_details: "Story Details",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",

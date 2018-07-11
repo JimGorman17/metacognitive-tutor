@@ -24,7 +24,7 @@ class YouTubeVideoInput extends React.Component {
     this.setState({ showModal: false });
     setTimeout(() => {
       this.setState({ canDisplayYouTubeResults: true });
-    }, 150);
+    }, 500);
   }
 
   onSearchResultsFound(results) {
@@ -77,7 +77,7 @@ YouTubeVideoInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.instanceOf(YouTubeVideoModel),
   error: PropTypes.string
 };
 
