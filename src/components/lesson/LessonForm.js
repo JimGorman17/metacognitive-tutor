@@ -21,6 +21,20 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
         onChange={onChange}
         error={errors.BookAmazonUrl}/>
 
+      <TextInput
+        name="mainIdea"
+        label={Labels.teacher.lesson_form.manage_lesson.main_idea}
+        value={lesson.MainIdea}
+        onChange={onChange}
+        error={errors.MainIdea}/>
+
+      <TextInput
+        name="supportingIdea"
+        label={Labels.teacher.lesson_form.manage_lesson.supporting_idea}
+        value={lesson.SupportingIdea}
+        onChange={onChange}
+        error={errors.SupportingIdea}/>
+
       <input
         type="submit"
         disabled={saving}
