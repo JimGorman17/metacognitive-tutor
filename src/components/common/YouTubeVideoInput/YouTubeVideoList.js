@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import YouTubeVideoModel from '../../models/YouTubeVideo';
+import YouTubeVideoModel from '../../../models/YouTubeVideo';
 import YouTubeVideoListRow from './YouTubeVideoListRow';
-import {Labels} from '../../constants';
+import {Labels} from '../../../constants';
 
 const YouTubeVideoList = ({youtubevideos}) => {
   return (

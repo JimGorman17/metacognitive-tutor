@@ -47,6 +47,7 @@ const Labels = {
                 lesson_author: "Lesson Author",
                 book_title: "Book Title",
                 book_amazon_url: "Amazon Url",
+                the_hook: "The Hook",
                 main_idea: "Main Idea",
                 supporting_idea: "Supporting Idea",
                 you_tube_video_selection: {

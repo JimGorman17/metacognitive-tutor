@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Labels} from '../../constants';
-import YouTubeVideoModel from '../../models/YouTubeVideo';
+import {Labels} from '../../../constants';
+import YouTubeVideoModel from '../../../models/YouTubeVideo';
 import {Image} from 'react-bootstrap/lib';
 
 const YouTubeVideoListRow = ({youtubevideo}) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
+import YouTubeVideoInput from '../common/YouTubeVideoInput/YouTubeVideoInput';
 import {Labels} from '../../constants';
 
 const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
@@ -20,6 +21,13 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
         value={lesson.BookAmazonUrl}
         onChange={onChange}
         error={errors.BookAmazonUrl}/>
+
+      <YouTubeVideoInput
+        name="theHookYouTubeVideo"
+        label={Labels.teacher.lesson_form.manage_lesson.the_hook}
+        value={lesson.TheHookYouTubeVideo}
+        onChange={onChange}
+        error={errors.TheHookYouTubeVideo} />
 
       <TextInput
         name="mainIdea"
