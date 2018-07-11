@@ -11,6 +11,7 @@ import YoutubeAutocomplete from 'react-youtube-autocomplete';
 import {Modal, Button} from 'react-bootstrap/lib';
 import YouTubeVideoList from './YouTubeVideoList'
 import YouTubeVideoModel from '../../models/YouTubeVideo';
+import LessonModel from '../../models/Lesson';
 
 export class ManageLessonPage extends React.Component {
   constructor(props, context) {
@@ -145,7 +146,7 @@ function getLessonById(lessons, id) {
 function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
-  let lesson = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  let lesson = new LessonModel();
 
   if (lessonId && state.lessons.length > 0) {
     lesson = getLessonById(state.lessons, lessonId);
