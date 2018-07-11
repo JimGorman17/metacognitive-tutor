@@ -24,7 +24,7 @@ const LessonList = ({lessons, loginStatus}) => {
 };
 
 LessonList.propTypes = {
-  lessons: PropTypes.arrayOf(LessonModel).isRequired,
+  lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   loginStatus: PropTypes.string.isRequired
 };
 
