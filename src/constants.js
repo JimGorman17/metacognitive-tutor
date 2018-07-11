@@ -46,6 +46,7 @@ const Labels = {
                 complete_lesson: "Complete Lesson",
                 lesson_author: "Lesson Author",
                 book_title: "Book Title",
+                book_amazon_url: "Amazon Url",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",

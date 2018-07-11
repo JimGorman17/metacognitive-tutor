@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonForm from './LessonForm';
-import {authorsFormattedForDropdown} from '../../selectors/selectors';
 import {Labels} from '../../constants';
 import toastr from 'toastr';
 import YoutubeAutocomplete from 'react-youtube-autocomplete';
@@ -120,7 +119,6 @@ export class ManageLessonPage extends React.Component {
           </Modal.Footer>
         </Modal>
         <LessonForm
-          allAuthors={this.props.authors}
           onChange={this.updateLessonState}
           onSave={this.saveLesson}
           lesson={this.state.lesson}
@@ -134,7 +132,6 @@ export class ManageLessonPage extends React.Component {
 
 ManageLessonPage.propTypes = {
   lesson: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
@@ -155,8 +152,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    lesson: lesson,
-    authors: authorsFormattedForDropdown(state.authors)
+    lesson: lesson
   };
 }
 
