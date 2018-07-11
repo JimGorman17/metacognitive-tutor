@@ -79,11 +79,11 @@ const Labels = {
     }
 }
 
-const LoginTypeEnum = Object.freeze({ logged_out: '', teacher: 'teacher', student: 'student' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 const LoginServiceEnum = Object.freeze({ logged_out: 0, google: 'google', facebook: 'facebook' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+const LoginTypeEnum = Object.freeze({ logged_out: '', teacher: 'teacher', student: 'student' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 
 export {
     Labels,
-    LoginTypeEnum,
-    LoginServiceEnum
+    LoginServiceEnum,
+    LoginTypeEnum
 };
