@@ -39,12 +39,15 @@ class ListInput extends React.Component {
       text: 'Product Price'
     }];
 
-    const {error, label, placeholder} = this.props;
+    const {error, maxItems, label, placeholder} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
       wrapperClass += " " + 'has-error';
     }
+
+    const {products} = this.state;
+    const deactivate = maxItems <= (products ? products.length : 0);
 
     return (
       <div className={wrapperClass}>
@@ -53,8 +56,8 @@ class ListInput extends React.Component {
           <div className="card">
             <div className="card-body">
               <div className="card-text">
-                <BootstrapTable keyField='id' data={ this.state.products } columns={ columns } />
-                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel="CHANGEME" />
+                <BootstrapTable keyField='id' data={products} columns={columns} />
+                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel="CHANGEME" deactivate={deactivate} />
               </div>
             </div>
           </div>
@@ -69,6 +72,7 @@ ListInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  maxItems: PropTypes.number,
   value: PropTypes.array,
   error: PropTypes.string
 };

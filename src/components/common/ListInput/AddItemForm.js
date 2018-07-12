@@ -20,10 +20,11 @@ class AddItemForm extends React.Component {
   }
 
   render() {
+    const {deactivate, addLabel} = this.props;
     return (
       <div className="form-inline">
-        <FormControl inputRef={ref => { this.myInput = ref; }} />
-        <Button onClick={this.addItem}><i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; {this.props.addLabel}</Button>
+        <FormControl inputRef={ref => { this.myInput = ref; }} disabled={deactivate} />
+        <Button onClick={this.addItem}><i className="fa fa-plus fa-fw" aria-hidden="true" disabled={deactivate} />&nbsp; {addLabel}</Button>
       </div>
     );
   }
@@ -32,6 +33,7 @@ class AddItemForm extends React.Component {
 AddItemForm.propTypes = {
   onAddItem: PropTypes.func.isRequired,
   addLabel: PropTypes.string.isRequired,
+  deactivate: PropTypes.bool,
   placeholder: PropTypes.string,
   error: PropTypes.string
 };
