@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import AddItemForm from './AddItemForm';
 
@@ -39,13 +39,38 @@ class ListInput extends React.Component {
       text: 'Product Price'
     }];
 
+    const {error, label, placeholder} = this.props;
+
+    let wrapperClass = 'form-group';
+    if (error && error.length > 0) {
+      wrapperClass += " " + 'has-error';
+    }
+
     return (
-      <div>
-        <BootstrapTable keyField='id' data={ this.state.products } columns={ columns } />
-        <AddItemForm onAddItem={this.addItem} addLabel="CHANGEME" />
+      <div className={wrapperClass}>
+        <label>{label}</label>
+        <div className="field">
+          <div className="card">
+            <div className="card-body">
+              <div className="card-text">
+                <BootstrapTable keyField='id' data={ this.state.products } columns={ columns } />
+                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel="CHANGEME" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+ListInput.propTypes = {
+  addLabel: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.array,
+  error: PropTypes.string
+};
 
 export default ListInput;

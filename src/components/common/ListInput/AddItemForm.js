@@ -15,7 +15,7 @@ class AddItemForm extends React.Component {
     const item = this.myInput.value;
     if(typeof item === "string" && item.length) {
       this.props.onAddItem(item);
-      this.myInput.reset();
+      this.myInput.value = "";
     }
   }
 
