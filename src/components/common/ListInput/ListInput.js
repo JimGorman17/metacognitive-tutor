@@ -6,6 +6,25 @@ import AddItemForm from './AddItemForm';
 class ListInput extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    const currentTime = (new Date()).getTime();
+
+    this.state = {
+      products: [{id: currentTime, name: 'Item name 0', price: 2100}, {id: currentTime + 1, name: 'Item name 1', price: 2101}, {id: currentTime + 2, name: 'Item name 2', price: 2102}]
+    };
+
+    this.addItem = this.addItem.bind(this);
+  }
+
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+
+  addItem(item) {
+    return this.setState({products: [
+      ...this.state.products,
+      Object.assign({}, {id: (new Date()).getTime(), name: item, price: this.getRndInteger(2000, 3000)})
+    ]});
   }
 
   render() {
@@ -20,12 +39,10 @@ class ListInput extends React.Component {
       text: 'Product Price'
     }];
 
-    const products = [{id: 0, name: 'Item name 0', price: 2100}, {id: 1, name: 'Item name 1', price: 2101}, {id: 2, name: 'Item name 2', price: 2102}];
-
     return (
       <div>
-        <BootstrapTable keyField='id' data={ products } columns={ columns } />
-        <AddItemForm />
+        <BootstrapTable keyField='id' data={ this.state.products } columns={ columns } />
+        <AddItemForm onAddItem={this.addItem} addLabel="CHANGEME" />
       </div>
     );
   }
