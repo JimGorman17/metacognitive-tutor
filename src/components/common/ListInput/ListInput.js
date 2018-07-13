@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import AddItemForm from './AddItemForm';
 import {Labels} from '../../../constants';
+import {Button} from 'react-bootstrap/lib';
 
 class ListInput extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      columns: [{
+      columns: [
+      {
         dataField: 'id',
         text: this.props.columnLabel // never changes
+      },
+      {
+        dataField: 'buttons',
+        formatter:this.cellButton.bind(this)
       }],
       data: this.props.data ? this.props.data.map(d => ({id: d})) : []
     };
@@ -20,7 +26,7 @@ class ListInput extends React.Component {
   }
 
   addItem(item) {
-    return this.setState(previousState => {
+    this.setState(previousState => {
       return {
         data: [
           ...previousState.data,
@@ -28,6 +34,20 @@ class ListInput extends React.Component {
         ]
       }
     });
+  }
+
+  onDelete(rowIndex) {
+    this.setState(previousState => {
+      return {
+        data: previousState.data.filter((_, i) => i !== rowIndex)
+      }
+    });
+  }
+
+  cellButton(cell, row, rowIndex) {
+    return (
+        <Button onClick={this.onDelete.bind(this,rowIndex)}><i className={`fa fa-trash-o fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
+    )
   }
 
   render() {
@@ -48,7 +68,7 @@ class ListInput extends React.Component {
           <div className="card">
             <div className="card-body">
               <div className="card-text">
-                <BootstrapTable keyField='id' data={data} columns={columns} />
+                <BootstrapTable keyField='id' data={data} columns={columns} deleteRow={ true } />
                 <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
               </div>
             </div>

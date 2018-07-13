@@ -47,6 +47,7 @@ const Labels = {
                 title: "Manage Lesson",
                 preview: "Preview",
                 edit: "Edit",
+                remove: "Remove",
                 complete_lesson: "Complete Lesson",
                 lesson_author: "Lesson Author",
                 book_title: "Book Title",
