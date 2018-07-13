@@ -13,7 +13,7 @@ class ListInput extends React.Component {
       columns: [
       {
         dataField: 'id',
-        text: this.props.columnLabel // never changes
+        text: this.props.label // never changes
       },
       {
         dataField: 'buttons',
@@ -51,7 +51,7 @@ class ListInput extends React.Component {
   }
 
   render() {
-    const {error, maxItems, label, placeholder, addLabel} = this.props;
+    const {error, maxItems, placeholder, addLabel} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
@@ -63,7 +63,6 @@ class ListInput extends React.Component {
 
     return (
       <div className={wrapperClass}>
-        <label>{label}</label>
         <div className="field">
           <div className="card">
             <div className="card-body">
@@ -82,7 +81,6 @@ class ListInput extends React.Component {
 ListInput.propTypes = {
   label: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.string),
-  columnLabel: PropTypes.string,
   addLabel: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
@@ -92,8 +90,7 @@ ListInput.propTypes = {
 };
 
 ListInput.defaultProps = {
-  addLabel: Labels.common.add_item,
-  columnLabel: Labels.common.items
+  addLabel: Labels.common.add_item
 };
 
 export default ListInput;

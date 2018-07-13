@@ -36,7 +36,6 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
       <ListInput
         name="storyDetails"
         data={dummyData}
-        columnLabel={Labels.teacher.lesson_form.manage_lesson.story_details}
         label={Labels.teacher.lesson_form.manage_lesson.story_details}
         value={lesson.StoryDetails}
         onChange={onChange}
