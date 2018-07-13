@@ -63,13 +63,11 @@ class ListInput extends React.Component {
 
     return (
       <div className={wrapperClass}>
-        <div className="field">
-          <div className="card">
-            <div className="card-body">
-              <div className="card-text">
-                <BootstrapTable keyField='id' data={data} columns={columns} deleteRow={ true } />
-                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
-              </div>
+        <div className="card">
+          <div className="card-body">
+            <div className="card-text">
+              <BootstrapTable keyField='id' data={data} columns={columns} deleteRow={ true } />
+              <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
             </div>
           </div>
         </div>
