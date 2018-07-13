@@ -21,10 +21,18 @@ class ListInput extends React.Component {
   }
 
   addItem(item) {
-    return this.setState({products: [
-      ...this.state.products,
-      Object.assign({}, {id: (new Date()).getTime(), name: item, price: this.getRndInteger(2000, 3000)})
-    ]});
+    return this.setState(previousState => {
+      return {
+        products: [
+          ...previousState.products,
+          {
+            id: new Date().getTime(),
+            name: item,
+            price: this.getRndInteger(2000, 3000)
+          }
+        ]
+      }
+    });
   }
 
   render() {
