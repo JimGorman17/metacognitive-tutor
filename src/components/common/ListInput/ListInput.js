@@ -9,14 +9,14 @@ class ListInput extends React.Component {
     super(props, context);
 
     this.state = {
-      data: this.props.data || []
+      columns: [{
+        dataField: 'id',
+        text: this.props.columnLabel // never changes
+      }],
+      data: this.props.data ? this.props.data.map(d => ({id: d})) : []
     };
 
     this.addItem = this.addItem.bind(this);
-  }
-
-  getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
   }
 
   addItem(item) {
@@ -24,25 +24,21 @@ class ListInput extends React.Component {
       return {
         data: [
           ...previousState.data,
-          {
-            id: new Date().getTime(),
-            name: item,
-            price: this.getRndInteger(2000, 3000)
-          }
+          {id: item}
         ]
       }
     });
   }
 
   render() {
-    const {error, maxItems, label, placeholder, columns, addLabel} = this.props;
+    const {error, maxItems, label, placeholder, addLabel} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
       wrapperClass += " " + 'has-error';
     }
 
-    const {data} = this.state;
+    const {columns, data} = this.state;
     const deactivate = maxItems <= (data ? data.length : 0);
 
     return (
@@ -64,9 +60,9 @@ class ListInput extends React.Component {
 }
 
 ListInput.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
-  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   label: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.string),
+  columnLabel: PropTypes.string,
   addLabel: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
@@ -76,7 +72,8 @@ ListInput.propTypes = {
 };
 
 ListInput.defaultProps = {
-  addLabel: Labels.common.add_item
+  addLabel: Labels.common.add_item,
+  columnLabel: Labels.common.items
 };
 
 export default ListInput;

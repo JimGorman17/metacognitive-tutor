@@ -10,6 +10,7 @@ const Labels = {
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
     common: {
+      items: "Items",
       add_item: "Add Item"
     },
     login: {

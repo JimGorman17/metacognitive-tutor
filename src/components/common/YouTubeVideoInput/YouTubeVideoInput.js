@@ -59,7 +59,7 @@ class YouTubeVideoInput extends React.Component {
             <Modal.Header>
               <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{"height" : "35em", "overflow-y":"auto"}}>
+            <Modal.Body style={{"height" : "35em", "overflowY":"auto"}}>
               <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
             </Modal.Body>
             <Modal.Footer>

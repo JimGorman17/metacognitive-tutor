@@ -6,19 +6,8 @@ import YouTubeVideoInput from '../common/YouTubeVideoInput/YouTubeVideoInput';
 import {Labels} from '../../constants';
 
 const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
-  const dummyColumns = [{
-    dataField: 'id',
-    text: 'Product ID'
-  }, {
-    dataField: 'name',
-    text: 'Product Name'
-  }, {
-    dataField: 'price',
-    text: 'Product Price'
-  }];
 
-  const currentTime = (new Date()).getTime();
-  const dummyData = [{id: currentTime, name: 'Item name 0', price: 2100}, {id: currentTime + 1, name: 'Item name 1', price: 2101}, {id: currentTime + 2, name: 'Item name 2', price: 2102}];
+  const dummyData = ["Manning", "Brady", "Rivers"];
 
   return (
     <form>
@@ -47,7 +36,7 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
       <ListInput
         name="storyDetails"
         data={dummyData}
-        columns={dummyColumns}
+        columnLabel={Labels.teacher.lesson_form.manage_lesson.story_details}
         label={Labels.teacher.lesson_form.manage_lesson.story_details}
         value={lesson.StoryDetails}
         onChange={onChange}
