@@ -9,6 +9,9 @@ const Labels = {
         title: 'About',
         description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     },
+    common: {
+      add_item: "Add Item"
+    },
     login: {
         title: "Log in",
         teachers: "Teachers",

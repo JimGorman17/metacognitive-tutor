@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import AddItemForm from './AddItemForm';
+import {Labels} from '../../../constants';
 
 class ListInput extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    const currentTime = (new Date()).getTime();
-
     this.state = {
-      products: [{id: currentTime, name: 'Item name 0', price: 2100}, {id: currentTime + 1, name: 'Item name 1', price: 2101}, {id: currentTime + 2, name: 'Item name 2', price: 2102}]
+      data: this.props.data || []
     };
 
     this.addItem = this.addItem.bind(this);
@@ -23,8 +22,8 @@ class ListInput extends React.Component {
   addItem(item) {
     return this.setState(previousState => {
       return {
-        products: [
-          ...previousState.products,
+        data: [
+          ...previousState.data,
           {
             id: new Date().getTime(),
             name: item,
@@ -36,26 +35,15 @@ class ListInput extends React.Component {
   }
 
   render() {
-    const columns = [{
-      dataField: 'id',
-      text: 'Product ID'
-    }, {
-      dataField: 'name',
-      text: 'Product Name'
-    }, {
-      dataField: 'price',
-      text: 'Product Price'
-    }];
-
-    const {error, maxItems, label, placeholder} = this.props;
+    const {error, maxItems, label, placeholder, columns, addLabel} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
       wrapperClass += " " + 'has-error';
     }
 
-    const {products} = this.state;
-    const deactivate = maxItems <= (products ? products.length : 0);
+    const {data} = this.state;
+    const deactivate = maxItems <= (data ? data.length : 0);
 
     return (
       <div className={wrapperClass}>
@@ -64,8 +52,8 @@ class ListInput extends React.Component {
           <div className="card">
             <div className="card-body">
               <div className="card-text">
-                <BootstrapTable keyField='id' data={products} columns={columns} />
-                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel="CHANGEME" deactivate={deactivate} />
+                <BootstrapTable keyField='id' data={data} columns={columns} />
+                <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
               </div>
             </div>
           </div>
@@ -76,13 +64,19 @@ class ListInput extends React.Component {
 }
 
 ListInput.propTypes = {
-  addLabel: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   label: PropTypes.string.isRequired,
+  addLabel: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   maxItems: PropTypes.number,
   value: PropTypes.array,
   error: PropTypes.string
+};
+
+ListInput.defaultProps = {
+  addLabel: Labels.common.add_item
 };
 
 export default ListInput;
