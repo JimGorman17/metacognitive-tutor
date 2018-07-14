@@ -6,11 +6,11 @@
     max-width: 850px;
     margin: 0 auto;
   }
-  
+
   a.active {
     color: orange;
   }
-  
+
   nav {
     padding-top: 20px;
   }
@@ -88,7 +88,7 @@
   border: 1px solid #ccc;
   cursor: default;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 }
 
