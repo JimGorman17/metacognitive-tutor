@@ -34,6 +34,13 @@ class ListInput extends React.Component {
 
     this.addItem = this.addItem.bind(this);
     this.immutablySwapItems = this.immutablySwapItems.bind(this);
+    this.afterSaveCell = this.afterSaveCell.bind(this);
+  }
+
+  onChange() {
+    const {name} = this.props;
+    const {data} = this.state;
+    this.props.onChange({target: {name: name, value: data.map(d => d.item) }});
   }
 
   addItem(item) {
@@ -44,7 +51,7 @@ class ListInput extends React.Component {
           {id: new Date().getTime(), item}
         ]
       }
-    });
+    }, () => {this.onChange()});
   }
 
   immutablySwapItems(items, firstIndex, secondIndex) { // https://stackoverflow.com/questions/41127548/how-do-i-swap-array-elements-in-an-immutable-fashion-within-a-redux-reducer, 07/14/2018
@@ -61,7 +68,7 @@ class ListInput extends React.Component {
       return {
         data: this.immutablySwapItems(previousState.data, rowIndex, rowIndex - 1)
       }
-    });
+    }, () => {this.onChange()});
   }
 
   onMoveDown(rowIndex) {
@@ -69,7 +76,7 @@ class ListInput extends React.Component {
       return {
         data: this.immutablySwapItems(previousState.data, rowIndex, rowIndex + 1)
       }
-    });
+    }, () => {this.onChange()});
   }
 
   onDelete(rowIndex) {
@@ -77,7 +84,19 @@ class ListInput extends React.Component {
       return {
         data: previousState.data.filter((_, i) => i !== rowIndex)
       }
-    });
+    }, () => {this.onChange()});
+  }
+
+  afterSaveCell(oldValue, newValue, row) {
+    if (oldValue !== newValue) {
+      this.setState(previousState => {
+        const newData = previousState.data.slice();
+        newData[row.id] = row;
+        return {
+          data: newData
+        }
+      }, () => {this.onChange()});
+    }
   }
 
   renderButtons(cell, row, rowIndex) {
@@ -101,12 +120,18 @@ class ListInput extends React.Component {
     const {columns, data} = this.state;
     const deactivate = maxItems <= (data ? data.length : 0);
 
+    const cellEdit = cellEditFactory({
+       mode: 'click'
+      ,blurToSave: true
+      ,afterSaveCell: (oldValue, newValue, row, column) => this.afterSaveCell(oldValue, newValue, row, column)
+    });
+
     return (
       <div className={wrapperClass}>
         <div className="card">
           <div className="card-body">
             <div className="card-text">
-              <BootstrapTable keyField='id' data={data} columns={columns} cellEdit={ cellEditFactory({ mode: 'click', blurToSave: true }) } />
+              <BootstrapTable keyField='id' data={data} columns={columns} cellEdit={cellEdit} />
               <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
             </div>
           </div>
@@ -117,6 +142,7 @@ class ListInput extends React.Component {
 }
 
 ListInput.propTypes = {
+  name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.string),
   addLabel: PropTypes.string,
