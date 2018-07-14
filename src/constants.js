@@ -55,9 +55,12 @@ const Labels = {
                 book_title: "Book Title",
                 book_amazon_url: "Amazon Url",
                 the_hook: "The Hook",
+                the_two_vocabulary_words_you_tube_video: "The Two Vocabulary Words",
                 main_idea: "Main Idea",
                 supporting_idea: "Supporting Idea",
                 story_details: "Story Details",
+                story_questions: "Story Questions",
+                important_sentences_for_word_scramble: "Important Sentences for Word Scramble",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",

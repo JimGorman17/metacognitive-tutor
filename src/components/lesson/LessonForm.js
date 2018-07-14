@@ -31,12 +31,12 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
         onChange={onChange}
         error={errors.TheHookYouTubeVideo} />
 
-      <ListInput
-        name="StoryDetails"
-        label={Labels.teacher.lesson_form.manage_lesson.story_details}
-        data={lesson.StoryDetails}
+      <YouTubeVideoInput
+        name="TheTwoVocabularyWordsYouTubeVideo"
+        label={Labels.teacher.lesson_form.manage_lesson.the_two_vocabulary_words_you_tube_video}
+        value={lesson.TheTwoVocabularyWordsYouTubeVideo}
         onChange={onChange}
-        error={errors.StoryDetails} />
+        error={errors.TheTwoVocabularyWordsYouTubeVideo} />
 
       <TextInput
         name="MainIdea"
@@ -50,7 +50,28 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
         label={Labels.teacher.lesson_form.manage_lesson.supporting_idea}
         value={lesson.SupportingIdea}
         onChange={onChange}
-        error={errors.SupportingIdea}/>
+        error={errors.SupportingIdea} />
+
+      <ListInput
+        name="StoryDetails"
+        label={Labels.teacher.lesson_form.manage_lesson.story_details}
+        data={lesson.StoryDetails}
+        onChange={onChange}
+        error={errors.StoryDetails} />
+
+      <ListInput
+        name="StoryQuestions"
+        label={Labels.teacher.lesson_form.manage_lesson.story_questions}
+        data={lesson.StoryQuestions}
+        onChange={onChange}
+        error={errors.StoryQuestions} />
+
+      <ListInput
+        name="ImportantSentencesForWordScramble"
+        label={Labels.teacher.lesson_form.manage_lesson.important_sentences_for_word_scramble}
+        data={lesson.ImportantSentencesForWordScramble}
+        onChange={onChange}
+        error={errors.ImportantSentencesForWordScramble} />
 
       <input
         type="submit"
