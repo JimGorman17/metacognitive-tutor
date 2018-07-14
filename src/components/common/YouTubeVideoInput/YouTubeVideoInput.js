@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Labels} from '../../../constants';
 import YoutubeAutocomplete from 'react-youtube-autocomplete';
-import {Modal, Button} from 'react-bootstrap/lib';
+import {Modal, Button, ButtonToolbar, ToggleButtonGroup, ToggleButton, FormControl} from 'react-bootstrap/lib';
 import YouTubeVideoList from './YouTubeVideoList'
 import YouTubeVideoModel from '../../../models/YouTubeVideo';
 
@@ -11,13 +11,19 @@ class YouTubeVideoInput extends React.Component {
     super(props, context);
 
     this.state = {
+      activeOption: 1,
       showModal: false,
       canDisplayYouTubeResults: true,
       youtubeResults: []
     };
 
+    this.onOptionChange = this.onOptionChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.onSearchResultsFound = this.onSearchResultsFound.bind(this);
+  }
+
+  onOptionChange(option) {
+    this.setState({ activeOption: option });
   }
 
   handleClose() {
@@ -39,7 +45,7 @@ class YouTubeVideoInput extends React.Component {
   }
 
   render() {
-    const {error, label, placeholder} = this.props;
+    const {error, label, placeholder, name} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
@@ -50,11 +56,32 @@ class YouTubeVideoInput extends React.Component {
       <div className={wrapperClass}>
         <label htmlFor={name}>{label}</label>
         <div className="field">
-          <YoutubeAutocomplete
-            apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
-            placeHolder={placeholder}
-            callback={this.onSearchResultsFound}
-          />
+          <div className="container">
+            <div className="row">
+              <div className="col-md-5">
+                <YoutubeAutocomplete
+                  apiKey="AIzaSyCLhB4-zscDl_jic4l_ekw-hkAZNsxh_fk"
+                  placeHolder={placeholder}
+                  callback={this.onSearchResultsFound}
+                  disabled={this.state.activeOption !== 1}
+                />
+              </div>
+              <div className="col-md-4">
+                <ButtonToolbar>
+                  <ToggleButtonGroup className="btn-group-toggle" onChange={this.onOptionChange} type="radio" name={`options-${name}`} defaultValue={1}>
+                    <ToggleButton value={1}>Search</ToggleButton>
+                    <ToggleButton value={2}>Direct Input</ToggleButton>
+                  </ToggleButtonGroup>
+                </ButtonToolbar>
+              </div>
+              <div className="col-md-3">
+                <FormControl
+                  type="text"
+                  readOnly={this.state.activeOption !== 2}
+                />
+              </div>
+            </div>
+          </div>
           <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
             <Modal.Header>
               <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
