@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Labels} from '../../../constants';
-import YoutubeAutocomplete from 'react-youtube-autocomplete';
+import YoutubeAutocomplete from './YoutubeAutocomplete';
 import {Modal, Button, ButtonToolbar, ToggleButtonGroup, ToggleButton, FormControl} from 'react-bootstrap/lib';
 import YouTubeVideoList from './YouTubeVideoList'
 import YouTubeVideoModel from '../../../models/YouTubeVideo';
