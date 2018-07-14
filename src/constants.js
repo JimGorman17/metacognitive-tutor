@@ -68,7 +68,8 @@ const Labels = {
                     image: "Image"
                   },
                   title: "Choose a YouTube Video",
-                  watch: "Watch"
+                  select: "Select",
+                  preview: "Preview"
                 }
             }
         }
