@@ -1,28 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import AddItemForm from './AddItemForm';
 import {Labels} from '../../../constants';
-import {Button} from 'react-bootstrap/lib';
+import {Button, ButtonToolbar} from 'react-bootstrap/lib';
 
 class ListInput extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const {data} = this.props;
+
     this.state = {
       columns: [
       {
         dataField: 'id',
+        hidden: true
+      },
+      {
+        dataField: 'item',
         text: this.props.label // never changes
       },
       {
         dataField: 'buttons',
-        formatter:this.cellButton.bind(this)
+        text: "", // required
+        formatter: this.renderButtons.bind(this),
+        editable: false,
+        headerStyle: { width: '10em' }
       }],
-      data: this.props.data ? this.props.data.map(d => ({id: d})) : []
+      data: data ? data.map((d, index) => ({id: index, item: d})) : []
     };
 
     this.addItem = this.addItem.bind(this);
+    this.immutablySwapItems = this.immutablySwapItems.bind(this);
   }
 
   addItem(item) {
@@ -30,8 +41,33 @@ class ListInput extends React.Component {
       return {
         data: [
           ...previousState.data,
-          {id: item}
+          {id: new Date().getTime(), item}
         ]
+      }
+    });
+  }
+
+  immutablySwapItems(items, firstIndex, secondIndex) { // https://stackoverflow.com/questions/41127548/how-do-i-swap-array-elements-in-an-immutable-fashion-within-a-redux-reducer, 07/14/2018
+    const results = items.slice();
+    const firstItem = items[firstIndex];
+    results[firstIndex] = items[secondIndex];
+    results[secondIndex] = firstItem;
+
+    return results;
+  }
+
+  onMoveUp(rowIndex) {
+    this.setState(previousState => {
+      return {
+        data: this.immutablySwapItems(previousState.data, rowIndex, rowIndex - 1)
+      }
+    });
+  }
+
+  onMoveDown(rowIndex) {
+    this.setState(previousState => {
+      return {
+        data: this.immutablySwapItems(previousState.data, rowIndex, rowIndex + 1)
       }
     });
   }
@@ -44,9 +80,13 @@ class ListInput extends React.Component {
     });
   }
 
-  cellButton(cell, row, rowIndex) {
+  renderButtons(cell, row, rowIndex) {
     return (
-        <Button onClick={this.onDelete.bind(this,rowIndex)}><i className={`fa fa-trash-o fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
+        <ButtonToolbar>
+          <Button disabled={rowIndex === 0} className="btn-sm" onClick={this.onMoveUp.bind(this,rowIndex)} title={Labels.teacher.lesson_form.manage_lesson.move_up}><i className={`fa fa-arrow-up fa-fw`} aria-hidden="true" /></Button>
+          <Button disabled={rowIndex === this.state.data.length - 1} className="btn-sm" onClick={this.onMoveDown.bind(this,rowIndex)} title={Labels.teacher.lesson_form.manage_lesson.move_down}><i className={`fa fa-arrow-down fa-fw`} aria-hidden="true" /></Button>
+          <Button className="btn-sm" onClick={this.onDelete.bind(this,rowIndex)} title={Labels.teacher.lesson_form.manage_lesson.remove}><i className={`fa fa-trash-o fa-fw`} aria-hidden="true" /></Button>
+        </ButtonToolbar>
     )
   }
 
@@ -66,7 +106,7 @@ class ListInput extends React.Component {
         <div className="card">
           <div className="card-body">
             <div className="card-text">
-              <BootstrapTable keyField='id' data={data} columns={columns} deleteRow={ true } />
+              <BootstrapTable keyField='id' data={data} columns={columns} cellEdit={ cellEditFactory({ mode: 'click', blurToSave: true }) } />
               <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
             </div>
           </div>

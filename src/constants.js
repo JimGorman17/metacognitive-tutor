@@ -48,6 +48,8 @@ const Labels = {
                 preview: "Preview",
                 edit: "Edit",
                 remove: "Remove",
+                move_up: "Move Up",
+                move_down: "Move Down",
                 complete_lesson: "Complete Lesson",
                 lesson_author: "Lesson Author",
                 book_title: "Book Title",

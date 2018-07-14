@@ -7,7 +7,7 @@ import {Labels} from '../../constants';
 
 const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
 
-  const dummyData = ["Manning", "Brady", "Rivers"];
+  const dummyData = ["First", "Second", "Third"];
 
   return (
     <form>

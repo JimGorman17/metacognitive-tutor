@@ -25,7 +25,7 @@ const YouTubeVideoList = ({youtubevideos}) => {
 };
 
 YouTubeVideoList.propTypes = {
-  youtubevideos: PropTypes.arrayOf(YouTubeVideoModel)
+  youtubevideos: PropTypes.arrayOf(PropTypes.instanceOf(YouTubeVideoModel))
 };
 
 export default YouTubeVideoList;
