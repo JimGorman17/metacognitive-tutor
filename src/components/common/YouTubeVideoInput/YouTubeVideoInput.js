@@ -20,6 +20,13 @@ class YouTubeVideoInput extends React.Component {
     this.onOptionChange = this.onOptionChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.onSearchResultsFound = this.onSearchResultsFound.bind(this);
+    this.onSelected = this.onSelected.bind(this);
+  }
+
+  onSelected(youTubeVideo) {
+    const {name, onChange} = this.props;
+    onChange({target: {name: name, value: youTubeVideo }});
+    this.handleClose();
   }
 
   onOptionChange(option) {
@@ -45,7 +52,7 @@ class YouTubeVideoInput extends React.Component {
   }
 
   render() {
-    const {error, label, placeholder, name} = this.props;
+    const {error, label, placeholder, name, onChange, value} = this.props;
 
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
@@ -78,6 +85,8 @@ class YouTubeVideoInput extends React.Component {
                 <FormControl
                   type="text"
                   readOnly={this.state.activeOption !== 2}
+                  value={value.Url}
+                  onChange={(url) => onChange({target: {name: name, value: new YouTubeVideoModel({Url: url}) }})}
                 />
               </div>
             </div>
@@ -87,7 +96,7 @@ class YouTubeVideoInput extends React.Component {
               <Modal.Title>{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{"height" : "35em", "overflowY":"auto"}}>
-              <YouTubeVideoList youtubevideos={this.state.youtubevideos} />
+              <YouTubeVideoList youtubevideos={this.state.youtubevideos} onSelected={this.onSelected} />
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.handleClose}>Close</Button>
@@ -106,6 +115,10 @@ YouTubeVideoInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.instanceOf(YouTubeVideoModel),
   error: PropTypes.string
+};
+
+YouTubeVideoInput.defaultProps = {
+  value: new YouTubeVideoModel()
 };
 
 export default YouTubeVideoInput;

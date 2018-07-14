@@ -4,12 +4,12 @@ import {Labels} from '../../../constants';
 import YouTubeVideoModel from '../../../models/YouTubeVideo';
 import {Image, Button} from 'react-bootstrap/lib';
 
-const YouTubeVideoListRow = ({youtubevideo}) => {
+const YouTubeVideoListRow = ({youtubevideo, onSelected}) => {
   return (
     <tr>
       <th scope="row">
         <div className="container">
-          <div className="row"><Button bsStyle="primary"><i className="fa fa-check fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.select}</Button></div>
+          <div className="row"><Button bsStyle="primary" onClick={() => onSelected(youtubevideo)}><i className="fa fa-check fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.select}</Button></div>
           <div className="row"><a href={`https://www.youtube.com/watch?v=${youtubevideo.VideoId}`} target="_blank">{Labels.teacher.lesson_form.manage_lesson.you_tube_video_selection.preview}</a></div>
         </div>
       </th>
@@ -21,7 +21,8 @@ const YouTubeVideoListRow = ({youtubevideo}) => {
 };
 
 YouTubeVideoListRow.propTypes = {
-  youtubevideo: PropTypes.instanceOf(YouTubeVideoModel).isRequired
+  youtubevideo: PropTypes.instanceOf(YouTubeVideoModel).isRequired,
+  onSelected: PropTypes.func.isRequired
 };
 
 export default YouTubeVideoListRow;

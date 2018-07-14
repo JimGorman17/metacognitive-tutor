@@ -4,7 +4,7 @@ import YouTubeVideoModel from '../../../models/YouTubeVideo';
 import YouTubeVideoListRow from './YouTubeVideoListRow';
 import {Labels} from '../../../constants';
 
-const YouTubeVideoList = ({youtubevideos}) => {
+const YouTubeVideoList = ({youtubevideos, onSelected}) => {
   return (
     <table className="table">
       <thead>
@@ -17,7 +17,7 @@ const YouTubeVideoList = ({youtubevideos}) => {
       </thead>
       <tbody>
       {youtubevideos.map(youtubevideo =>
-        <YouTubeVideoListRow key={youtubevideo.VideoId} youtubevideo={youtubevideo}/>
+        <YouTubeVideoListRow key={youtubevideo.VideoId} youtubevideo={youtubevideo} onSelected={onSelected} />
       )}
       </tbody>
     </table>
@@ -25,7 +25,8 @@ const YouTubeVideoList = ({youtubevideos}) => {
 };
 
 YouTubeVideoList.propTypes = {
-  youtubevideos: PropTypes.arrayOf(PropTypes.instanceOf(YouTubeVideoModel))
+  youtubevideos: PropTypes.arrayOf(PropTypes.instanceOf(YouTubeVideoModel)),
+  onSelected: PropTypes.func.isRequired
 };
 
 export default YouTubeVideoList;
