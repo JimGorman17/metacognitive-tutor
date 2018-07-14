@@ -11,7 +11,7 @@ const OptionsTemplate = ({data}) => {
 }
 
 OptionsTemplate.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.array.isRequired
 };
 
 export default OptionsTemplate;
