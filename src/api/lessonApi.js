@@ -11,7 +11,7 @@ class LessonApi {
       throw 'payload is not of type LessonModel.';
     }
 
-    return post(`lesson/upsert`, lessonModel);
+    return post(`lesson/upsert`, lessonModel.convertToApiReady());
   }
 
   // TODO: Implement

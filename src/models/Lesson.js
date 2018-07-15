@@ -20,4 +20,14 @@ export default class Lesson {
     this.provider = this.lessonAuthor ? this.lessonAuthor.provider : null;
     this.providerId = this.lessonAuthor ? this.lessonAuthor.providerId : null;
   }
+
+  convertToApiReady(){
+    return Object.assign({}, this, {
+      theHookYouTubeVideo: JSON.stringify(this.theHookYouTubeVideo),
+      theTwoVocabularyWordsYouTubeVideo: JSON.stringify(this.theTwoVocabularyWordsYouTubeVideo),
+      storyDetails: JSON.stringify(this.storyDetails),
+      storyQuestions: JSON.stringify(this.storyQuestions),
+      importantSentencesForWordScramble: JSON.stringify(this.importantSentencesForWordScramble)
+    });
+  }
 }

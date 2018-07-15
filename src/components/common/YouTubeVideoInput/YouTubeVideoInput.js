@@ -84,7 +84,7 @@ class YouTubeVideoInput extends React.Component {
               <div className="col-md-3">
                 <FormControl
                   type="text"
-                  readOnly={this.state.activeOption !== 2}
+                  disabled={this.state.activeOption !== 2}
                   value={value.url}
                   onChange={(url) => onChange({target: {name: name, value: new YouTubeVideoModel({url: url}) }})}
                 />
