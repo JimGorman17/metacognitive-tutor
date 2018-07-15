@@ -37,6 +37,12 @@ class ListInput extends React.Component {
     this.afterSaveCell = this.afterSaveCell.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.data != nextProps.data) {
+      this.setState({data: nextProps.data.map((d, index) => ({id: index, item: d}))});
+    }
+  }
+
   onChange() {
     const {name} = this.props;
     const {data} = this.state;
