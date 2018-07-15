@@ -21,12 +21,12 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
             <h4>{Labels.app_title}</h4>
             {loading && <LoadingDots interval={100} dots={20}/>}
           </div>
-          <div className="col-4 d-flex justify-content-end align-items-center">            
-            <NavLink to="/login" className="btn btn-sm btn-outline-secondary"><i className={`fa ${loginStatus ? "fa-sign-out" : "fa-sign-in"} fa-fw`} aria-hidden="true" />&nbsp; {loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>            
+          <div className="col-4 d-flex justify-content-end align-items-center">
+            <NavLink to="/login" className="btn btn-sm btn-outline-secondary"><i className={`fa ${loginStatus ? "fa-sign-out" : "fa-sign-in"} fa-fw`} aria-hidden="true" />&nbsp; {loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>
           </div>
         </div>
       </header>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">      
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           {loginStatus &&
           <ul className="navbar-nav mr-auto">
@@ -35,24 +35,19 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
             </li>
             {loginStatus == LoginTypeEnum.teacher &&
             <li className="nav-item">
-              <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-user fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.admin_page.title}</NavLink>
+              <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.admin_page.title}</NavLink>
             </li>
             }
             {loginStatus == LoginTypeEnum.teacher &&
             <li className="nav-item">
               <NavLink to="/lesson" className="nav-link" activeClassName="active"><i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.create_lesson_page.title}</NavLink>
             </li>
-            }          
+            }
             {loginStatus == LoginTypeEnum.student &&
             <li className="nav-item">
               <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-bars fa-fw" aria-hidden="true" />&nbsp; {Labels.student.main_menu.title}</NavLink>
             </li>
             }
-            {loginStatus == LoginTypeEnum.student &&
-            <li className="nav-item">
-              <NavLink to="/student_lesson" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; {Labels.student.lesson_page.title}</NavLink>
-            </li>
-            }          
           </ul>
           }
         </div>
@@ -61,16 +56,16 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span className="navbar-toggler-icon"></span>
           </button>
-          }          
+          }
         </div>
-        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">        
+        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink to="/about" className="nav-link" activeClassName="active"><i className="fa fa-info-circle fa-fw" aria-hidden="true" />&nbsp; {Labels.about.title}</NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/privacy_policy" className="nav-link" activeClassName="active"><i className="fa fa-lock fa-fw" aria-hidden="true" />&nbsp; {Labels.privacy_policy.title}</NavLink>
-            </li>            
+            </li>
           </ul>
         </div>
       </nav>

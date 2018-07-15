@@ -2,7 +2,7 @@
    1. Centralizes our Axios default configuration.
    2. Abstracts away the logic for determining the baseURL.
    3. Provides a clear, easily consumable list of JavaScript functions
-      for interacting with the API. This keeps API calls short and consistent. 
+      for interacting with the API. This keeps API calls short and consistent.
 */
 // c/o Cory House's GitHub Repository, 07/04/2018, https://gist.githubusercontent.com/coryhouse/09fb49dd0c13ca20cca6cc0fe2438f3e/raw/ceb68883b2412e7037457ebd4dc49ec1e6b2857f/userApi.js
 import axios from 'axios';
@@ -31,6 +31,10 @@ function post(url, data) {
   return getInitializedApi().post(url, data);
 }
 
+function delete_command(url, data) {
+  return getInitializedApi().delete(url, {params: data}); // https://github.com/axios/axios/issues/736, 07/15/2018
+}
+
 /*
 // FOR EXAMPLE ONLY. Functions like this belong in their own Api file.
 // Public functions
@@ -44,8 +48,9 @@ export function saveUser(user) {
 }
 */
 
-export {  
+export {
     get,
-    post
+    post,
+    delete_command
 };
 

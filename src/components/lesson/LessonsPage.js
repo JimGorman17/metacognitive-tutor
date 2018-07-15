@@ -5,20 +5,39 @@ import {bindActionCreators} from 'redux';
 import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
-import {Labels, LoginTypeEnum} from '../../constants';
+import {Labels} from '../../constants';
+import LoginModel from '../../models/Login';
+import LessonModel from '../../models/Lesson';
+import DeleteLessonModel from '../../models/DeleteLesson';
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.redirectToAddLessonPage = this.redirectToAddLessonPage.bind(this);
+    this.onDeleted = this.onDeleted.bind(this);
+  }
+
+  onDeleted(lessonId) {
+    const {actions, loggedInUser} = this.props;
+    actions.deleteLesson(new DeleteLessonModel({
+      id: lessonId,
+      lessonAuthor: loggedInUser
+    }));
   }
 
   lessonRow(lesson, index) {
     return <div key={index}>{lesson.title}</div>;
   }
 
-  redirectToAddLessonPage() {    
+  redirectToAddLessonPage() {
     this.props.history.push('/lesson');
+  }
+
+  componentDidMount(){
+    const {lessons, actions, loggedInUser} = this.props;
+    if (!lessons.length) {
+      actions.loadLessons(loggedInUser);
+    }
   }
 
   render() {
@@ -27,29 +46,25 @@ class LessonsPage extends React.Component {
     return (
       <div>
         <h1>{Labels.shared.lessons_page.title}</h1>
-        {loginStatus == LoginTypeEnum.teacher &&
-        <input type="submit"
-               value={Labels.teacher.create_lesson_page.title}
-               className="btn btn-primary"
-               onClick={this.redirectToAddLessonPage}/>
-        }
-        <LessonList lessons={lessons}/>
+        <LessonList lessons={lessons} loginStatus={loginStatus} onDeleted={this.onDeleted} />
       </div>
     );
   }
 }
 
 LessonsPage.propTypes = {
-  lessons: PropTypes.array.isRequired,
+  lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  loginStatus: PropTypes.string.isRequired
+  loginStatus: PropTypes.string.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {
   return {
     lessons: state.lessons,
-    loginStatus: state.loginStatus
+    loginStatus: state.loginStatus,
+    loggedInUser: state.loggedInUser
   };
 }
 

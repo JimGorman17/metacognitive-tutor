@@ -1,21 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import LessonModel from '../../models/Lesson';
+import {Labels, LoginTypeEnum} from '../../constants';
+import {ButtonToolbar, Button} from 'react-bootstrap/lib';
+import { NavLink } from 'react-router-dom';
 
-const LessonListRow = ({lesson}) => {  
+const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
   return (
-    <tr>
-      <td><a href={lesson.watchHref} target="_blank">Watch</a></td>
-      <td><Link to={'/lesson/' + lesson.id}>{lesson.title}</Link></td>
-      <td>{lesson.authorId}</td>
-      <td>{lesson.category}</td>
-      <td>{lesson.length}</td>
+    <tr className="d-flex">
+      <td className="col-2">
+        <div className="container">
+          <div className="row" key={lesson.id}>
+            <img src={lesson.lessonAuthor.providerPic} className="img-thumbnail" alt="{lesson.lessonAuthor.name}" />
+          </div>
+          <div className="row">
+            {lesson.lessonAuthor.name}
+          </div>
+        </div>
+      </td>
+      <td className="col-4"><a href={lesson.bookAmazonUrl} target="_blank">{lesson.bookTitle}</a></td>
+      <td className="col-4">
+        <ButtonToolbar>
+          <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
+          {loginStatus == LoginTypeEnum.student &&
+          <Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button>
+          }
+          {loginStatus == LoginTypeEnum.teacher &&
+          <span>
+          <NavLink to={'/lesson/' + lesson.id}><Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.edit}</Button></NavLink>
+          <Button onClick={() => onDeleted(lesson.id)}><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
+          </span>
+          }
+        </ButtonToolbar>
+      </td>
     </tr>
   );
 };
 
 LessonListRow.propTypes = {
-  lesson: PropTypes.object.isRequired
+  lesson: PropTypes.instanceOf(LessonModel).isRequired,
+  loginStatus: PropTypes.string.isRequired,
+  onDeleted: PropTypes.func.isRequired
 };
 
 export default LessonListRow;

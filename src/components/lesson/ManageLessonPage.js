@@ -5,9 +5,10 @@ import {bindActionCreators} from 'redux';
 import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonForm from './LessonForm';
-import {authorsFormattedForDropdown} from '../../selectors/selectors';
 import {Labels} from '../../constants';
 import toastr from 'toastr';
+import LessonModel from '../../models/Lesson';
+import LoginModel from '../../models/Login';
 
 export class ManageLessonPage extends React.Component {
   constructor(props, context) {
@@ -30,6 +31,13 @@ export class ManageLessonPage extends React.Component {
     }
   }
 
+  componentDidMount(){
+    const {lessons, actions, loggedInUser} = this.props;
+    if (!lessons.length) {
+      actions.loadLessons(loggedInUser);
+    }
+  }
+
   updateLessonState(event) {
     const field = event.target.name;
     let lesson = Object.assign({}, this.state.lesson);
@@ -41,15 +49,15 @@ export class ManageLessonPage extends React.Component {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.lesson.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
-      formIsValid = false;
-    }
+    // TODO: Add some validation.
+    // if (this.state.lesson.title.length < 5) {
+    //   errors.title = 'Title must be at least 5 characters.';
+    //   formIsValid = false;
+    // }
 
     this.setState({errors: errors});
     return formIsValid;
   }
-
 
   saveLesson(event) {
     event.preventDefault();
@@ -60,12 +68,14 @@ export class ManageLessonPage extends React.Component {
 
     this.setState({saving: true});
 
-    this.props.actions.saveLesson(this.state.lesson)
-      .then(() => this.redirect())
-      .catch(error => {
-        toastr.error(error);
-        this.setState({saving: false});
-      });
+    const lesson = new LessonModel(Object.assign({}, this.state.lesson, {lessonAuthor: this.props.loggedInUser})); // to avoid manipulating object passed in.
+
+    this.props.actions.saveLesson(lesson)
+    .then(() => this.redirect())
+    .catch(error => {
+      toastr.error(error);
+      this.setState({saving: false});
+    });
   }
 
   redirect() {
@@ -76,26 +86,28 @@ export class ManageLessonPage extends React.Component {
 
   render() {
     return (
-      <LessonForm
-        allAuthors={this.props.authors}
-        onChange={this.updateLessonState}
-        onSave={this.saveLesson}
-        lesson={this.state.lesson}
-        errors={this.state.errors}
-        saving={this.state.saving}
-      />
+      <div>
+        <LessonForm
+          onChange={this.updateLessonState}
+          onSave={this.saveLesson}
+          lesson={this.state.lesson}
+          errors={this.state.errors}
+          saving={this.state.saving}
+        />
+      </div>
     );
   }
 }
 
 ManageLessonPage.propTypes = {
+  lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   lesson: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
-function getLessonById(lessons, id) {  
+function getLessonById(lessons, id) {
   const lesson = lessons.filter(lesson => lesson.id == id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
@@ -104,15 +116,16 @@ function getLessonById(lessons, id) {
 function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
-  let lesson = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
-  
+  let lesson = new LessonModel();
+
   if (lessonId && state.lessons.length > 0) {
     lesson = getLessonById(state.lessons, lessonId);
   }
 
   return {
+    lessons: state.lessons,
     lesson: lesson,
-    authors: authorsFormattedForDropdown(state.authors)
+    loggedInUser: state.loggedInUser
   };
 }
 
