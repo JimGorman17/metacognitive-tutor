@@ -43,19 +43,10 @@ const lessons = [
     MainIdea: "Teach a child letter sounds with Bob Books Set 1! With four letters in the first story, children can read a whole book. Consistent new sounds are added gradually, until young readers have read books with all letters of the alphabet (except Q). Short vowels and three-letter words in simple sentences make Bob Books Set 1 a fun confidence builder. With little books, come big success. (TM)",
     SupportingIdea: "This is my supporting idea.",
     StoryDetails: [
-      "",
-      "",
-      ""
     ],
     StoryQuestions: [
-      "",
-      "",
-      ""
     ],
     ImportantSentencesForWordScramble: [
-      "",
-      "",
-      ""
     ],
     LessonAuthor: new PersonModel({
       Name: "Jim Gorman",
@@ -101,19 +92,10 @@ const lessons = [
     MainIdea: "Bob Books Set 2-Advancing Beginners continues to build reading skills. Use of three-letter words and consistent vowel sounds in slightly longer stories build confidence. Children love the hilarious (and sometimes mischievous) stories and pictures. These twelve books, filled with fun, drama, and surprise keep interest high for even the youngest readers.",
     SupportingIdea: "This is my supporting idea. 2",
     StoryDetails: [
-      "",
-      "",
-      ""
     ],
     StoryQuestions: [
-      "",
-      "",
-      ""
     ],
     ImportantSentencesForWordScramble: [
-      "",
-      "",
-      ""
     ],
     LessonAuthor: new PersonModel({
       Name: "Jim Gorman",
@@ -159,19 +141,10 @@ const lessons = [
     MainIdea: "Bob Books Set 3 adds something new for young readers. Consonant blends gently introduce new concepts to the progressing reader. Consistent vowel sounds and lots of three-letter-word practice mean your child continues to enjoy reading success. In addition to eight story books, two Activity Books are included, designed to entice youngsters to read, write, and solve puzzles.",
     SupportingIdea: "This is my supporting idea. 3",
     StoryDetails: [
-      "",
-      "",
-      ""
     ],
     StoryQuestions: [
-      "",
-      "",
-      ""
     ],
     ImportantSentencesForWordScramble: [
-      "",
-      "",
-      ""
     ],
     LessonAuthor: new PersonModel({
       Name: "Allison Gorman",
