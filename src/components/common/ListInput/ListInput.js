@@ -38,7 +38,8 @@ class ListInput extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.data != nextProps.data) {
+    const stateItems = this.state.data.map(d => d.item);
+    if (JSON.stringify(stateItems) !== JSON.stringify(nextProps.data)) { // https://stackoverflow.com/a/23555773/109941, 07/15/2018
       this.setState({data: nextProps.data.map((d, index) => ({id: index, item: d}))});
     }
   }
