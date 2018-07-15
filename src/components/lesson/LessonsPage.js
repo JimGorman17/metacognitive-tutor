@@ -7,6 +7,7 @@ import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
 import {Labels} from '../../constants';
 import LoginModel from '../../models/Login';
+import LessonModel from '../../models/Lesson';
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
@@ -23,8 +24,10 @@ class LessonsPage extends React.Component {
   }
 
   componentDidMount(){
-    const {actions, loggedInUser} = this.props;
-    actions.loadLessons(loggedInUser);
+    const {lessons, actions, loggedInUser} = this.props;
+    if (!lessons.length) {
+      actions.loadLessons(loggedInUser);
+    }
   }
 
   render() {
@@ -40,7 +43,7 @@ class LessonsPage extends React.Component {
 }
 
 LessonsPage.propTypes = {
-  lessons: PropTypes.array.isRequired,
+  lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   loginStatus: PropTypes.string.isRequired,

@@ -31,6 +31,13 @@ export class ManageLessonPage extends React.Component {
     }
   }
 
+  componentDidMount(){
+    const {lessons, actions, loggedInUser} = this.props;
+    if (!lessons.length) {
+      actions.loadLessons(loggedInUser);
+    }
+  }
+
   updateLessonState(event) {
     const field = event.target.name;
     let lesson = Object.assign({}, this.state.lesson);
@@ -94,6 +101,7 @@ export class ManageLessonPage extends React.Component {
 }
 
 ManageLessonPage.propTypes = {
+  lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   lesson: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
@@ -116,6 +124,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
+    lessons: state.lessons,
     lesson: lesson,
     loggedInUser: state.loggedInUser
   };
