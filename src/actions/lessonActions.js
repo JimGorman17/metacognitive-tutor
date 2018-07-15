@@ -20,21 +20,22 @@ export function deleteLessonSuccess(lessonId) {
   return {type: types.DELETE_LESSON_SUCCESS, lessonId};
 }
 
+function jsonParseLesson(l) {
+  const lesson = Object.assign({}, l);
+  lesson.theHookYouTubeVideo = lesson.theHookYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theHookYouTubeVideo)) : new YouTubeVideoModel();
+  lesson.theTwoVocabularyWordsYouTubeVideo = lesson.theTwoVocabularyWordsYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theTwoVocabularyWordsYouTubeVideo)) : new YouTubeVideoModel();
+  lesson.storyDetails = lesson.storyDetails ? JSON.parse(lesson.storyDetails) : [];
+  lesson.storyQuestions = lesson.storyQuestions ? JSON.parse(lesson.storyQuestions) : [];
+  lesson.importantSentencesForWordScramble = lesson.importantSentencesForWordScramble ? JSON.parse(lesson.importantSentencesForWordScramble) : [];
+  return new LessonModel(lesson)
+}
+
 export function loadLessons(loggedInUser) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return lessonApi.getAllLessons(loggedInUser).then(response => {
-      dispatch(loadLessonsSuccess(response.data.map(l => {
-        const lesson = Object.assign({}, l);
-        lesson.theHookYouTubeVideo = lesson.theHookYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theHookYouTubeVideo)) : new YouTubeVideoModel();
-        lesson.theTwoVocabularyWordsYouTubeVideo = lesson.theTwoVocabularyWordsYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theTwoVocabularyWordsYouTubeVideo)) : new YouTubeVideoModel();
-        lesson.storyDetails = lesson.storyDetails ? JSON.parse(lesson.storyDetails) : [];
-        lesson.storyQuestions = lesson.storyQuestions ? JSON.parse(lesson.storyQuestions) : [];
-        lesson.importantSentencesForWordScramble = lesson.importantSentencesForWordScramble ? JSON.parse(lesson.importantSentencesForWordScramble) : [];
-        return new LessonModel(lesson)
-      }))
-    );
-    }).catch(error => {
+    return lessonApi.getAllLessons(loggedInUser)
+    .then(response => dispatch(loadLessonsSuccess(response.data.map(l => jsonParseLesson(l)))))
+    .catch(error => {
       throw(error);
     });
   };
@@ -45,9 +46,9 @@ export function saveLesson(lesson) {
     const isNew = !lesson.id;
     dispatch(beginAjaxCall());
     return lessonApi.saveLesson(lesson).then(response => {
-      const lesson = new LessonModel(response.data);
-      isNew ? dispatch(updateLessonSuccess(lesson)) :
-      dispatch(createLessonSuccess(lesson));
+      const lesson = jsonParseLesson(response.data);
+      isNew ? dispatch(createLessonSuccess(lesson)) :
+      dispatch(updateLessonSuccess(lesson));
     }).catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);
