@@ -8,6 +8,7 @@ import LessonForm from './LessonForm';
 import {Labels} from '../../constants';
 import toastr from 'toastr';
 import LessonModel from '../../models/Lesson';
+import LoginModel from '../../models/Login';
 
 export class ManageLessonPage extends React.Component {
   constructor(props, context) {
@@ -41,10 +42,11 @@ export class ManageLessonPage extends React.Component {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.lesson.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
-      formIsValid = false;
-    }
+    // TODO: Add some validation.
+    // if (this.state.lesson.title.length < 5) {
+    //   errors.title = 'Title must be at least 5 characters.';
+    //   formIsValid = false;
+    // }
 
     this.setState({errors: errors});
     return formIsValid;
@@ -59,7 +61,10 @@ export class ManageLessonPage extends React.Component {
 
     this.setState({saving: true});
 
-    this.props.actions.saveLesson(this.state.lesson)
+    const lesson = Object.assign(new LessonModel(), this.state.lesson); // to avoid manipulating object passed in.
+    lesson.LessonAuthor = this.props.loggedInUser;
+
+    this.props.actions.saveLesson(lesson)
       .then(() => this.redirect())
       .catch(error => {
         toastr.error(error);
@@ -91,7 +96,8 @@ export class ManageLessonPage extends React.Component {
 ManageLessonPage.propTypes = {
   lesson: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
 function getLessonById(lessons, id) {
@@ -110,7 +116,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    lesson: lesson
+    lesson: lesson,
+    loggedInUser: state.loggedInUser
   };
 }
 

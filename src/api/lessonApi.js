@@ -1,6 +1,7 @@
 import LessonModel from '../models/Lesson';
 import YouTubeVideoModel from '../models/YouTubeVideo';
-import PersonModel from '../models/Person';
+import LoginModel from '../models/Login';
+import {post} from '../apiWrapper';
 import delay from './delay';
 
 // This file mocks a web API by working with the hard-coded data below.
@@ -48,7 +49,7 @@ const lessons = [
     ],
     ImportantSentencesForWordScramble: [
     ],
-    LessonAuthor: new PersonModel({
+    LessonAuthor: new LoginModel({
       Name: "Jim Gorman",
       Email: "james.m.gorman@gmail.com",
       Provider: "google",
@@ -97,7 +98,7 @@ const lessons = [
     ],
     ImportantSentencesForWordScramble: [
     ],
-    LessonAuthor: new PersonModel({
+    LessonAuthor: new LoginModel({
       Name: "Jim Gorman",
       Email: "james.m.gorman@gmail.com",
       Provider: "google",
@@ -146,7 +147,7 @@ const lessons = [
     ],
     ImportantSentencesForWordScramble: [
     ],
-    LessonAuthor: new PersonModel({
+    LessonAuthor: new LoginModel({
       Name: "Allison Gorman",
       Email: "allisonbarry25@gmail.com",
       Provider: "facebook",
@@ -155,15 +156,6 @@ const lessons = [
     })
   }),
 ];
-
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
-//This would be performed on the server in a real app. Just stubbing in.
-const generateId = (lesson) => {
-  return replaceAll(lesson.title, ' ', '-');
-};
 
 class LessonApi {
   static getAllLessons() {
@@ -174,31 +166,12 @@ class LessonApi {
     });
   }
 
-  static saveLesson(lesson) {
-    lesson = Object.assign({}, lesson); // to avoid manipulating object passed in.
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Simulate server-side validation
-        const minLessonTitleLength = 1;
-        if (lesson.title.length < minLessonTitleLength) {
-          reject(`Lesson must be at least ${minLessonTitleLength} characters.`);
-        }
+  static saveLesson(lessonModel) {
+    if (!(lessonModel instanceof LessonModel)) {
+      throw 'payload is not of type LessonModel.';
+    }
 
-        if (lesson.id) {
-          const existingLessonIndex = lessons.findIndex(a => a.id == lesson.id);
-          lessons.splice(existingLessonIndex, 1, lesson);
-        } else {
-          //Just simulating creation here.
-          //The server would generate ids and watchHref's for new courses in a real app.
-          //Cloning so copy returned is passed by value rather than by reference.
-          lesson.id = generateId(lesson);
-          lesson.watchHref = `http://www.pluralsight.com/courses/${lesson.id}`;
-          lessons.push(lesson);
-        }
-
-        resolve(lesson);
-      }, delay);
-    });
+    return post(`lesson/upsert`, lessonModel);
   }
 
   static deleteLesson(lessonId) {
