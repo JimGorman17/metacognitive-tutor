@@ -15,11 +15,11 @@ export function updateLessonSuccess(lesson) {
   return {type: types.UPDATE_LESSON_SUCCESS, lesson};
 }
 
-export function loadLessons() {
+export function loadLessons(loggedInUser) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return lessonApi.getAllLessons().then(lessons => {
-      dispatch(loadLessonsSuccess(lessons));
+    return lessonApi.getAllLessons(loggedInUser).then(response => {
+      dispatch(loadLessonsSuccess(response.data.map(l => new LessonModel(l))));
     }).catch(error => {
       throw(error);
     });

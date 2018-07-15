@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import * as lessonActions from '../../actions/lessonActions';
 import LessonList from './LessonList';
 import {Labels} from '../../constants';
+import LoginModel from '../../models/Login';
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
@@ -19,6 +20,11 @@ class LessonsPage extends React.Component {
 
   redirectToAddLessonPage() {
     this.props.history.push('/lesson');
+  }
+
+  componentDidMount(){
+    const {actions, loggedInUser} = this.props;
+    actions.loadLessons(loggedInUser);
   }
 
   render() {
@@ -37,13 +43,15 @@ LessonsPage.propTypes = {
   lessons: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  loginStatus: PropTypes.string.isRequired
+  loginStatus: PropTypes.string.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
 function mapStateToProps(state/*, ownProps*/) {
   return {
     lessons: state.lessons,
-    loginStatus: state.loginStatus
+    loginStatus: state.loginStatus,
+    loggedInUser: state.loggedInUser
   };
 }
 

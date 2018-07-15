@@ -25,14 +25,14 @@ class LoginPage extends React.Component {
     responseGoogleTeacher = (response) => {
         const profileObj = response.profileObj;
         this.props.actions.loginTeacher(new LoginModel({
-            Name: profileObj.name,
-            Token: response.accessToken,
-            Email: profileObj.email,
-            Provider: LoginServiceEnum.google,
-            ProviderId: response.googleId,
-            ProviderPic: profileObj.imageUrl,
-            IsTeacher: true,
-            IsStudent: false,
+            name: profileObj.name,
+            token: response.accessToken,
+            email: profileObj.email,
+            provider: LoginServiceEnum.google,
+            providerId: response.googleId,
+            providerPic: profileObj.imageUrl,
+            isTeacher: true,
+            isStudent: false,
         }))
         .then(() => {
             this.setState(() => ({redirectToReferrer: true}));
@@ -41,14 +41,14 @@ class LoginPage extends React.Component {
 
     responseFacebookTeacher = (response) => {
       this.props.actions.loginTeacher(new LoginModel({
-          Name: response.name,
-          Token: response.accessToken,
-          Email: response.email,
-          Provider: LoginServiceEnum.facebook,
-          ProviderId: response.id,
-          ProviderPic: response.picture.data.url,
-          IsTeacher: true,
-          IsStudent: false,
+          name: response.name,
+          token: response.accessToken,
+          email: response.email,
+          provider: LoginServiceEnum.facebook,
+          providerId: response.id,
+          providerPic: response.picture.data.url,
+          isTeacher: true,
+          isStudent: false,
       }))
       .then(() => {
           this.setState(() => ({redirectToReferrer: true}));
@@ -58,14 +58,14 @@ class LoginPage extends React.Component {
     responseGoogleStudent = (response) => {
         const profileObj = response.profileObj;
         this.props.actions.loginStudent(new LoginModel({
-            Name: profileObj.name,
-            Token: response.accessToken,
-            Email: profileObj.email,
-            Provider: LoginServiceEnum.google,
-            ProviderId: response.googleId,
-            ProviderPic: profileObj.imageUrl,
-            IsTeacher: false,
-            IsStudent: true,
+            name: profileObj.name,
+            token: response.accessToken,
+            email: profileObj.email,
+            provider: LoginServiceEnum.google,
+            providerId: response.googleId,
+            providerPic: profileObj.imageUrl,
+            isTeacher: false,
+            isStudent: true,
         }))
         .then(() => {
             this.setState(() => ({redirectToReferrer: true}));
@@ -74,14 +74,14 @@ class LoginPage extends React.Component {
 
     responseFacebookStudent = (response) => {
         this.props.actions.loginStudent(new LoginModel({
-            Name: response.name,
-            Token: response.accessToken,
-            Email: response.email,
-            Provider: LoginServiceEnum.facebook,
-            ProviderId: response.id,
-            ProviderPic: response.picture.data.url,
-            IsTeacher: false,
-            IsStudent: true,
+            name: response.name,
+            token: response.accessToken,
+            email: response.email,
+            provider: LoginServiceEnum.facebook,
+            providerId: response.id,
+            providerPic: response.picture.data.url,
+            isTeacher: false,
+            isStudent: true,
         }))
         .then(() => {
             this.setState(() => ({redirectToReferrer: true}));
