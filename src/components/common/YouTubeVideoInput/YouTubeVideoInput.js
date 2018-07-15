@@ -43,10 +43,10 @@ class YouTubeVideoInput extends React.Component {
   onSearchResultsFound(results) {
     if (this.state && this.state.canDisplayYouTubeResults) {
       this.setState({ youtubevideos: results.map(youtubevideo => new YouTubeVideoModel({
-        VideoId: youtubevideo.id.videoId,
-        Title: youtubevideo.snippet.title,
-        Description: youtubevideo.snippet.description,
-        ImageUrl: youtubevideo.snippet.thumbnails.default.url
+        videoId: youtubevideo.id.videoId,
+        title: youtubevideo.snippet.title,
+        description: youtubevideo.snippet.description,
+        imageUrl: youtubevideo.snippet.thumbnails.default.url
       })), showModal: true, canDisplayYouTubeResults: false });
     }
   }
@@ -86,7 +86,7 @@ class YouTubeVideoInput extends React.Component {
                   type="text"
                   readOnly={this.state.activeOption !== 2}
                   value={value.Url}
-                  onChange={(url) => onChange({target: {name: name, value: new YouTubeVideoModel({Url: url}) }})}
+                  onChange={(url) => onChange({target: {name: name, value: new YouTubeVideoModel({url: url}) }})}
                 />
               </div>
             </div>

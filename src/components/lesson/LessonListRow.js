@@ -11,14 +11,14 @@ const LessonListRow = ({lesson, loginStatus}) => {
       <td className="col-2">
         <div className="container">
           <div className="row" key={lesson.id}>
-            <img src={lesson.LessonAuthor.ProviderPic} className="img-thumbnail" alt="{lesson.LessonAuthor.Name}" />
+            <img src={lesson.lessonAuthor.providerPic} className="img-thumbnail" alt="{lesson.lessonAuthor.name}" />
           </div>
           <div className="row">
-            {lesson.LessonAuthor.Name}
+            {lesson.lessonAuthor.name}
           </div>
         </div>
       </td>
-      <td className="col-4"><a href={lesson.BookAmazonUrl} target="_blank">{lesson.BookTitle}</a></td>
+      <td className="col-4"><a href={lesson.bookAmazonUrl} target="_blank">{lesson.bookTitle}</a></td>
       <td className="col-4">
         <ButtonToolbar>
           <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>

@@ -1,9 +1,9 @@
 export default class YouTubeVideo {
   constructor(params) {
-      this.VideoId = params ? params.VideoId : '';
-      this.Url = params ? (params.Url ? params.Url : (params.VideoId ? `https://www.youtube.com/watch?v=${params.VideoId}`: "")): "";
-      this.Title = params ? params.Title : '';
-      this.Description = params ? params.Description : '';
-      this.ImageUrl = params ? params.ImageUrl : '';
+      this.videoId = params ? params.videoId : '';
+      this.url = params ? (params.url ? params.url : (params.videoId ? `https://www.youtube.com/watch?v=${params.videoId}`: "")): "";
+      this.title = params ? params.title : '';
+      this.description = params ? params.description : '';
+      this.imageUrl = params ? params.imageUrl : '';
   }
 }

@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import lessonApi from '../api/lessonApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import LessonModel from '../models/Lesson';
 
 export function loadLessonsSuccess(lessons) {
   return { type: types.LOAD_LESSONS_SUCCESS, lessons};
@@ -27,10 +28,12 @@ export function loadLessons() {
 
 export function saveLesson(lesson) {
   return function (dispatch/*, getState*/) {
+    const isNew = !lesson.id;
     dispatch(beginAjaxCall());
-    return lessonApi.saveLesson(lesson).then(lesson => {
-      lesson.id ? dispatch(updateLessonSuccess(lesson)) :
-        dispatch(createLessonSuccess(lesson));
+    return lessonApi.saveLesson(lesson).then(response => {
+      const lesson = new LessonModel(response.data);
+      isNew ? dispatch(updateLessonSuccess(lesson)) :
+      dispatch(createLessonSuccess(lesson));
     }).catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);

@@ -11,67 +11,67 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
     <form>
       <h1>{Labels.teacher.lesson_form.manage_lesson.title}</h1>
       <TextInput
-        name="BookTitle"
+        name="bookTitle"
         label={Labels.teacher.lesson_form.manage_lesson.book_title}
-        value={lesson.BookTitle}
+        value={lesson.bookTitle}
         onChange={onChange}
-        error={errors.BookTitle}/>
+        error={errors.bookTitle}/>
 
       <TextInput
-        name="BookAmazonUrl"
+        name="bookAmazonUrl"
         label={Labels.teacher.lesson_form.manage_lesson.book_amazon_url}
-        value={lesson.BookAmazonUrl}
+        value={lesson.bookAmazonUrl}
         onChange={onChange}
-        error={errors.BookAmazonUrl}/>
+        error={errors.bookAmazonUrl}/>
 
       <YouTubeVideoInput
-        name="TheHookYouTubeVideo"
+        name="theHookYouTubeVideo"
         label={Labels.teacher.lesson_form.manage_lesson.the_hook}
-        value={lesson.TheHookYouTubeVideo}
+        value={lesson.theHookYouTubeVideo}
         onChange={onChange}
-        error={errors.TheHookYouTubeVideo} />
+        error={errors.theHookYouTubeVideo} />
 
       <YouTubeVideoInput
-        name="TheTwoVocabularyWordsYouTubeVideo"
+        name="theTwoVocabularyWordsYouTubeVideo"
         label={Labels.teacher.lesson_form.manage_lesson.the_two_vocabulary_words_you_tube_video}
-        value={lesson.TheTwoVocabularyWordsYouTubeVideo}
+        value={lesson.theTwoVocabularyWordsYouTubeVideo}
         onChange={onChange}
-        error={errors.TheTwoVocabularyWordsYouTubeVideo} />
+        error={errors.theTwoVocabularyWordsYouTubeVideo} />
 
       <TextInput
-        name="MainIdea"
+        name="mainIdea"
         label={Labels.teacher.lesson_form.manage_lesson.main_idea}
-        value={lesson.MainIdea}
+        value={lesson.mainIdea}
         onChange={onChange}
-        error={errors.MainIdea}/>
+        error={errors.mainIdea}/>
 
       <TextInput
-        name="SupportingIdea"
+        name="supportingIdea"
         label={Labels.teacher.lesson_form.manage_lesson.supporting_idea}
-        value={lesson.SupportingIdea}
+        value={lesson.supportingIdea}
         onChange={onChange}
-        error={errors.SupportingIdea} />
+        error={errors.supportingIdea} />
 
       <ListInput
-        name="StoryDetails"
+        name="storyDetails"
         label={Labels.teacher.lesson_form.manage_lesson.story_details}
-        data={lesson.StoryDetails}
+        data={lesson.storyDetails}
         onChange={onChange}
-        error={errors.StoryDetails} />
+        error={errors.storyDetails} />
 
       <ListInput
-        name="StoryQuestions"
+        name="storyQuestions"
         label={Labels.teacher.lesson_form.manage_lesson.story_questions}
-        data={lesson.StoryQuestions}
+        data={lesson.storyQuestions}
         onChange={onChange}
-        error={errors.StoryQuestions} />
+        error={errors.storyQuestions} />
 
       <ListInput
-        name="ImportantSentencesForWordScramble"
+        name="importantSentencesForWordScramble"
         label={Labels.teacher.lesson_form.manage_lesson.important_sentences_for_word_scramble}
-        data={lesson.ImportantSentencesForWordScramble}
+        data={lesson.importantSentencesForWordScramble}
         onChange={onChange}
-        error={errors.ImportantSentencesForWordScramble} />
+        error={errors.importantSentencesForWordScramble} />
 
       <input
         type="submit"
