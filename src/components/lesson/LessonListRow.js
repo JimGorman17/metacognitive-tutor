@@ -5,7 +5,7 @@ import {Labels, LoginTypeEnum} from '../../constants';
 import {ButtonToolbar, Button} from 'react-bootstrap/lib';
 import { NavLink } from 'react-router-dom';
 
-const LessonListRow = ({lesson, loginStatus}) => {
+const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
   return (
     <tr className="d-flex">
       <td className="col-2">
@@ -28,7 +28,7 @@ const LessonListRow = ({lesson, loginStatus}) => {
           {loginStatus == LoginTypeEnum.teacher &&
           <span>
           <NavLink to={'/lesson/' + lesson.id}><Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.edit}</Button></NavLink>
-          <Button><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
+          <Button onClick={() => onDeleted(lesson.id)}><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
           </span>
           }
         </ButtonToolbar>
@@ -39,7 +39,8 @@ const LessonListRow = ({lesson, loginStatus}) => {
 
 LessonListRow.propTypes = {
   lesson: PropTypes.instanceOf(LessonModel).isRequired,
-  loginStatus: PropTypes.string.isRequired
+  loginStatus: PropTypes.string.isRequired,
+  onDeleted: PropTypes.func.isRequired
 };
 
 export default LessonListRow;

@@ -18,6 +18,11 @@ export default function lessonReducer(state = initialState.lessons, action) {
         Object.assign({}, action.lesson)
       ];
 
+    case types.DELETE_LESSON_SUCCESS:
+      return [
+        ...state.filter(lesson => lesson.id !== action.lessonId)
+      ];
+
     default:
       return state;
   }

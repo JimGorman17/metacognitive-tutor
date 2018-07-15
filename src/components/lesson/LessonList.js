@@ -4,7 +4,7 @@ import LessonListRow from './LessonListRow';
 import LessonModel from '../../models/Lesson';
 import {Labels} from '../../constants';
 
-const LessonList = ({lessons, loginStatus}) => {
+const LessonList = ({lessons, loginStatus, onDeleted}) => {
   return (
     <table className="table">
       <thead>
@@ -16,7 +16,7 @@ const LessonList = ({lessons, loginStatus}) => {
       </thead>
       <tbody>
         {lessons.map(lesson =>
-          <LessonListRow key={lesson.id} lesson={lesson} loginStatus={loginStatus} />
+          <LessonListRow key={lesson.id} lesson={lesson} loginStatus={loginStatus} onDeleted={onDeleted} />
         )}
       </tbody>
     </table>
@@ -25,7 +25,8 @@ const LessonList = ({lessons, loginStatus}) => {
 
 LessonList.propTypes = {
   lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
-  loginStatus: PropTypes.string.isRequired
+  loginStatus: PropTypes.string.isRequired,
+  onDeleted: PropTypes.func.isRequired
 };
 
 export default LessonList;

@@ -1,5 +1,6 @@
 import LessonModel from '../models/Lesson';
-import {post} from '../apiWrapper';
+import DeleteLessonModel from '../models/DeleteLesson';
+import {post, delete_command} from '../apiWrapper';
 
 class LessonApi {
   static getAllLessons(loggedInUser) {
@@ -14,18 +15,13 @@ class LessonApi {
     return post(`lesson/upsert`, lessonModel.convertToApiReady());
   }
 
-  // TODO: Implement
-  // static deleteLesson(lessonId) {
-  //   return new Promise((resolve/*, reject*/) => {
-  //     setTimeout(() => {
-  //       const indexOfLessonToDelete = lessons.findIndex(lesson => {
-  //         return lesson.lessonId == lessonId;
-  //       });
-  //       lessons.splice(indexOfLessonToDelete, 1);
-  //       resolve();
-  //     }, delay);
-  //   });
-  // }
+  static deleteLesson(deleteLessonModel) {
+    if (!(deleteLessonModel instanceof DeleteLessonModel)) {
+      throw 'payload is not of type DeleteLessonModel.';
+    }
+
+    return delete_command(`lesson/delete`, deleteLessonModel);
+  }
 }
 
 export default LessonApi;

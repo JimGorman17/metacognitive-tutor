@@ -68,15 +68,14 @@ export class ManageLessonPage extends React.Component {
 
     this.setState({saving: true});
 
-    const lesson = Object.assign(new LessonModel(), this.state.lesson); // to avoid manipulating object passed in.
-    lesson.lessonAuthor = this.props.loggedInUser;
+    const lesson = new LessonModel(Object.assign({}, this.state.lesson, {lessonAuthor: this.props.loggedInUser})); // to avoid manipulating object passed in.
 
     this.props.actions.saveLesson(lesson)
-      .then(() => this.redirect())
-      .catch(error => {
-        toastr.error(error);
-        this.setState({saving: false});
-      });
+    .then(() => this.redirect())
+    .catch(error => {
+      toastr.error(error);
+      this.setState({saving: false});
+    });
   }
 
   redirect() {

@@ -8,11 +8,21 @@ import LessonList from './LessonList';
 import {Labels} from '../../constants';
 import LoginModel from '../../models/Login';
 import LessonModel from '../../models/Lesson';
+import DeleteLessonModel from '../../models/DeleteLesson';
 
 class LessonsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.redirectToAddLessonPage = this.redirectToAddLessonPage.bind(this);
+    this.onDeleted = this.onDeleted.bind(this);
+  }
+
+  onDeleted(lessonId) {
+    const {actions, loggedInUser} = this.props;
+    actions.deleteLesson(new DeleteLessonModel({
+      id: lessonId,
+      lessonAuthor: loggedInUser
+    }));
   }
 
   lessonRow(lesson, index) {
@@ -36,7 +46,7 @@ class LessonsPage extends React.Component {
     return (
       <div>
         <h1>{Labels.shared.lessons_page.title}</h1>
-        <LessonList lessons={lessons} loginStatus={loginStatus} />
+        <LessonList lessons={lessons} loginStatus={loginStatus} onDeleted={this.onDeleted} />
       </div>
     );
   }

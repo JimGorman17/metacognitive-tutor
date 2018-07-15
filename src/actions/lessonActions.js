@@ -16,6 +16,10 @@ export function updateLessonSuccess(lesson) {
   return {type: types.UPDATE_LESSON_SUCCESS, lesson};
 }
 
+export function deleteLessonSuccess(lessonId) {
+  return {type: types.DELETE_LESSON_SUCCESS, lessonId};
+}
+
 export function loadLessons(loggedInUser) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
@@ -45,6 +49,17 @@ export function saveLesson(lesson) {
       isNew ? dispatch(updateLessonSuccess(lesson)) :
       dispatch(createLessonSuccess(lesson));
     }).catch(error => {
+      dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+}
+
+export function deleteLesson(deleteLessonModel) {
+  return function (dispatch/*, getState*/) {
+    dispatch(beginAjaxCall());
+    return lessonApi.deleteLesson(deleteLessonModel).then(() => dispatch(deleteLessonSuccess(deleteLessonModel.id)))
+    .catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);
     });
