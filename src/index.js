@@ -10,6 +10,7 @@ import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
+import '../node_modules/react-stepzilla/src/css/main.css'
 require('./favicon.ico'); // Tell webpack to load favicon.ico
 const store = configureStore();
 
