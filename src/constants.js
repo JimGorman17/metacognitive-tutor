@@ -100,7 +100,8 @@ const Labels = {
             title: "Important Details to Review"
           },
           story_questions: {
-            title: "Story Questions"
+            title: "Story Questions",
+            your_answers: "Your Answers"
           },
           congratulations: {
             title: "Congratulations"

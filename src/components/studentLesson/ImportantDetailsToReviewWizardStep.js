@@ -40,9 +40,9 @@ const ImportantDetailsToReviewWizardStep = (props) => {
 };
 
 ImportantDetailsToReviewWizardStep.propTypes = {
-    mainIdea: PropTypes.string.isRequired,
-    supportingIdea: PropTypes.string.isRequired,
-    storyDetails: PropTypes.array.isRequired
+  mainIdea: PropTypes.string.isRequired,
+  supportingIdea: PropTypes.string.isRequired,
+  storyDetails: PropTypes.array.isRequired
 };
 
 export default ImportantDetailsToReviewWizardStep;
