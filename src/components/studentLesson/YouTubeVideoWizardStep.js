@@ -13,7 +13,7 @@ const YouTubeVideoWizardStep = (props) => {
   };
 
   const {youTubeVideo} = props;
-  const videoId = youTubeVideo.videoId ? youTubeVideo.videoId : youTubeVideo.url.substring(youTubeVideo.url.indexOf("?v="));
+  const videoId = youTubeVideo.videoId ? youTubeVideo.videoId : (youTubeVideo.url.indexOf("?v=") !== -1 ? youTubeVideo.url.substring(youTubeVideo.url.indexOf("?v=") + 3): youTubeVideo.url.substring(youTubeVideo.url.lastIndexOf('/') + 1));
 
   return(
     <div style={{marginTop: "2em", marginBottom: "2em"}}>
