@@ -1,31 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl} from 'react-bootstrap/lib';
+import {Labels} from '../../constants';
 
-const TextWizardStep = (title, text, hasInput) => {
-    return(
-      <div>
-        <h1>{title}</h1>
-        <p>{text}</p>
-        {hasInput &&
-        <FormControl
-          type="text"
-          //value={this.state.value}
-          //placeholder="Enter text"
-          onChange={this.handleChange}
-        />
-        }
-      </div>
-    );
+const PleaseReadTheBookWizardStep = (props) => {
+  const {bookTitle, bookAmazonUrl} = props;
+  return(
+    <div>
+      <h1>{Labels.student.wizard_steps.please_read_the_book.title}</h1>
+      <p>OK. Now {"it's"} time to read the book, <u>{bookTitle}</u>!</p>
+      <p>Remember, if you {"don't"} already own a copy of the book, you can buy it here: <a href={bookAmazonUrl} target="_blank">{bookTitle}</a>.</p>
+      <p>After {"you've"} finished reading, you can resume this lesson at any time.</p>
+    </div>
+  );
 };
 
-TextWizardStep.propTypes = {
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    hasInput: PropTypes.bool.isRequired,
-    onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-    value: PropTypes.string,
+PleaseReadTheBookWizardStep.propTypes = {
+    bookTitle: PropTypes.string.isRequired,
+    bookAmazonUrl: PropTypes.string.isRequired
 };
 
-export default TextWizardStep;
+export default PleaseReadTheBookWizardStep;
