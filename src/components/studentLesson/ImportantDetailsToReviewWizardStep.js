@@ -6,7 +6,7 @@ const ImportantDetailsToReviewWizardStep = (props) => {
   const {mainIdea, supportingIdea, storyDetails} = props;
   return(
     <div style={{marginTop: "2em", marginBottom: "2em"}}>
-      <h1>{Labels.student.wizard_steps.important_details_to_review.title}</h1>
+      <h2>{Labels.student.wizard_steps.important_details_to_review.title}</h2>
       <p>OK. Hope you liked the book.</p>
       <p>{"Let's"} review what you just read.</p>
       <div className="card">
