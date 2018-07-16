@@ -36,8 +36,8 @@ class StudentLessonPage extends React.Component {
     const steps =
       [
         {name: Labels.student.wizard_steps.welcome.title, component: <WelcomeWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
-        {name: Labels.student.wizard_steps.the_hook.title, component: <YouTubeVideoWizardStep />},
-        {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep />},
+        {name: Labels.student.wizard_steps.the_hook.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theHookYouTubeVideo} />},
+        {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep />},
         {name: Labels.student.wizard_steps.important_details_to_review.title, component: <ImportantDetailsToReviewWizardStep />},
         {name: Labels.student.wizard_steps.story_questions.title, component: <ListWizardStep />}//,
