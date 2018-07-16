@@ -16,10 +16,12 @@ const YouTubeVideoWizardStep = (props) => {
   const videoId = youTubeVideo.videoId ? youTubeVideo.videoId : youTubeVideo.url.substring(youTubeVideo.url.indexOf("?v="));
 
   return(
-    <YouTube
-        videoId={videoId}
-        opts={opts}
-      />
+    <div style={{marginTop: "2em", marginBottom: "2em"}}>
+      <YouTube
+          videoId={videoId}
+          opts={opts}
+        />
+    </div>
   );
 };
 
