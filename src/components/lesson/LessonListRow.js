@@ -23,7 +23,7 @@ const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
         <ButtonToolbar>
           <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
           {loginStatus == LoginTypeEnum.student &&
-          <Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button>
+          <NavLink to={'/student_lesson/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button></NavLink>
           }
           {loginStatus == LoginTypeEnum.teacher &&
           <span>

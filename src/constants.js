@@ -82,6 +82,30 @@ const Labels = {
         lesson_page: {
             title: 'Lesson Page',
             description: 'Some Description...'
+        },
+        wizard_steps: {
+          welcome: {
+            title: "Welcome"
+          },
+          the_hook: {
+            title: "The Hook"
+          },
+          two_vocabulary_words: {
+            title: "Two Vocabulary Words"
+          },
+          please_read_the_book: {
+            title: "Please Read the Book"
+          },
+          important_details_to_review: {
+            title: "Important Details to Review"
+          },
+          story_questions: {
+            title: "Story Questions",
+            your_answers: "Your Answers"
+          },
+          congratulations: {
+            title: "Congratulations"
+          }
         }
     },
     shared: {
