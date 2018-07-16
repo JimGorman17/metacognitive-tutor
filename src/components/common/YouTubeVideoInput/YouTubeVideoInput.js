@@ -86,7 +86,7 @@ class YouTubeVideoInput extends React.Component {
                   type="text"
                   disabled={this.state.activeOption !== 2}
                   value={value.url}
-                  onChange={(url) => onChange({target: {name: name, value: new YouTubeVideoModel({url: url}) }})}
+                  onChange={(event) => onChange({target: {name: name, value: new YouTubeVideoModel({url: event.target.value}) }})}
                 />
               </div>
             </div>
