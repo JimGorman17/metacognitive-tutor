@@ -9,10 +9,10 @@ import YouTubeVideoWizardStep from './YouTubeVideoWizardStep';
 import ListWizardStep from './ListWizardStep';
 import LessonModel from '../../models/Lesson';
 import LoginModel from '../../models/Login';
-
 import WelcomeWizardStep from './WelcomeWizardStep';
 import PleaseReadTheBookWizardStep from './PleaseReadTheBookWizardStep';
 import ImportantDetailsToReviewWizardStep from './ImportantDetailsToReviewWizardStep';
+import CongratulationsWizardStep from './CongratulationsWizardStep';
 
 class StudentLessonPage extends React.Component {
   constructor(props, context) {
@@ -40,15 +40,15 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
         {name: Labels.student.wizard_steps.important_details_to_review.title, component: <ImportantDetailsToReviewWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} />},
-        {name: Labels.student.wizard_steps.story_questions.title, component: <ListWizardStep />}//,
-        //{name: Labels.student.wizard_steps.congratulations.title, component: <TextWizardStep />}
+        {name: Labels.student.wizard_steps.story_questions.title, component: <ListWizardStep />},
+        {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
 
     return (
       <div>
         <h1>{Labels.student.lesson_page.title}</h1>
         <div className='step-progress'>
-          <StepZilla steps={steps}/>
+          <StepZilla steps={steps} nextTextOnFinalActionStep="Save"/>
         </div>
       </div>
     );
