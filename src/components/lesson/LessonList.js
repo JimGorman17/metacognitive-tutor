@@ -15,7 +15,7 @@ const LessonList = ({lessons, loginStatus, onDeleted}) => {
         </tr>
       </thead>
       <tbody>
-        {lessons.map(lesson =>
+        {lessons.slice().sort((a, b) => a.id - b.id).map(lesson =>
           <LessonListRow key={lesson.id} lesson={lesson} loginStatus={loginStatus} onDeleted={onDeleted} />
         )}
       </tbody>
