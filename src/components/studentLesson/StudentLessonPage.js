@@ -9,6 +9,7 @@ import YouTubeVideoWizardStep from './YouTubeVideoWizardStep';
 import StoryQuestionsWizardStep from './StoryQuestionsWizardStep';
 import LessonModel from '../../models/Lesson';
 import LoginModel from '../../models/Login';
+import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import WelcomeWizardStep from './WelcomeWizardStep';
 import PleaseReadTheBookWizardStep from './PleaseReadTheBookWizardStep';
 import ImportantDetailsToReviewWizardStep from './ImportantDetailsToReviewWizardStep';
@@ -19,8 +20,11 @@ class StudentLessonPage extends React.Component {
     super(props, context);
 
     this.state = {
-      errors: {} // TODO: Validate student responses.
+      studentLessonAnswers: Object.assign({}, props.studentLessonAnswers),
+      // errors: {} // TODO: Validate student responses.
     };
+
+    this.updateStudentLessonAnswers = this.updateStudentLessonAnswers.bind(this);
   }
 
   componentDidMount(){
@@ -28,6 +32,13 @@ class StudentLessonPage extends React.Component {
     if (!lessons.length) {
       actions.loadLessons(loggedInUser);
     }
+  }
+
+  updateStudentLessonAnswers(questionNumber, answer) {
+    let studentLessonAnswers = Object.assign({}, this.state.studentLessonAnswers);
+    throw 'TODO: Implement - Must operate on the given lesson, not just questionNumber.';
+    studentLessonAnswers[questionNumber] = answer;
+    return this.setState({studentLessonAnswers: studentLessonAnswers});
   }
 
   render() {
@@ -40,7 +51,7 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
         {name: Labels.student.wizard_steps.important_details_to_review.title, component: <ImportantDetailsToReviewWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} />},
-        {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} />},
+        {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} onChange={this.updateStudentLessonAnswers} />},
         {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
 
@@ -58,6 +69,7 @@ class StudentLessonPage extends React.Component {
 StudentLessonPage.propTypes = {
   lessons: PropTypes.arrayOf(PropTypes.instanceOf(LessonModel)).isRequired,
   lesson: PropTypes.object.isRequired,
+  studentLessonAnswers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   actions: PropTypes.object.isRequired,
   loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
