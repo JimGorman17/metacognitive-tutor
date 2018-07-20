@@ -1,5 +1,5 @@
-import YouTubeVideoModel from '../models/YouTubeVideo';
-import LoginModel from '../models/Login';
+import YouTubeVideoModel from './YouTubeVideo';
+import LoginModel from './Login';
 
 export default class Lesson {
   constructor(params) {

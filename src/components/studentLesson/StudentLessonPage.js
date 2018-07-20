@@ -31,6 +31,7 @@ class StudentLessonPage extends React.Component {
     const {lessons, actions, loggedInUser} = this.props;
     if (!lessons.length) {
       actions.loadLessons(loggedInUser);
+      actions.loadStudentLessonAnswers(loggedInUser);
     }
   }
 
@@ -80,17 +81,24 @@ function getLessonById(lessons, id) {
   return null;
 }
 
+function getStudentLessonAnswersByLessonId(studentLessonAnswers, id) {
+  return studentLessonAnswers.filter(sla => sla.lessonid == id);
+}
+
 function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
   let lesson = new LessonModel();
+  let studentLessonAnswers = [];
 
   if (lessonId && state.lessons.length > 0) {
     lesson = getLessonById(state.lessons, lessonId);
+    studentLessonAnswers = getStudentLessonAnswersByLessonId(state.studentLessonAnswers, lessonId);
   }
 
   return {
     lessons: state.lessons,
+    studentLessonAnswers: studentLessonAnswers,
     lesson: lesson,
     loggedInUser: state.loggedInUser
   };

@@ -1,4 +1,4 @@
-import LoginModel from '../models/Login';
+import LoginModel from './Login';
 
 export default class Lesson {
   constructor(params) {

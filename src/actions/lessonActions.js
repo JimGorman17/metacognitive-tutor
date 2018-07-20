@@ -20,6 +20,10 @@ export function deleteLessonSuccess(lessonId) {
   return {type: types.DELETE_LESSON_SUCCESS, lessonId};
 }
 
+export function loadStudentLessonAnswersForAStudentSuccess(studentLessonAnswers) {
+  return { type: types.LOAD_STUDENT_LESSON_ANSWERS_FOR_A_STUDENT_SUCCESS, studentLessonAnswers }
+}
+
 function jsonParseLesson(l) {
   const lesson = Object.assign({}, l);
   lesson.theHookYouTubeVideo = lesson.theHookYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theHookYouTubeVideo)) : new YouTubeVideoModel();
@@ -62,6 +66,16 @@ export function deleteLesson(deleteLessonModel) {
     return lessonApi.deleteLesson(deleteLessonModel).then(() => dispatch(deleteLessonSuccess(deleteLessonModel.id)))
     .catch(error => {
       dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+}
+export function loadStudentLessonAnswers(loggedInUser) {
+  return function(dispatch) {
+    dispatch(beginAjaxCall());
+    return lessonApi.getAllStudentLessonAnswersForAStudent(loggedInUser)
+    .then(response => dispatch(loadStudentLessonAnswersForAStudentSuccess(response.data)))
+    .catch(error => {
       throw(error);
     });
   };

@@ -7,6 +7,10 @@ class LessonApi {
     return post(`lesson/getall`, {provider: loggedInUser.provider, providerId: loggedInUser.providerId});
   }
 
+  static getAllStudentLessonAnswersForAStudent(loggedInUser) {
+    return post(`studentlessonanswer/for-student/getall`, {provider: loggedInUser.provider, providerId: loggedInUser.providerId});
+  }
+
   static saveLesson(lessonModel) {
     if (!(lessonModel instanceof LessonModel)) {
       throw 'payload is not of type LessonModel.';
