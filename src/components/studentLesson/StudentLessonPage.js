@@ -22,13 +22,19 @@ class StudentLessonPage extends React.Component {
     super(props, context);
 
     this.state = {
-      studentLessonAnswers: props.studentLessonAnswers,
+      studentLessonAnswers: props.studentLessonAnswers.slice(),
       saving: false
       // errors: {} // TODO: Validate student responses.
     };
 
     this.updateStudentLessonAnswers = this.updateStudentLessonAnswers.bind(this);
     this.saveStudentLessonAnswers = this.saveStudentLessonAnswers.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (JSON.stringify(this.props.studentLessonAnswers) !== JSON.stringify(nextProps.studentLessonAnswers)) { // https://stackoverflow.com/a/23555773/109941, 07/21/2018
+      this.setState({studentLessonAnswers: nextProps.studentLessonAnswers.slice()});
+    }
   }
 
   componentDidMount(){
