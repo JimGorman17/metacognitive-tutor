@@ -28,11 +28,11 @@ const ImportantDetailsToReviewWizardStep = (props) => {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Some important story details were:</h5>
-          <p className="card-text">
+          <div className="card-text">
             <ul>
               {storyDetails.map(sd => <li key={sd}>{sd}</li>)}
             </ul>
-          </p>
+          </div>
         </div>
       </div>
     </div>

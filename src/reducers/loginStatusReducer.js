@@ -3,11 +3,11 @@ import initialState from './initialState';
 import {LoginTypeEnum} from '../constants';
 
 export default function loginReducer(state = initialState.loginStatus, action) {
-  if (action.type == types.LOGIN_TEACHER_SUCCESS) {
+  if (action.type === types.LOGIN_TEACHER_SUCCESS) {
     return LoginTypeEnum.teacher;
-  } else if (action.type == types.LOGIN_STUDENT_SUCCESS) {
+  } else if (action.type === types.LOGIN_STUDENT_SUCCESS) {
     return LoginTypeEnum.student;
-  } else if (action.type == types.LOGOUT_SUCCESS) {
+  } else if (action.type === types.LOGOUT_SUCCESS) {
     return LoginTypeEnum.logged_out;
   }
 

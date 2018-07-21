@@ -22,10 +22,10 @@ const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
       <td className="col-4">
         <ButtonToolbar>
           <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
-          {loginStatus == LoginTypeEnum.student &&
+          {loginStatus === LoginTypeEnum.student &&
           <NavLink to={'/student_lesson/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button></NavLink>
           }
-          {loginStatus == LoginTypeEnum.teacher &&
+          {loginStatus === LoginTypeEnum.teacher &&
           <span>
           <NavLink to={'/lesson/' + lesson.id}><Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.edit}</Button></NavLink>
           <Button onClick={() => onDeleted(lesson.id)}><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>

@@ -118,7 +118,7 @@ function mapStateToProps(state, ownProps) {
 
   let lesson = new LessonModel();
 
-  if (lessonId && state.lessons.length > 0) {
+  if (lessonId && 0 < state.lessons.length) {
     lesson = getLessonById(state.lessons, lessonId);
   }
 

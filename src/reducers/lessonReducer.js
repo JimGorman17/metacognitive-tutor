@@ -5,7 +5,7 @@ import LessonModel from '../models/Lesson';
 export default function lessonReducer(state = initialState.lessons, action) {
   switch (action.type) {
     case types.LOAD_LESSONS_SUCCESS:
-      return action.lessons;
+      return action.lessons.map(l => new LessonModel(l));
 
     case types.CREATE_LESSON_SUCCESS:
       return [

@@ -81,7 +81,8 @@ const Labels = {
         },
         lesson_page: {
             title: 'Lesson Page',
-            description: 'Some Description...'
+            description: 'Some Description...',
+            answers_saved_success_message: "Answers saved",
         },
         wizard_steps: {
           welcome: {
@@ -117,9 +118,11 @@ const Labels = {
 
 const LoginServiceEnum = Object.freeze({ logged_out: 0, google: 'google', facebook: 'facebook' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 const LoginTypeEnum = Object.freeze({ logged_out: '', teacher: 'teacher', student: 'student' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
+const QuestionTypeEnum = Object.freeze({ story_question: 'story_question', card_pyramid: 'card_pyramid', word_scramble: 'word_scramble' }); // https://stackoverflow.com/a/5040502/109941, 06/27/2018
 
 export {
     Labels,
     LoginServiceEnum,
-    LoginTypeEnum
+    LoginTypeEnum,
+    QuestionTypeEnum
 };
