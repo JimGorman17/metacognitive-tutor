@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Labels} from '../../constants';
+import {Labels, QuestionTypeEnum} from '../../constants';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap/lib';
 
 const StoryQuestionsWizardStep = (props) => {
@@ -15,7 +15,7 @@ const StoryQuestionsWizardStep = (props) => {
             <ControlLabel>{q}:</ControlLabel>
             <FormControl
               componentClass="textarea"
-              onChange={(event) => onChange(index, event.target.value)}
+              onChange={(event) => onChange(QuestionTypeEnum.story_question, index + 1, event.target.value)}
             />
           </FormGroup>
         </li>)

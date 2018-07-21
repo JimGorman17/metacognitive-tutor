@@ -35,11 +35,17 @@ class StudentLessonPage extends React.Component {
     }
   }
 
-  updateStudentLessonAnswers(questionNumber, answer) {
-    let studentLessonAnswers = Object.assign({}, this.state.studentLessonAnswers);
-    throw 'TODO: Implement - Must operate on the given lesson, not just questionNumber.';
-    studentLessonAnswers[questionNumber] = answer;
-    return this.setState({studentLessonAnswers: studentLessonAnswers});
+  updateStudentLessonAnswers(questionType, questionId, answer) {
+    const studentLessonAnswers = Object.assign({}, this.state.studentLessonAnswers);
+
+    const newStudentLessonAnswers = studentLessonAnswers.map(sla => {
+      if (sla.questionType == questionType && sla.questionId == questionId) {
+        return Object.assign({}, sla, {answer:answer});
+      }
+      return sla;
+    });
+
+    return this.setState({studentLessonAnswers: newStudentLessonAnswers});
   }
 
   render() {
