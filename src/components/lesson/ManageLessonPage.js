@@ -108,7 +108,7 @@ ManageLessonPage.propTypes = {
 };
 
 function getLessonById(lessons, id) {
-  const lesson = lessons.filter(lesson => lesson.id == id);
+  const lesson = lessons.filter(lesson => lesson.id === id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
 }

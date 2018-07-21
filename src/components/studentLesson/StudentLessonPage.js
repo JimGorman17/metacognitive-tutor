@@ -39,7 +39,7 @@ class StudentLessonPage extends React.Component {
     const studentLessonAnswers = Object.assign({}, this.state.studentLessonAnswers);
 
     const newStudentLessonAnswers = studentLessonAnswers.map(sla => {
-      if (sla.questionType == questionType && sla.questionId == questionId) {
+      if (sla.questionType === questionType && sla.questionId === questionId) {
         return Object.assign({}, sla, {answer:answer});
       }
       return sla;
@@ -82,13 +82,13 @@ StudentLessonPage.propTypes = {
 };
 
 function getLessonById(lessons, id) {
-  const lesson = lessons.filter(lesson => lesson.id == id);
+  const lesson = lessons.filter(lesson => lesson.id === id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
 }
 
 function getStudentLessonAnswersByLessonId(studentLessonAnswers, id) {
-  return studentLessonAnswers.filter(sla => sla.lessonid == id);
+  return studentLessonAnswers.filter(sla => sla.lessonid === id);
 }
 
 function mapStateToProps(state, ownProps) {
