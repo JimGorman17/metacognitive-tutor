@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Labels} from '../../constants';
+import {Labels, QuestionTypeEnum} from '../../constants';
 import {connect} from 'react-redux';
 import * as lessonActions from '../../actions/lessonActions';
 import {bindActionCreators} from 'redux';
@@ -20,7 +20,7 @@ class StudentLessonPage extends React.Component {
     super(props, context);
 
     this.state = {
-      studentLessonAnswers: Object.assign({}, props.studentLessonAnswers),
+      studentLessonAnswers: props.studentLessonAnswers,
       // errors: {} // TODO: Validate student responses.
     };
 
@@ -36,20 +36,36 @@ class StudentLessonPage extends React.Component {
   }
 
   updateStudentLessonAnswers(questionType, questionId, answer) {
-    const studentLessonAnswers = Object.assign({}, this.state.studentLessonAnswers);
+    const {studentLessonAnswers} = this.state;
 
-    const newStudentLessonAnswers = studentLessonAnswers.map(sla => {
-      if (sla.questionType === questionType && sla.questionId === questionId) {
-        return Object.assign({}, sla, {answer:answer});
+    let newStudentLessonAnswers = null;
+    if (studentLessonAnswers.some(sla => sla.questionType === questionType && sla.questionId === questionId)) {
+      newStudentLessonAnswers = studentLessonAnswers.map(sla => {
+        if (sla.questionType === questionType && sla.questionId === questionId) {
+          return Object.assign({}, sla, {answer:answer});
+        }
+        return sla;
+      });
+    } else {
+      if (questionType != QuestionTypeEnum.story_question) {
+        throw 'Not Implemented questionType: ' + questionType;
       }
-      return sla;
-    });
+
+      const {lesson, loggedInUser} = this.props;
+      const question = lesson.storyQuestions[questionId - 1];
+
+      newStudentLessonAnswers = [
+        ...studentLessonAnswers.filter(sla => sla.questionId !== questionId),
+        new StudentLessonAnswerModel({lessonId: lesson.id, questionType: questionType, questionId: questionId, question: question, answer: answer, student: loggedInUser})
+      ];
+    }
 
     return this.setState({studentLessonAnswers: newStudentLessonAnswers});
   }
 
   render() {
     const {lesson} = this.props;
+    const {studentLessonAnswers} = this.state;
 
     const steps =
       [
@@ -58,7 +74,7 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
         {name: Labels.student.wizard_steps.important_details_to_review.title, component: <ImportantDetailsToReviewWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} />},
-        {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} onChange={this.updateStudentLessonAnswers} />},
+        {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} answers={studentLessonAnswers.filter(sla => sla.questionType === QuestionTypeEnum.story_question)} onChange={this.updateStudentLessonAnswers} />},
         {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
 
@@ -82,7 +98,7 @@ StudentLessonPage.propTypes = {
 };
 
 function getLessonById(lessons, id) {
-  const lesson = lessons.filter(lesson => lesson.id === id);
+  const lesson = lessons.filter(lesson => lesson.id == id);
   if (lesson) return lesson[0]; //since filter returns an array, have to grab the first.
   return null;
 }

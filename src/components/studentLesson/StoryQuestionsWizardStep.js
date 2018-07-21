@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Labels, QuestionTypeEnum} from '../../constants';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap/lib';
+import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 
 const StoryQuestionsWizardStep = (props) => {
-  const {questions, onChange} = props;
+  const {questions, onChange, answers} = props;
   return(
     <div style={{marginTop: "2em", marginBottom: "2em"}}>
       <h2>{Labels.student.wizard_steps.story_questions.title}</h2>
@@ -16,6 +17,7 @@ const StoryQuestionsWizardStep = (props) => {
             <FormControl
               componentClass="textarea"
               onChange={(event) => onChange(QuestionTypeEnum.story_question, index + 1, event.target.value)}
+              value={answers[index] != null ? answers[index].answer : ""}
             />
           </FormGroup>
         </li>)
@@ -27,6 +29,7 @@ const StoryQuestionsWizardStep = (props) => {
 
 StoryQuestionsWizardStep.propTypes = {
   questions: PropTypes.array.isRequired,
+  answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   onChange: PropTypes.func.isRequired
 };
 
