@@ -31,9 +31,9 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
             <li className="nav-item">
               <NavLink exact to="/" className="nav-link" activeClassName="active"><i className="fa fa-home fa-fw" aria-hidden="true" />&nbsp; {Labels.home.title}</NavLink>
             </li>
-            {loginStatus === LoginTypeEnum.teacher &&
+            {loginStatus !== LoginTypeEnum.logged_out &&
             <li className="nav-item">
-              <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.admin_page.title}</NavLink>
+              <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-university fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.admin_page.title}</NavLink>
             </li>
             }
             {loginStatus === LoginTypeEnum.teacher &&
@@ -41,9 +41,9 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
               <NavLink to="/lesson" className="nav-link" activeClassName="active"><i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.create_lesson_page.title}</NavLink>
             </li>
             }
-            {loginStatus === LoginTypeEnum.student &&
+            {loginStatus === LoginTypeEnum.teacher &&
             <li className="nav-item">
-              <NavLink to="/lessons" className="nav-link" activeClassName="active"><i className="fa fa-bars fa-fw" aria-hidden="true" />&nbsp; {Labels.student.main_menu.title}</NavLink>
+              <NavLink to="/teacher_admin" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; Grades</NavLink>
             </li>
             }
           </ul>

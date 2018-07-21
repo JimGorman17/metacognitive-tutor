@@ -37,6 +37,11 @@ const Labels = {
             title: 'Lessons',
             description: 'Some Description...'
         },
+        create_lesson_page: {
+            title: 'Create Lesson',
+            description: 'Some Description...',
+            lesson_saved_success_message: 'Lesson saved'
+        },
         lesson_form: {
             manage_lesson: {
                 title: "Manage Lesson",
@@ -70,6 +75,10 @@ const Labels = {
         }
     },
     student: {
+        main_menu: {
+            title: 'Main Menu',
+            description: 'Some Description...'
+        },
         lesson_page: {
             title: 'Lesson Page',
             description: 'Some Description...',
