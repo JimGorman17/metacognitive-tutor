@@ -8,8 +8,6 @@ import {connect} from 'react-redux';
 
 // TODO: Cleanup
 // <NavLink to="/teacher_admin" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
-// <NavLink to="/create_lesson" className="nav-link" activeClassName="active">{Labels.teacher.create_lesson_page.title}</NavLink>
-// <NavLink to="/student_main_menu" className="nav-link" activeClassName="active">{Labels.student.main_menu.title}</NavLink>
 
 const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-line
   return (
