@@ -134,7 +134,7 @@ function getLessonById(lessons, id) {
 }
 
 function getStudentLessonAnswersByLessonId(studentLessonAnswers, id) {
-  return studentLessonAnswers.filter(sla => sla.lessonid === id);
+  return studentLessonAnswers.filter(sla => sla.lessonId == id);
 }
 
 function mapStateToProps(state, ownProps) {
