@@ -1,4 +1,5 @@
 import LessonModel from '../models/Lesson';
+import StudentLessonAnswerModel from '../models/StudentLessonAnswer';
 import DeleteLessonModel from '../models/DeleteLesson';
 import {post, delete_command} from '../apiWrapper';
 
@@ -17,6 +18,14 @@ class LessonApi {
     }
 
     return post(`lesson/upsert`, lessonModel.convertToApiReady());
+  }
+
+  static saveStudentLessonAction(studentLessonAnswerModel) {
+    if (!(studentLessonAnswerModel instanceof StudentLessonAnswerModel)) {
+      throw 'payload is not of type StudentLessonAnswer.';
+    }
+
+    return post(`studentlessonanswer/upsert`, studentLessonAnswerModel);
   }
 
   static deleteLesson(deleteLessonModel) {

@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import lessonApi from '../api/lessonApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import LessonModel from '../models/Lesson';
+import StudentLessonAnswerModel from '../models/StudentLessonAnswer';
 import YouTubeVideoModel from '../models/YouTubeVideo';
 
 export function loadLessonsSuccess(lessons) {
@@ -22,6 +23,10 @@ export function deleteLessonSuccess(lessonId) {
 
 export function loadStudentLessonAnswersForAStudentSuccess(studentLessonAnswers) {
   return { type: types.LOAD_STUDENT_LESSON_ANSWERS_FOR_A_STUDENT_SUCCESS, studentLessonAnswers }
+}
+
+export function updateStudentLessonAnswerSuccess(studentLessonAnswer) {
+  return {type: types.UPDATE_STUDENT_LESSON_ANSWER, studentLessonAnswer}
 }
 
 function jsonParseLesson(l) {
@@ -70,6 +75,7 @@ export function deleteLesson(deleteLessonModel) {
     });
   };
 }
+
 export function loadStudentLessonAnswers(loggedInUser) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
@@ -80,3 +86,17 @@ export function loadStudentLessonAnswers(loggedInUser) {
     });
   };
 }
+
+export function saveStudentLessonAction(studentLessonAnswer) {
+  return function (dispatch/*, getState*/) {
+    dispatch(beginAjaxCall());
+    return lessonApi.saveStudentLessonAction(studentLessonAnswer).then(response => {
+      const studentLessonAction = new StudentLessonAnswerModel(response.data);
+      dispatch(updateStudentLessonAnswerSuccess(studentLessonAction));
+    }).catch(error => {
+      dispatch(ajaxCallError(error));
+      throw(error);
+    });
+  };
+}
+
