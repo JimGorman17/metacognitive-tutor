@@ -6,8 +6,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
 
 // import TeacherAdminPage from './teacherAdmin/TeacherAdminPage'; TODO: Cleanup
-// import CreateLessonPage from './createLesson/CreateLessonPage'; TODO: Cleanup
-// import StudentMainMenuPage from './studentMainMenu/StudentMainMenuPage'; TODO: Cleanup
+
 import LessonsPage from './lesson/LessonsPage';
 import ManageLessonPage from './lesson/ManageLessonPage'; //eslint-disable-line import/no-named-as-default
 
@@ -27,8 +26,6 @@ import {connect} from 'react-redux';
 
 // TODO: Cleanup
 // <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
-// <PrivateRoute path="/create_lesson" component={CreateLessonPage} />
-// <PrivateRoute path="/student_main_menu" component={StudentMainMenuPage} />
 
 class App extends React.Component {
   render() {
@@ -64,7 +61,7 @@ App.propTypes = {
 
 function mapStateToProps(state/*, ownProps*/) {
   return {
-    loading: state.ajaxCallsInProgress > 0,
+    loading: 0 < state.ajaxCallsInProgress,
     loginStatus: state.loginStatus
   };
 }
