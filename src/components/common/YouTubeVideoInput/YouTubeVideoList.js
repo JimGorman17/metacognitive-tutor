@@ -17,7 +17,7 @@ const YouTubeVideoList = ({youtubevideos, onSelected}) => {
       </thead>
       <tbody>
       {youtubevideos.map(youtubevideo =>
-        <YouTubeVideoListRow key={youtubevideo.VideoId} youtubevideo={youtubevideo} onSelected={onSelected} />
+        <YouTubeVideoListRow key={youtubevideo.videoId} youtubevideo={youtubevideo} onSelected={onSelected} />
       )}
       </tbody>
     </table>
