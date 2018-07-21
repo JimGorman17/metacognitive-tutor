@@ -81,7 +81,8 @@ const Labels = {
         },
         lesson_page: {
             title: 'Lesson Page',
-            description: 'Some Description...'
+            description: 'Some Description...',
+            answers_saved_success_message: "Answers saved",
         },
         wizard_steps: {
           welcome: {

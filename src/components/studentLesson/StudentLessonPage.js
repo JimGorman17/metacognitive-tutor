@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Labels, QuestionTypeEnum} from '../../constants';
 import {connect} from 'react-redux';
-import * as lessonActions from '../../actions/lessonActions';
 import {bindActionCreators} from 'redux';
+import { withRouter } from "react-router-dom";
+import * as lessonActions from '../../actions/lessonActions';
 import StepZilla from 'react-stepzilla';
 import YouTubeVideoWizardStep from './YouTubeVideoWizardStep';
 import StoryQuestionsWizardStep from './StoryQuestionsWizardStep';
@@ -14,6 +15,7 @@ import WelcomeWizardStep from './WelcomeWizardStep';
 import PleaseReadTheBookWizardStep from './PleaseReadTheBookWizardStep';
 import ImportantDetailsToReviewWizardStep from './ImportantDetailsToReviewWizardStep';
 import CongratulationsWizardStep from './CongratulationsWizardStep';
+import toastr from 'toastr';
 
 class StudentLessonPage extends React.Component {
   constructor(props, context) {
@@ -21,10 +23,12 @@ class StudentLessonPage extends React.Component {
 
     this.state = {
       studentLessonAnswers: props.studentLessonAnswers,
+      saving: false
       // errors: {} // TODO: Validate student responses.
     };
 
     this.updateStudentLessonAnswers = this.updateStudentLessonAnswers.bind(this);
+    this.saveStudentLessonAnswers = this.saveStudentLessonAnswers.bind(this);
   }
 
   componentDidMount(){
@@ -42,7 +46,7 @@ class StudentLessonPage extends React.Component {
     if (studentLessonAnswers.some(sla => sla.questionType === questionType && sla.questionId === questionId)) {
       newStudentLessonAnswers = studentLessonAnswers.map(sla => {
         if (sla.questionType === questionType && sla.questionId === questionId) {
-          return Object.assign({}, sla, {answer:answer});
+          return new StudentLessonAnswerModel(Object.assign({}, sla, {answer:answer}));
         }
         return sla;
       });
@@ -61,6 +65,27 @@ class StudentLessonPage extends React.Component {
     }
 
     return this.setState({studentLessonAnswers: newStudentLessonAnswers});
+  }
+
+  saveStudentLessonAnswers() {
+    this.setState({saving: true});
+
+    const {studentLessonAnswers} = this.state;
+    const studentLessonAnswersToSave = studentLessonAnswers.map(sla => new StudentLessonAnswerModel(Object.assign({}, sla, {student: this.props.loggedInUser})));
+
+    let requests = studentLessonAnswersToSave.map(sla => new Promise((resolve) => this.props.actions.saveStudentLessonAction(sla, resolve))); // https://stackoverflow.com/a/18983245/109941, 07/21/2018
+    Promise.all(requests)
+      .then(() => this.redirect())
+      .catch(error => {
+        toastr.error(error);
+        this.setState({saving: false});
+      });
+  }
+
+  redirect() {
+    this.setState({saving: false});
+    toastr.success(Labels.student.lesson_page.answers_saved_success_message);
+    this.props.history.push('/lessons');
   }
 
   render() {
@@ -82,7 +107,11 @@ class StudentLessonPage extends React.Component {
       <div>
         <h1>{Labels.student.lesson_page.title}</h1>
         <div className='step-progress'>
-          <StepZilla steps={steps} nextTextOnFinalActionStep="Save"/>
+          <StepZilla
+            steps={steps}
+            nextTextOnFinalActionStep="Save"
+            onStepChange={(step) => {if (step === steps.length - 1) {this.saveStudentLessonAnswers();}}}
+            />
         </div>
       </div>
     );
@@ -94,6 +123,7 @@ StudentLessonPage.propTypes = {
   lesson: PropTypes.object.isRequired,
   studentLessonAnswers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
@@ -113,7 +143,7 @@ function mapStateToProps(state, ownProps) {
   let lesson = new LessonModel();
   let studentLessonAnswers = [];
 
-  if (lessonId && state.lessons.length > 0) {
+  if (lessonId && 0 < state.lessons.length) {
     lesson = getLessonById(state.lessons, lessonId);
     studentLessonAnswers = getStudentLessonAnswersByLessonId(state.studentLessonAnswers, lessonId);
   }
@@ -132,4 +162,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentLessonPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentLessonPage));

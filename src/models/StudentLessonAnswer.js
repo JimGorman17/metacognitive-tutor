@@ -1,12 +1,12 @@
 import LoginModel from './Login';
 
-export default class Lesson {
+export default class StudentLessonAnswer {
   constructor(params) {
     if (params) {
       if (params.lessonId <= 0) {
         throw `Invalid lessonId: ${params.lessonId}.`;
       }
-      if (params.questionType.trim() === "") {
+      if (!params.questionType || params.questionType.trim() === "") {
         throw `Invalid questionType: ${params.questionType}.`;
       }
     }
