@@ -48,7 +48,7 @@ class StudentLessonPage extends React.Component {
       });
     } else {
       if (questionType != QuestionTypeEnum.story_question) {
-        throw 'Not Implemented questionType: ' + questionType;
+        throw `Not Implemented questionType: ${questionType}`;
       }
 
       const {lesson, loggedInUser} = this.props;
