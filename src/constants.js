@@ -3,7 +3,8 @@ const Labels = {
     app_description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     home: {
         title: 'Home',
-        learn_more: "Learn More"
+        learn_more: "Learn More",
+        image_description: "A teacher teaching students how to read."
     },
     about: {
         title: 'About',

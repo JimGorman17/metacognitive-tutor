@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Labels} from '../../constants';
+import {Image} from 'react-bootstrap/lib';
 
 class HomePage extends React.Component {
   render() {
@@ -13,7 +14,7 @@ class HomePage extends React.Component {
         </div>
         <div className="row mb-4">
           <div className="col-md-5">
-            <img src="../../images/teacher_teaching_kids_how_to_read.jpg" />
+            <Image src="../../images/teacher_teaching_kids_how_to_read.jpg" alt={Labels.home.image_description} />
           </div>
           <div className="col-md-7">
             {Labels.app_description}
