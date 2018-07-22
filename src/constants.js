@@ -44,6 +44,7 @@ const Labels = {
         },
         grades_page: {
           title: "Grades for '${lessonName}' Lesson",
+          grade_for: "Grade for ${studentName}",
           button_title: "Grades",
           column_headers: {
             student: "Student",

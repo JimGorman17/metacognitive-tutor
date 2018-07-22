@@ -5,6 +5,7 @@ import LoginModel from '../../models/Login';
 import {Modal, ButtonToolbar, Button} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {Labels} from '../../constants';
+import fillTemplate from 'es6-dynamic-template'; // https://stackoverflow.com/a/51079254/109941, 07/22/2018
 
 class GradeListRow extends React.Component {
   constructor(props, context) {
@@ -80,7 +81,7 @@ class GradeListRow extends React.Component {
         </tr>
         <Modal show={this.state.showModal} animation={false} onHide={this.handleClose} dialogClassName="modal-lg">
           <Modal.Header>
-            My title
+            <Modal.Title>{fillTemplate(Labels.teacher.grades_page.grade_for, {studentName: groupedStudentLessonAnswer.name})}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             My body
