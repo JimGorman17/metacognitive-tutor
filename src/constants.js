@@ -48,7 +48,10 @@ const Labels = {
             student: "Student",
             question: "Question",
             answer: "Answer"
-          }
+          },
+          edit_button_text: "Edit",
+          remove_button_text: "Remove",
+          grade_button_text: "Grade"
         },
         lesson_form: {
             manage_lesson: {

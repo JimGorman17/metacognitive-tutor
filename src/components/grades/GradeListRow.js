@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
 import LoginModel from '../../models/Login';
-import {ButtonToolbar, Button} from 'react-bootstrap/lib'; // eslint-disable-line
+import {ButtonToolbar, Button} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {Labels} from '../../constants';
 
@@ -14,7 +14,8 @@ const GradeListRow = ({index, groupedStudentLessonAnswer, loggedInUser}) => { //
     },
     {
       dataField: 'question',
-      text: Labels.teacher.grades_page.column_headers.question
+      text: Labels.teacher.grades_page.column_headers.question,
+      headerStyle: { width: '10em' }
     },
     {
       dataField: 'answer',
@@ -40,7 +41,13 @@ const GradeListRow = ({index, groupedStudentLessonAnswer, loggedInUser}) => { //
         <BootstrapTable keyField='id' data={data} columns={columns} />
       </td>
       <td className="col-2">
-        Buttons
+        {groupedStudentLessonAnswer.gradeResponse.isGraded
+          ? <ButtonToolbar>
+              <Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.edit_button_text}</Button>
+              <Button><i className={`fa fa-trash-can fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.remove_button_text}</Button>
+            </ButtonToolbar>
+          : <Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.grade_button_text}</Button>
+        }
       </td>
     </tr>
   );
