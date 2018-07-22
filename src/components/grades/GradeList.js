@@ -10,14 +10,15 @@ const GradeList = ({groupedStudentLessonAnswers, loggedInUser}) => {
     <table className="table">
       <thead>
         <tr className="d-flex">
+          <th className="col-1">&nbsp;</th>
           <th className="col-2">{Labels.teacher.grades_page.column_headers.student}</th>
-          <th className="col-4">{Labels.teacher.grades_page.column_headers.answers}</th>
-          <th className="col-4">&nbsp;</th>
+          <th className="col-7">&nbsp;</th>
+          <th className="col-2">&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        {groupedStudentLessonAnswers.map(gsla =>
-          <GradeListRow key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} groupedStudentLessonAnswer={gsla} loggedInUser={loggedInUser} />
+        {groupedStudentLessonAnswers.map((gsla, index) =>
+          <GradeListRow key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} index={index+1} groupedStudentLessonAnswer={gsla} loggedInUser={loggedInUser} />
         )}
       </tbody>
     </table>

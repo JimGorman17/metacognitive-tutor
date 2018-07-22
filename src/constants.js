@@ -46,7 +46,8 @@ const Labels = {
           title: "Grades",
           column_headers: {
             student: "Student",
-            answers: "Answers"
+            question: "Question",
+            answer: "Answer"
           }
         },
         lesson_form: {
