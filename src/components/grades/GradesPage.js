@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import LoginModel from '../../models/Login';
+import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
 import {Labels} from '../../constants';
 import lessonApi from '../../api/lessonApi';
 import toastr from 'toastr';
@@ -20,7 +21,7 @@ class GradesPage extends React.Component {
     const {loggedInUser, lessonId} = this.props;
 
     return lessonApi.getAllStudentLessonAnswersForATeacher(loggedInUser, lessonId)
-      .then((response) => this.setState({groupedStudentLessonAnswers: response.data.slice()}))
+      .then((response) => this.setState({groupedStudentLessonAnswers: response.data.map(d => new GroupedStudentLessonAnswerModel(d))}))
       .catch(error => {
         toastr.error(error);
       });
@@ -33,7 +34,7 @@ class GradesPage extends React.Component {
       <div>
         <h1>{Labels.teacher.grades_page.title}</h1>
         <ul>
-          {groupedStudentLessonAnswers.map(a => <li>{a.name}</li>)}
+          {groupedStudentLessonAnswers.map(gsla => <li key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`}>{gsla.name}</li>)}
         </ul>
       </div>
     );
@@ -49,7 +50,7 @@ function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
 
   return {
-    lessonId: lessonId,
+    lessonId: parseInt(lessonId),
     loggedInUser: state.loggedInUser,
   };
 }
