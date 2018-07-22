@@ -43,6 +43,9 @@ const Labels = {
             description: 'Some Description...',
             lesson_saved_success_message: 'Lesson saved'
         },
+        grades_page: {
+          title: "Grades"
+        },
         lesson_form: {
             manage_lesson: {
                 title: "Manage Lesson",

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from './common/Header';
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
-import TeacherAdminPage from './teacherAdmin/TeacherAdminPage';
+import GradesPage from './grades/GradesPage';
 import LessonsPage from './lesson/LessonsPage';
 import ManageLessonPage from './lesson/ManageLessonPage'; //eslint-disable-line import/no-named-as-default
 import StudentLessonPage from './studentLesson/StudentLessonPage';
@@ -38,7 +38,7 @@ class App extends React.Component {
               <PrivateRoute path="/lessons" component={LessonsPage} />
               <PrivateRoute path="/lesson/:id?" component={ManageLessonPage} />
               <PrivateRoute path="/student_lesson/:id" component={StudentLessonPage} />
-              <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
+              <PrivateRoute path="/grades/:id" component={GradesPage} />
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
               <PrivateRoute component={NotFoundPage} />
           </Switch>
