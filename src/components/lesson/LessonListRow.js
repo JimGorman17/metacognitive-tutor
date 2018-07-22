@@ -29,7 +29,7 @@ const LessonListRow = ({lesson, loginStatus, onDeleted, loggedInUser}) => {
           {loginStatus === LoginTypeEnum.teacher && lesson.provider === loggedInUser.provider && lesson.providerId === loggedInUser.providerId &&
           <span>
             {!!lesson.numberOfEnrolledStudents && // https://medium.freecodecamp.org/conditional-rendering-in-react-using-ternaries-and-logical-and-7807f53b6935, 07/22/2018
-            <NavLink to={'/grades/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.title}</Button></NavLink>
+            <NavLink to={'/grades/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.button_title}</Button></NavLink>
             }
             {!lesson.numberOfEnrolledStudents &&
             <span>

@@ -4,6 +4,7 @@ import GradeModel from './Grade';
 export default class GroupedStudentLessonAnswer {
   constructor(params) {
     this.lessonId = params ? params.lessonId : null;
+    this.bookTitle = params ? params.bookTitle: null;
     this.name = params ? params.name : null;
     this.provider = params ? params.provider : null;
     this.providerId = params ? params.providerId : null;

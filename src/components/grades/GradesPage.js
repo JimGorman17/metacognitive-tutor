@@ -8,6 +8,7 @@ import {Labels} from '../../constants';
 import lessonApi from '../../api/lessonApi';
 import toastr from 'toastr';
 import GradeList from './GradeList';
+import fillTemplate from 'es6-dynamic-template'; // https://stackoverflow.com/a/51079254/109941, 07/22/2018
 
 class GradesPage extends React.Component {
   constructor(props, context) {
@@ -34,7 +35,7 @@ class GradesPage extends React.Component {
 
     return (
       <div>
-        <h1>{Labels.teacher.grades_page.title}</h1>
+        <h1>{fillTemplate(Labels.teacher.grades_page.title, {lessonName: groupedStudentLessonAnswers.length && groupedStudentLessonAnswers.length ? groupedStudentLessonAnswers[0].bookTitle : ""})}</h1>
         <GradeList groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
       </div>
     );

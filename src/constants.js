@@ -43,7 +43,8 @@ const Labels = {
             lesson_saved_success_message: 'Lesson saved'
         },
         grades_page: {
-          title: "Grades",
+          title: "Grades for '${lessonName}' Lesson",
+          button_title: "Grades",
           column_headers: {
             student: "Student",
             question: "Question",

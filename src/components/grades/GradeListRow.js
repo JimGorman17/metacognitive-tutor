@@ -52,7 +52,7 @@ class GradeListRow extends React.Component {
     const data = groupedStudentLessonAnswer.studentLessonAnswers.slice().sort((a, b) => a.questionId - b.questionId).map((sla, index) => ({id: index, question: sla.question, answer: sla.answer}));
 
     return (
-      <div>
+      <React.Fragment>
         <tr className="d-flex">
           <td className="col-1">{`${index}.`}</td>
           <td className="col-2">
@@ -89,7 +89,7 @@ class GradeListRow extends React.Component {
             My footer
           </Modal.Footer>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }
