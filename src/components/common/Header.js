@@ -6,9 +6,6 @@ import {Labels, LoginTypeEnum} from '../../constants';
 import LoginModel from '../../models/Login';
 import {connect} from 'react-redux';
 
-// TODO: Cleanup
-// <NavLink to="/teacher_admin" className="nav-link" activeClassName="active">{Labels.teacher.admin_page.title}</NavLink>
-
 const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-line
   return (
     <div>

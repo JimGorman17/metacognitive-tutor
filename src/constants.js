@@ -43,7 +43,11 @@ const Labels = {
             lesson_saved_success_message: 'Lesson saved'
         },
         grades_page: {
-          title: "Grades"
+          title: "Grades",
+          column_headers: {
+            student: "Student",
+            answers: "Answers"
+          }
         },
         lesson_form: {
             manage_lesson: {

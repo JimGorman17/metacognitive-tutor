@@ -7,6 +7,7 @@ import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAn
 import {Labels} from '../../constants';
 import lessonApi from '../../api/lessonApi';
 import toastr from 'toastr';
+import GradeList from './GradeList';
 
 class GradesPage extends React.Component {
   constructor(props, context) {
@@ -29,13 +30,12 @@ class GradesPage extends React.Component {
 
   render() {
     const {groupedStudentLessonAnswers} = this.state;
+    const {loggedInUser} = this.props;
 
     return (
       <div>
         <h1>{Labels.teacher.grades_page.title}</h1>
-        <ul>
-          {groupedStudentLessonAnswers.map(gsla => <li key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`}>{gsla.name}</li>)}
-        </ul>
+        <GradeList groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
       </div>
     );
   }

@@ -11,10 +11,10 @@ const LessonListRow = ({lesson, loginStatus, onDeleted, loggedInUser}) => {
     <tr className="d-flex">
       <td className="col-2">
         <div className="container">
-          <div className="row" key={lesson.id}>
+          <div className="row" key={1}>
             <img src={lesson.lessonAuthor.providerPic} className="img-thumbnail" alt={lesson.lessonAuthor.name} />
           </div>
-          <div className="row">
+          <div className="row" key={2}>
             {lesson.lessonAuthor.name}
           </div>
         </div>
