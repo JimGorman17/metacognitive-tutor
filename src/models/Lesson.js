@@ -14,6 +14,7 @@ export default class Lesson {
     this.storyQuestions = params && params.storyQuestions && params.storyQuestions.constructor === Array ? params.storyQuestions : [];
     this.importantSentencesForWordScramble = params && params.importantSentencesForWordScramble && params.importantSentencesForWordScramble.constructor === Array ? params.importantSentencesForWordScramble : [];
     this.lessonAuthor = params && params.lessonAuthor ? new LoginModel(params.lessonAuthor) : new LoginModel();
+    this.numberOfEnrolledStudents = params ? params.numberOfEnrolledStudents : 0;
 
     this.provider = this.lessonAuthor ? this.lessonAuthor.provider : null;
     this.providerId = this.lessonAuthor ? this.lessonAuthor.providerId : null;
