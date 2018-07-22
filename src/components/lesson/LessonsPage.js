@@ -41,12 +41,12 @@ class LessonsPage extends React.Component {
   }
 
   render() {
-    const {lessons, loginStatus} = this.props;
+    const {lessons, loginStatus, loggedInUser} = this.props;
 
     return (
       <div>
         <h1>{Labels.shared.lessons_page.title}</h1>
-        <LessonList lessons={lessons} loginStatus={loginStatus} onDeleted={this.onDeleted} />
+        <LessonList lessons={lessons} loginStatus={loginStatus} onDeleted={this.onDeleted} loggedInUser={loggedInUser} />
       </div>
     );
   }

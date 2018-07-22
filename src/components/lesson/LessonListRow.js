@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LessonModel from '../../models/Lesson';
+import LoginModel from '../../models/Login';
 import {Labels, LoginTypeEnum} from '../../constants';
 import {ButtonToolbar, Button} from 'react-bootstrap/lib';
 import { NavLink } from 'react-router-dom';
 
-const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
+const LessonListRow = ({lesson, loginStatus, onDeleted, loggedInUser}) => {
   return (
     <tr className="d-flex">
       <td className="col-2">
@@ -25,15 +26,17 @@ const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
           {loginStatus === LoginTypeEnum.student &&
           <NavLink to={'/student_lesson/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button></NavLink>
           }
-          {loginStatus === LoginTypeEnum.teacher &&
+          {loginStatus === LoginTypeEnum.teacher && lesson.provider === loggedInUser.provider && lesson.providerId === loggedInUser.providerId &&
           <span>
+            {!!lesson.numberOfEnrolledStudents && // https://medium.freecodecamp.org/conditional-rendering-in-react-using-ternaries-and-logical-and-7807f53b6935, 07/22/2018
             <NavLink to={'/grades/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.title}</Button></NavLink>
-          </span>
-          }
-          {loginStatus === LoginTypeEnum.teacher &&
-          <span>
+            }
+            {!lesson.numberOfEnrolledStudents &&
+            <span>
             <NavLink to={'/lesson/' + lesson.id}><Button><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.edit}</Button></NavLink>
             <Button onClick={() => onDeleted(lesson.id)}><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.remove}</Button>
+            </span>
+            }
           </span>
           }
         </ButtonToolbar>
@@ -45,7 +48,8 @@ const LessonListRow = ({lesson, loginStatus, onDeleted}) => {
 LessonListRow.propTypes = {
   lesson: PropTypes.instanceOf(LessonModel).isRequired,
   loginStatus: PropTypes.string.isRequired,
-  onDeleted: PropTypes.func.isRequired
+  onDeleted: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
 };
 
 export default LessonListRow;
