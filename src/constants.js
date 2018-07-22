@@ -35,8 +35,7 @@ const Labels = {
     },
     teacher: {
         admin_page: {
-            title: 'Lessons',
-            description: 'Some Description...'
+            title: 'Lessons'
         },
         create_lesson_page: {
             title: 'Create Lesson',

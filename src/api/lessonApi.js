@@ -12,6 +12,10 @@ class LessonApi {
     return post(`studentlessonanswer/for-student/getall`, {provider: loggedInUser.provider, providerId: loggedInUser.providerId});
   }
 
+  static getAllStudentLessonAnswersForATeacher(loggedInUser, lessonId) {
+    return post(`studentlessonanswer/for-teacher/get-all-by-lessonid`, {provider: loggedInUser.provider, providerId: loggedInUser.providerId, lessonId: lessonId});
+  }
+
   static saveLesson(lessonModel) {
     if (!(lessonModel instanceof LessonModel)) {
       throw 'payload is not of type LessonModel.';
