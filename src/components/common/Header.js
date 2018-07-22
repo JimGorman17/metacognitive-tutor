@@ -43,7 +43,7 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
             }
             {loginStatus === LoginTypeEnum.teacher &&
             <li className="nav-item">
-              <NavLink to="/teacher_admin" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; Grades</NavLink>
+              <NavLink to="/grades" className="nav-link" activeClassName="active"><i className="fa fa-graduation-cap fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.title}</NavLink>
             </li>
             }
           </ul>
