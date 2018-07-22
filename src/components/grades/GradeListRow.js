@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
+import FieldGroup from '../common/FieldGroup';
 import LoginModel from '../../models/Login';
 import {Modal, ButtonToolbar, Button} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -84,7 +85,20 @@ class GradeListRow extends React.Component {
             <Modal.Title>{fillTemplate(Labels.teacher.grades_page.grade_for, {studentName: groupedStudentLessonAnswer.name})}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            My body
+          <form>
+            <FieldGroup
+              id="formControlsText"
+              type="text"
+              label="Text"
+              placeholder="Enter text"
+            />
+            <FieldGroup
+              id="formControlsText"
+              type="text"
+              label="Text"
+              placeholder="Enter text"
+            />
+          </form>
           </Modal.Body>
           <Modal.Footer>
             My footer
