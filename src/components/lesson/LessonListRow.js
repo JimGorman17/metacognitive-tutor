@@ -22,7 +22,7 @@ const LessonListRow = ({lesson, loginStatus, onDeleted, loggedInUser}) => {
       <td className="col-4"><a href={lesson.bookAmazonUrl} target="_blank">{lesson.bookTitle}</a></td>
       <td className="col-4">
         <ButtonToolbar>
-          <Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button>
+          <NavLink to={`/student_lesson/${lesson.id}/${true}`}><Button><i className="fa fa-eye fa-fw" aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.preview}</Button></NavLink>
           {loginStatus === LoginTypeEnum.student &&
           <NavLink to={'/student_lesson/' + lesson.id}><Button><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.lesson_form.manage_lesson.complete_lesson}</Button></NavLink>
           }
