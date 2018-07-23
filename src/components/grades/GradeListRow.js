@@ -102,7 +102,7 @@ class GradeListRow extends React.Component {
           <Modal.Footer>
             <ButtonToolbar>
               <Button bsStyle="primary"><i className={`fa fa-save fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.save_button_text}</Button>
-              <Button><i className={`fa fa-close fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.cancel_button_text}</Button>
+              <Button onClick={this.handleClose}><i className={`fa fa-close fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.cancel_button_text}</Button>
             </ButtonToolbar>
           </Modal.Footer>
         </Modal>
