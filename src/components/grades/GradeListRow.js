@@ -78,10 +78,19 @@ class GradeListRow extends React.Component {
           </td>
           <td className="col-2">
             {groupedStudentLessonAnswer.gradeResponse.isGraded
-              ? <ButtonToolbar>
-                  <Button onClick={this.openModal} ><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.edit_button_text}</Button>
-                  <Button><i className={`fa fa-trash-can fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.remove_button_text}</Button>
-                </ButtonToolbar>
+              ? <React.Fragment>
+                  <FieldGroup
+                    id="readOnlyGrade"
+                    type="text"
+                    label={Labels.teacher.grades_page.grade_label_text}
+                    value={groupedStudentLessonAnswer.gradeResponse.grade}
+                    disabled
+                  />
+                  <ButtonToolbar>
+                    <Button onClick={this.openModal} ><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.edit_button_text}</Button>
+                    <Button><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.remove_button_text}</Button>
+                  </ButtonToolbar>
+                </React.Fragment>
               : <Button onClick={this.openModal}><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.grade_button_text}</Button>
             }
           </td>
@@ -92,16 +101,22 @@ class GradeListRow extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <FieldGroup
-              id="formControlsText"
+              id="grade"
               type="text"
               label={Labels.teacher.grades_page.grade_label_text}
               maxLength={10}
+              defaultValue={groupedStudentLessonAnswer.gradeResponse.grade}
               style={{width: "10em"}}
               inputRef={ref => { this.grade = ref; }}
             />
-            <FormGroup controlId="formControlsTextarea">
+            <FormGroup controlId="comments">
               <ControlLabel>{Labels.teacher.grades_page.comments_label_text}</ControlLabel>
-              <FormControl componentClass="textarea" rows={8} inputRef={ref => { this.comments = ref; }} />
+              <FormControl
+                componentClass="textarea"
+                rows={8}
+                inputRef={ref => { this.comments = ref; }}
+                defaultValue={groupedStudentLessonAnswer.gradeResponse.comments}
+              />
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>

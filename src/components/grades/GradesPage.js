@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import LoginModel from '../../models/Login';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
+import GradeModel from '../../models/Grade';
 import {Labels} from '../../constants';
 import lessonApi from '../../api/lessonApi';
 import toastr from 'toastr';
@@ -22,6 +23,16 @@ class GradesPage extends React.Component {
   }
 
   saveGrade(provider, providerId, grade, comments) {
+    this.setState(previousState => {
+      const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel({isGraded: true, grade: grade, comments: comments})}));
+      return {
+        groupedStudentLessonAnswers:
+          [
+            ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
+            updatedGsla
+          ]
+      }
+    });
     console.log(provider, providerId, grade, comments); // eslint-disable-line
   }
 
