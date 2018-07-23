@@ -17,6 +17,12 @@ class GradesPage extends React.Component {
     this.state = {
       groupedStudentLessonAnswers: [],
     };
+
+    this.saveGrade = this.saveGrade.bind(this);
+  }
+
+  saveGrade(provider, providerId, grade, comments) {
+    console.log(provider, providerId, grade, comments); // eslint-disable-line
   }
 
   componentDidMount() {
@@ -36,7 +42,7 @@ class GradesPage extends React.Component {
     return (
       <div>
         <h1>{fillTemplate(Labels.teacher.grades_page.title, {lessonName: groupedStudentLessonAnswers.length && groupedStudentLessonAnswers.length ? groupedStudentLessonAnswers[0].bookTitle : ""})}</h1>
-        <GradeList groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
+        <GradeList onSaveGrade={this.saveGrade} groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
       </div>
     );
   }

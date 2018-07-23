@@ -5,7 +5,7 @@ import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAn
 import LoginModel from '../../models/Login';
 import {Labels} from '../../constants';
 
-const GradeList = ({groupedStudentLessonAnswers, loggedInUser}) => {
+const GradeList = ({onSaveGrade, groupedStudentLessonAnswers, loggedInUser}) => {
   return (
     <table className="table">
       <thead>
@@ -18,7 +18,7 @@ const GradeList = ({groupedStudentLessonAnswers, loggedInUser}) => {
       </thead>
       <tbody>
         {groupedStudentLessonAnswers.map((gsla, index) =>
-          <GradeListRow key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} index={index+1} groupedStudentLessonAnswer={gsla} loggedInUser={loggedInUser} />
+          <GradeListRow onSaveGrade={onSaveGrade} key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} index={index+1} groupedStudentLessonAnswer={gsla} loggedInUser={loggedInUser} />
         )}
       </tbody>
     </table>
@@ -27,7 +27,8 @@ const GradeList = ({groupedStudentLessonAnswers, loggedInUser}) => {
 
 GradeList.propTypes = {
   groupedStudentLessonAnswers: PropTypes.arrayOf(PropTypes.instanceOf(GroupedStudentLessonAnswerModel)).isRequired,
-  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
+  onSaveGrade: PropTypes.func.isRequired
 };
 
 export default GradeList;

@@ -26,7 +26,13 @@ class GradeListRow extends React.Component {
   }
 
   handleSave() {
-    this.setState({ showModal: false });
+    const {onSaveGrade, groupedStudentLessonAnswer} = this.props;
+    const grade = this.grade.value;
+    const comments = this.comments.value;
+    if(typeof grade === "string" && grade.trim().length) {
+      onSaveGrade(groupedStudentLessonAnswer.provider, groupedStudentLessonAnswer.providerId, grade, comments);
+      this.setState({ showModal: false });
+    }
   }
 
   handleClose() {
@@ -85,23 +91,22 @@ class GradeListRow extends React.Component {
             <Modal.Title>{fillTemplate(Labels.teacher.grades_page.grade_for, {studentName: groupedStudentLessonAnswer.name})}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <form>
             <FieldGroup
               id="formControlsText"
               type="text"
               label={Labels.teacher.grades_page.grade_label_text}
               maxLength={10}
               style={{width: "10em"}}
+              inputRef={ref => { this.grade = ref; }}
             />
             <FormGroup controlId="formControlsTextarea">
-              <ControlLabel>{Labels.teacher.grades_page.comment_label_text}</ControlLabel>
-              <FormControl componentClass="textarea" rows={8}/>
+              <ControlLabel>{Labels.teacher.grades_page.comments_label_text}</ControlLabel>
+              <FormControl componentClass="textarea" rows={8} inputRef={ref => { this.comments = ref; }} />
             </FormGroup>
-          </form>
           </Modal.Body>
           <Modal.Footer>
             <ButtonToolbar>
-              <Button bsStyle="primary"><i className={`fa fa-save fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.save_button_text}</Button>
+              <Button onClick={this.handleSave} bsStyle="primary"><i className={`fa fa-save fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.save_button_text}</Button>
               <Button onClick={this.handleClose}><i className={`fa fa-close fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.cancel_button_text}</Button>
             </ButtonToolbar>
           </Modal.Footer>
@@ -114,7 +119,8 @@ class GradeListRow extends React.Component {
 GradeListRow.propTypes = {
   index: PropTypes.number.isRequired,
   groupedStudentLessonAnswer: PropTypes.instanceOf(GroupedStudentLessonAnswerModel).isRequired,
-  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
+  onSaveGrade: PropTypes.func.isRequired
 };
 
 export default GradeListRow;
