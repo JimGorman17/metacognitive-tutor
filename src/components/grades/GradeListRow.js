@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
 import FieldGroup from '../common/FieldGroup';
 import LoginModel from '../../models/Login';
-import {Modal, ButtonToolbar, Button} from 'react-bootstrap/lib';
+import {Modal, ButtonToolbar, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {Labels} from '../../constants';
 import fillTemplate from 'es6-dynamic-template'; // https://stackoverflow.com/a/51079254/109941, 07/22/2018
@@ -89,19 +89,21 @@ class GradeListRow extends React.Component {
             <FieldGroup
               id="formControlsText"
               type="text"
-              label="Text"
-              placeholder="Enter text"
+              label={Labels.teacher.grades_page.grade_label_text}
+              maxLength={10}
+              style={{width: "10em"}}
             />
-            <FieldGroup
-              id="formControlsText"
-              type="text"
-              label="Text"
-              placeholder="Enter text"
-            />
+            <FormGroup controlId="formControlsTextarea">
+              <ControlLabel>{Labels.teacher.grades_page.comment_label_text}</ControlLabel>
+              <FormControl componentClass="textarea" rows={8}/>
+            </FormGroup>
           </form>
           </Modal.Body>
           <Modal.Footer>
-            My footer
+            <ButtonToolbar>
+              <Button bsStyle="primary"><i className={`fa fa-save fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.save_button_text}</Button>
+              <Button><i className={`fa fa-close fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.cancel_button_text}</Button>
+            </ButtonToolbar>
           </Modal.Footer>
         </Modal>
       </React.Fragment>

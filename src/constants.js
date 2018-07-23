@@ -53,7 +53,11 @@ const Labels = {
           },
           edit_button_text: "Edit",
           remove_button_text: "Remove",
-          grade_button_text: "Grade"
+          grade_button_text: "Grade",
+          save_button_text: "Save",
+          cancel_button_text: "Cancel",
+          grade_label_text: "Grade",
+          comment_label_text: "Comment"
         },
         lesson_form: {
             manage_lesson: {

@@ -14,7 +14,7 @@ const FieldGroup = ({ id, label, help, ...props }) => {
 };
 
 FieldGroup.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   help: PropTypes.string
 };
