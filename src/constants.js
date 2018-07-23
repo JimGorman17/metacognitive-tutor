@@ -57,7 +57,7 @@ const Labels = {
           save_button_text: "Save",
           cancel_button_text: "Cancel",
           grade_label_text: "Grade",
-          comment_label_text: "Comment"
+          comment_label_text: "Comments"
         },
         lesson_form: {
             manage_lesson: {
