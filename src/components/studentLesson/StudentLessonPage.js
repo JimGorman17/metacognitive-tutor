@@ -38,9 +38,11 @@ class StudentLessonPage extends React.Component {
   }
 
   componentDidMount(){
-    const {lessons, actions, loggedInUser} = this.props;
+    const {lessons, studentLessonAnswers, actions, loggedInUser} = this.props;
     if (!lessons.length) {
       actions.loadLessons(loggedInUser);
+    }
+    if (!studentLessonAnswers.length) {
       actions.loadStudentLessonAnswers(loggedInUser);
     }
   }
