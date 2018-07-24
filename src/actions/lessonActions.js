@@ -26,7 +26,7 @@ export function loadStudentLessonAnswersForAStudentSuccess(studentLessonAnswers)
 }
 
 export function updateStudentLessonAnswerSuccess(studentLessonAnswer) {
-  return {type: types.UPDATE_STUDENT_LESSON_ANSWER, studentLessonAnswer}
+  return {type: types.UPDATE_STUDENT_LESSON_ANSWER_SUCCESS, studentLessonAnswer}
 }
 
 function jsonParseLesson(l) {
