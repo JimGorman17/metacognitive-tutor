@@ -1,5 +1,6 @@
 import YouTubeVideoModel from './YouTubeVideo';
 import LoginModel from './Login';
+import GradeModel from './Grade';
 
 export default class Lesson {
   constructor(params) {
@@ -15,6 +16,7 @@ export default class Lesson {
     this.importantSentencesForWordScramble = params && params.importantSentencesForWordScramble && params.importantSentencesForWordScramble.constructor === Array ? params.importantSentencesForWordScramble : [];
     this.lessonAuthor = params && params.lessonAuthor ? new LoginModel(params.lessonAuthor) : new LoginModel();
     this.numberOfEnrolledStudents = params ? params.numberOfEnrolledStudents : 0;
+    this.gradeResponse = params ? new GradeModel(params.gradeResponse) : new GradeModel();
 
     this.provider = this.lessonAuthor ? this.lessonAuthor.provider : null;
     this.providerId = this.lessonAuthor ? this.lessonAuthor.providerId : null;

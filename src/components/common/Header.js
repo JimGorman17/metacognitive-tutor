@@ -17,7 +17,7 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
             {loading && <LoadingDots interval={100} dots={20}/>}
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
-            <NavLink to="/login" className="btn btn-sm btn-outline-secondary"><i className={`fa ${loginStatus ? "fa-sign-out" : "fa-sign-in"} fa-fw`} aria-hidden="true" />&nbsp; {loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>
+            <NavLink onClick={() => { if (loginStatus){ location.reload(true); } }} to="/login" className="btn btn-sm btn-outline-secondary"><i className={`fa ${loginStatus ? "fa-sign-out" : "fa-sign-in"} fa-fw`} aria-hidden="true" />&nbsp; {loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>
           </div>
         </div>
       </header>
