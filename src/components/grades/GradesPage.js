@@ -20,6 +20,7 @@ class GradesPage extends React.Component {
     };
 
     this.saveGrade = this.saveGrade.bind(this);
+    this.removeGrade = this.removeGrade.bind(this);
   }
 
   saveGrade(provider, providerId, grade, comments) {
@@ -33,7 +34,22 @@ class GradesPage extends React.Component {
           ]
       }
     });
-    console.log(provider, providerId, grade, comments); // eslint-disable-line
+    toastr.success(Labels.teacher.grades_page.grade_saved_message);
+  }
+
+  removeGrade(provider, providerId) {
+    const {loggedInUser, lessonId} = this.props;
+    this.setState(previousState => {
+      const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel()}));
+      return {
+        groupedStudentLessonAnswers:
+          [
+            ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
+            updatedGsla
+          ]
+      }
+    });
+    toastr.success(Labels.teacher.grades_page.grade_removed_message);
   }
 
   componentDidMount() {
@@ -53,7 +69,7 @@ class GradesPage extends React.Component {
     return (
       <div>
         <h1>{fillTemplate(Labels.teacher.grades_page.title, {lessonName: groupedStudentLessonAnswers.length && groupedStudentLessonAnswers.length ? groupedStudentLessonAnswers[0].bookTitle : ""})}</h1>
-        <GradeList onSaveGrade={this.saveGrade} groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
+        <GradeList onSaveGrade={this.saveGrade} onRemoveGrade={this.removeGrade} groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
       </div>
     );
   }

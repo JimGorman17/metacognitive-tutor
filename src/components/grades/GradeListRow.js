@@ -18,6 +18,7 @@ class GradeListRow extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -33,6 +34,11 @@ class GradeListRow extends React.Component {
       onSaveGrade(groupedStudentLessonAnswer.provider, groupedStudentLessonAnswer.providerId, grade, comments);
       this.setState({ showModal: false });
     }
+  }
+
+  handleRemove() {
+    const {onRemoveGrade, groupedStudentLessonAnswer} = this.props;
+    onRemoveGrade(groupedStudentLessonAnswer.provider, groupedStudentLessonAnswer.providerId);
   }
 
   handleClose() {
@@ -87,8 +93,8 @@ class GradeListRow extends React.Component {
                     disabled
                   />
                   <ButtonToolbar>
-                    <Button onClick={this.openModal} ><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.edit_button_text}</Button>
-                    <Button><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.remove_button_text}</Button>
+                    <Button onClick={this.openModal}><i className={`fa fa-edit fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.edit_button_text}</Button>
+                    <Button onClick={this.handleRemove}><i className={`fa fa-trash fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.remove_button_text}</Button>
                   </ButtonToolbar>
                 </React.Fragment>
               : <Button onClick={this.openModal}><i className={`fa fa-graduation-cap fa-fw`} aria-hidden="true" />&nbsp; {Labels.teacher.grades_page.grade_button_text}</Button>
@@ -135,7 +141,8 @@ GradeListRow.propTypes = {
   index: PropTypes.number.isRequired,
   groupedStudentLessonAnswer: PropTypes.instanceOf(GroupedStudentLessonAnswerModel).isRequired,
   loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
-  onSaveGrade: PropTypes.func.isRequired
+  onSaveGrade: PropTypes.func.isRequired,
+  onRemoveGrade: PropTypes.func.isRequired
 };
 
 export default GradeListRow;
