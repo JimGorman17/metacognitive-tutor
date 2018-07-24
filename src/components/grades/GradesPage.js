@@ -5,8 +5,11 @@ import { withRouter } from "react-router-dom";
 import LoginModel from '../../models/Login';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
 import GradeModel from '../../models/Grade';
+import UpsertGradeModel from '../../models/UpsertGrade';
+import DeleteGradeModel from '../../models/DeleteGrade';
 import {Labels} from '../../constants';
 import lessonApi from '../../api/lessonApi';
+import gradeApi from '../../api/gradeApi';
 import toastr from 'toastr';
 import GradeList from './GradeList';
 import fillTemplate from 'es6-dynamic-template'; // https://stackoverflow.com/a/51079254/109941, 07/22/2018
@@ -24,32 +27,45 @@ class GradesPage extends React.Component {
   }
 
   saveGrade(provider, providerId, grade, comments) {
-    this.setState(previousState => {
-      const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel({isGraded: true, grade: grade, comments: comments})}));
-      return {
-        groupedStudentLessonAnswers:
-          [
-            ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
-            updatedGsla
-          ]
-      }
-    });
-    toastr.success(Labels.teacher.grades_page.grade_saved_message);
+    const {loggedInUser, lessonId} = this.props;
+    gradeApi.saveGrade(new UpsertGradeModel({grade: grade, comments: comments, lessonId: lessonId, lessonAuthor: loggedInUser, student: new LoginModel({provider: provider, providerId: providerId})}))
+      .then(() => {
+        this.setState(previousState => {
+          const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel({isGraded: true, grade: grade, comments: comments})}));
+          return {
+            groupedStudentLessonAnswers:
+              [
+                ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
+                updatedGsla
+              ]
+          }
+        });
+        toastr.success(Labels.teacher.grades_page.grade_saved_message);
+      })
+      .catch(error => {
+        toastr.error(error);
+      });
   }
 
   removeGrade(provider, providerId) {
     const {loggedInUser, lessonId} = this.props;
-    this.setState(previousState => {
-      const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel()}));
-      return {
-        groupedStudentLessonAnswers:
-          [
-            ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
-            updatedGsla
-          ]
-      }
-    });
-    toastr.success(Labels.teacher.grades_page.grade_removed_message);
+    gradeApi.deleteGrade(new DeleteGradeModel({lessonId: lessonId, lessonAuthor: loggedInUser, student: new LoginModel({provider: provider, providerId: providerId})}))
+      .then(() => {
+        this.setState(previousState => {
+          const updatedGsla = new GroupedStudentLessonAnswerModel(Object.assign({}, previousState.groupedStudentLessonAnswers.find(gsla => gsla.provider === provider && gsla.providerId === providerId), {gradeResponse: new GradeModel()}));
+          return {
+            groupedStudentLessonAnswers:
+              [
+                ...previousState.groupedStudentLessonAnswers.filter(gsla => gsla.provider !== provider || gsla.providerId !== providerId),
+                updatedGsla
+              ]
+          }
+        });
+        toastr.success(Labels.teacher.grades_page.grade_removed_message);
+      })
+      .catch(error => {
+        toastr.error(error);
+      });
   }
 
   componentDidMount() {
