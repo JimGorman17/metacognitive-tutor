@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
 import FieldGroup from '../common/FieldGroup';
-import LoginModel from '../../models/Login';
 import {Modal, ButtonToolbar, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
 import {Labels} from '../../constants';
@@ -46,7 +45,7 @@ class GradeListRow extends React.Component {
   }
 
   render() {
-    const {index, groupedStudentLessonAnswer, loggedInUser} = this.props; // eslint-disable-line
+    const {index, groupedStudentLessonAnswer} = this.props;
 
     const columns = [
     {
@@ -140,7 +139,6 @@ class GradeListRow extends React.Component {
 GradeListRow.propTypes = {
   index: PropTypes.number.isRequired,
   groupedStudentLessonAnswer: PropTypes.instanceOf(GroupedStudentLessonAnswerModel).isRequired,
-  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
   onSaveGrade: PropTypes.func.isRequired,
   onRemoveGrade: PropTypes.func.isRequired
 };

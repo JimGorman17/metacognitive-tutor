@@ -80,12 +80,11 @@ class GradesPage extends React.Component {
 
   render() {
     const {groupedStudentLessonAnswers} = this.state;
-    const {loggedInUser} = this.props;
 
     return (
       <div>
         <h1>{fillTemplate(Labels.teacher.grades_page.title, {lessonName: groupedStudentLessonAnswers.length && groupedStudentLessonAnswers.length ? groupedStudentLessonAnswers[0].bookTitle : ""})}</h1>
-        <GradeList onSaveGrade={this.saveGrade} onRemoveGrade={this.removeGrade} groupedStudentLessonAnswers={groupedStudentLessonAnswers} loggedInUser={loggedInUser} />
+        <GradeList onSaveGrade={this.saveGrade} onRemoveGrade={this.removeGrade} groupedStudentLessonAnswers={groupedStudentLessonAnswers} />
       </div>
     );
   }

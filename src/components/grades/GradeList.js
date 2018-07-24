@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GradeListRow from './GradeListRow';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
-import LoginModel from '../../models/Login';
 import {Labels} from '../../constants';
 
-const GradeList = ({onSaveGrade, onRemoveGrade, groupedStudentLessonAnswers, loggedInUser}) => {
+const GradeList = ({onSaveGrade, onRemoveGrade, groupedStudentLessonAnswers}) => {
   return (
     <table className="table">
       <thead>
@@ -18,7 +17,7 @@ const GradeList = ({onSaveGrade, onRemoveGrade, groupedStudentLessonAnswers, log
       </thead>
       <tbody>
         {groupedStudentLessonAnswers.map((gsla, index) =>
-          <GradeListRow onSaveGrade={onSaveGrade} onRemoveGrade={onRemoveGrade} key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} index={index+1} groupedStudentLessonAnswer={gsla} loggedInUser={loggedInUser} />
+          <GradeListRow onSaveGrade={onSaveGrade} onRemoveGrade={onRemoveGrade} key={`${gsla.lessonId}-${gsla.provider}-${gsla.providerId}`} index={index+1} groupedStudentLessonAnswer={gsla} />
         )}
       </tbody>
     </table>
@@ -27,7 +26,6 @@ const GradeList = ({onSaveGrade, onRemoveGrade, groupedStudentLessonAnswers, log
 
 GradeList.propTypes = {
   groupedStudentLessonAnswers: PropTypes.arrayOf(PropTypes.instanceOf(GroupedStudentLessonAnswerModel)).isRequired,
-  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
   onSaveGrade: PropTypes.func.isRequired,
   onRemoveGrade: PropTypes.func.isRequired
 };

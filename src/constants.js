@@ -80,6 +80,8 @@ const Labels = {
                 story_details: "Story Details",
                 story_questions: "Story Questions",
                 important_sentences_for_word_scramble: "Important Sentences for Word Scramble",
+                see_your_grade: "See Your Grade",
+                close_model_label: "Close",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",
