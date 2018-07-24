@@ -137,10 +137,8 @@ class ListInput extends React.Component {
       <div className={wrapperClass}>
         <div className="card">
           <div className="card-body">
-            <div className="card-text">
-              <BootstrapTable keyField='id' data={data} columns={columns} cellEdit={cellEdit} />
-              <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
-            </div>
+            <BootstrapTable keyField='id' data={data} columns={columns} cellEdit={cellEdit} />
+            <AddItemForm onAddItem={this.addItem} placeholder={placeholder} addLabel={addLabel} deactivate={deactivate} />
           </div>
         </div>
       </div>

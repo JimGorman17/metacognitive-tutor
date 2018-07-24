@@ -3,7 +3,8 @@ const Labels = {
     app_description: 'An app to teach kids metacognitive reading strategies. Written with React.js.',
     home: {
         title: 'Home',
-        learn_more: "Learn More"
+        learn_more: "Learn More",
+        image_description: "A teacher teaching students how to read."
     },
     about: {
         title: 'About',
@@ -34,13 +35,31 @@ const Labels = {
     },
     teacher: {
         admin_page: {
-            title: 'Lessons',
-            description: 'Some Description...'
+            title: 'Lessons'
         },
         create_lesson_page: {
             title: 'Create Lesson',
             description: 'Some Description...',
             lesson_saved_success_message: 'Lesson saved'
+        },
+        grades_page: {
+          title: "Grades for '${lessonName}' Lesson",
+          grade_for: "Grade for ${studentName}",
+          button_title: "Grades",
+          column_headers: {
+            student: "Student",
+            question: "Question",
+            answer: "Answer"
+          },
+          edit_button_text: "Edit",
+          remove_button_text: "Remove",
+          grade_button_text: "Grade",
+          save_button_text: "Save",
+          cancel_button_text: "Cancel",
+          grade_label_text: "Grade",
+          comments_label_text: "Comments",
+          grade_saved_message: "Grade Saved",
+          grade_removed_message: "Grade Removed"
         },
         lesson_form: {
             manage_lesson: {
@@ -61,6 +80,8 @@ const Labels = {
                 story_details: "Story Details",
                 story_questions: "Story Questions",
                 important_sentences_for_word_scramble: "Important Sentences for Word Scramble",
+                see_your_grade: "See Your Grade",
+                close_model_label: "Close",
                 you_tube_video_selection: {
                   column_headers: {
                     title: "Title",

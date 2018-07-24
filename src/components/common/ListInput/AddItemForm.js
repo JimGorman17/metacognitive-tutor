@@ -13,7 +13,7 @@ class AddItemForm extends React.Component {
 
   addItem() {
     const item = this.myInput.value;
-    if(typeof item === "string" && item.length) {
+    if(typeof item === "string" && item.trim().length) {
       this.props.onAddItem(item);
       this.myInput.value = "";
     }

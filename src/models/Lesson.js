@@ -1,5 +1,6 @@
 import YouTubeVideoModel from './YouTubeVideo';
 import LoginModel from './Login';
+import GradeModel from './Grade';
 
 export default class Lesson {
   constructor(params) {
@@ -8,14 +9,14 @@ export default class Lesson {
     this.bookAmazonUrl = params ? params.bookAmazonUrl : '';
     this.theHookYouTubeVideo = params && params.theHookYouTubeVideo ? new YouTubeVideoModel(params.theHookYouTubeVideo) : new YouTubeVideoModel();
     this.theTwoVocabularyWordsYouTubeVideo = params && params.theTwoVocabularyWordsYouTubeVideo ? new YouTubeVideoModel(params.theTwoVocabularyWordsYouTubeVideo) : new YouTubeVideoModel();
-    // TODO: Out-of-scope for now
-    // this.theTwoVocabularyWordsEnunciationVideos = params && params.theTwoVocabularyWordsEnunciationVideos && params.theTwoVocabularyWordsEnunciationVideos.constructor === Array && params.theTwoVocabularyWordsEnunciationVideos.length === 2 && params.theTwoVocabularyWordsEnunciationVideos.every(v => v instanceof YouTubeVideoModel) ? params.theTwoVocabularyWordsEnunciationVideos : [];
     this.mainIdea = params ? params.mainIdea : '';
     this.supportingIdea = params ? params.supportingIdea : '';
     this.storyDetails = params && params.storyDetails && params.storyDetails.constructor === Array ? params.storyDetails : [];
     this.storyQuestions = params && params.storyQuestions && params.storyQuestions.constructor === Array ? params.storyQuestions : [];
     this.importantSentencesForWordScramble = params && params.importantSentencesForWordScramble && params.importantSentencesForWordScramble.constructor === Array ? params.importantSentencesForWordScramble : [];
     this.lessonAuthor = params && params.lessonAuthor ? new LoginModel(params.lessonAuthor) : new LoginModel();
+    this.numberOfEnrolledStudents = params ? params.numberOfEnrolledStudents : 0;
+    this.gradeResponse = params ? new GradeModel(params.gradeResponse) : new GradeModel();
 
     this.provider = this.lessonAuthor ? this.lessonAuthor.provider : null;
     this.providerId = this.lessonAuthor ? this.lessonAuthor.providerId : null;

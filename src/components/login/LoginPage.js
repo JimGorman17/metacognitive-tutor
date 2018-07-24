@@ -100,7 +100,7 @@ class LoginPage extends React.Component {
         return <Redirect to={from} />
       }
 
-      return ( // TODO: Refactor - A container component shouldn't render markup.
+      return (
         <div className="container">
           <div className="row justify-content-center mb-2">
             <h5>{Labels.login.teachers}</h5>

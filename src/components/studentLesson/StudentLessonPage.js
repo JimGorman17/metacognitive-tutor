@@ -38,9 +38,11 @@ class StudentLessonPage extends React.Component {
   }
 
   componentDidMount(){
-    const {lessons, actions, loggedInUser} = this.props;
+    const {lessons, studentLessonAnswers, actions, loggedInUser} = this.props;
     if (!lessons.length) {
       actions.loadLessons(loggedInUser);
+    }
+    if (!studentLessonAnswers.length) {
       actions.loadStudentLessonAnswers(loggedInUser);
     }
   }
@@ -92,7 +94,7 @@ class StudentLessonPage extends React.Component {
   }
 
   render() {
-    const {lesson} = this.props;
+    const {lesson, isPreviewMode} = this.props;
     const {studentLessonAnswers} = this.state;
 
     const steps =
@@ -112,8 +114,8 @@ class StudentLessonPage extends React.Component {
         <div className='step-progress'>
           <StepZilla
             steps={steps}
-            nextTextOnFinalActionStep="Save"
-            onStepChange={(step) => {if (step === steps.length - 1) {this.saveStudentLessonAnswers();}}}
+            nextTextOnFinalActionStep={!isPreviewMode ? "Save" : ""}
+            onStepChange={(step) => {if (!isPreviewMode && step === steps.length - 1) {this.saveStudentLessonAnswers();}}}
             />
         </div>
       </div>
@@ -127,7 +129,8 @@ StudentLessonPage.propTypes = {
   studentLessonAnswers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired
+  loggedInUser: PropTypes.instanceOf(LoginModel).isRequired,
+  isPreviewMode: PropTypes.bool
 };
 
 function getLessonById(lessons, id) {
@@ -142,6 +145,7 @@ function getStudentLessonAnswersByLessonId(studentLessonAnswers, id) {
 
 function mapStateToProps(state, ownProps) {
   const lessonId = ownProps.match.params.id; // from the path `/lesson/:id`
+  const isPreviewMode = ownProps.match.params.is_preview_mode;
 
   let lesson = new LessonModel();
   let studentLessonAnswers = [];
@@ -155,7 +159,8 @@ function mapStateToProps(state, ownProps) {
     lessons: state.lessons,
     studentLessonAnswers: studentLessonAnswers,
     lesson: lesson,
-    loggedInUser: state.loggedInUser
+    loggedInUser: state.loggedInUser,
+    isPreviewMode: isPreviewMode
   };
 }
 

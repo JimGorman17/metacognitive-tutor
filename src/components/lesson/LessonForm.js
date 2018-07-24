@@ -9,7 +9,7 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
 
   return (
     <form>
-      <h1>{Labels.teacher.lesson_form.manage_lesson.title}</h1>
+      <h1>{lesson.id ? Labels.teacher.lesson_form.manage_lesson.title : Labels.teacher.create_lesson_page.title}</h1>
       <TextInput
         name="bookTitle"
         label={Labels.teacher.lesson_form.manage_lesson.book_title}

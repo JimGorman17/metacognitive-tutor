@@ -4,13 +4,9 @@ import PropTypes from 'prop-types';
 import Header from './common/Header';
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from './home/HomePage';
-
-// import TeacherAdminPage from './teacherAdmin/TeacherAdminPage'; TODO: Cleanup
-// import CreateLessonPage from './createLesson/CreateLessonPage'; TODO: Cleanup
-// import StudentMainMenuPage from './studentMainMenu/StudentMainMenuPage'; TODO: Cleanup
+import GradesPage from './grades/GradesPage';
 import LessonsPage from './lesson/LessonsPage';
 import ManageLessonPage from './lesson/ManageLessonPage'; //eslint-disable-line import/no-named-as-default
-
 import StudentLessonPage from './studentLesson/StudentLessonPage';
 import AboutPage from './about/AboutPage';
 import PrivacyPolicyPage from './privacyPolicy/PrivacyPolicyPage';
@@ -24,11 +20,6 @@ import {connect} from 'react-redux';
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
-
-// TODO: Cleanup
-// <PrivateRoute path="/teacher_admin" component={TeacherAdminPage} />
-// <PrivateRoute path="/create_lesson" component={CreateLessonPage} />
-// <PrivateRoute path="/student_main_menu" component={StudentMainMenuPage} />
 
 class App extends React.Component {
   render() {
@@ -46,7 +37,8 @@ class App extends React.Component {
               <PrivateRoute exact path="/" component={HomePage} />
               <PrivateRoute path="/lessons" component={LessonsPage} />
               <PrivateRoute path="/lesson/:id?" component={ManageLessonPage} />
-              <PrivateRoute path="/student_lesson/:id" component={StudentLessonPage} />
+              <PrivateRoute path="/student_lesson/:id/:is_preview_mode?" component={StudentLessonPage} />
+              <PrivateRoute path="/grades/:id" component={GradesPage} />
               <PrivateRoute path="/helloworld" component={() => <SamplePage name="Sally" />} />
               <PrivateRoute component={NotFoundPage} />
           </Switch>
@@ -64,7 +56,7 @@ App.propTypes = {
 
 function mapStateToProps(state/*, ownProps*/) {
   return {
-    loading: state.ajaxCallsInProgress > 0,
+    loading: 0 < state.ajaxCallsInProgress,
     loginStatus: state.loginStatus
   };
 }
