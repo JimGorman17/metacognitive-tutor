@@ -118,8 +118,8 @@ const Labels = {
           please_read_the_book: {
             title: "Please Read the Book"
           },
-          important_details_to_review: {
-            title: "Important Details to Review"
+          card_pyramid: {
+            title: "Card Pyramid"
           },
           story_questions: {
             title: "Story Questions",
