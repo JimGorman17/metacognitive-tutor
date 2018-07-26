@@ -29,7 +29,6 @@ class CardPyramid extends Component {
     };
 
     this.pickColor = this.pickColor.bind(this);
-    this.shouldAcceptDrop = this.shouldAcceptDrop.bind(this);
   }
 
   cardColors = [
@@ -48,10 +47,6 @@ class CardPyramid extends Component {
     let rand = Math.floor(Math.random() * 10);
     return this.cardColors[rand];
   };
-
-  shouldAcceptDrop(sourceContainerOptions, payload, shouldAccept) {
-    return shouldAccept;
-  }
 
   render() {
     /*console.log(
@@ -74,9 +69,6 @@ class CardPyramid extends Component {
         <div className="row">
           <div className="card-container col-md-2">
             <Container
-              className="main-idea-bg"
-              groupName="1"
-              shouldAcceptDrop={this.shouldAcceptDrop(false)}
               getChildPayload={i => this.state.items1[i]}
               onDrop={e =>
                 this.setState({ items1: applyDrag(this.state.items1, e) })
@@ -102,9 +94,7 @@ class CardPyramid extends Component {
           >
             <Container
               style={{ minHeight: "54.4px" }}
-              shouldAcceptDrop={this.shouldAcceptDrop(true)}
               orientation="horizontal"
-              groupName="1"
               getChildPayload={i => this.state.items2[i]}
               onDrop={e =>
                 this.setState({ items2: applyDrag(this.state.items2, e) })
@@ -125,9 +115,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               style={{ minHeight: "54.4px" }}
-              shouldAcceptDrop={this.shouldAcceptDrop(true)}
               orientation="horizontal"
-              groupName="1"
               getChildPayload={i => this.state.items3[i]}
               onDrop={e =>
                 this.setState({ items3: applyDrag(this.state.items3, e) })
@@ -148,9 +136,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               style={{ minHeight: "54.4px" }}
-              shouldAcceptDrop={this.shouldAcceptDrop(true)}
               orientation="horizontal"
-              groupName="1"
               getChildPayload={i => this.state.items4[i]}
               onDrop={e =>
                 this.setState({ items4: applyDrag(this.state.items4, e) })
