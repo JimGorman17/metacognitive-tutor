@@ -61,6 +61,7 @@ class CardPyramid extends Component {
           <div className="card-container col-md-3">
             <Container
               groupName="1"
+              nonDragAreaSelector=".info-handle"
               getChildPayload={i => this.state.items1[i]}
               onDrop={e =>
                 this.setState({ items1: applyDrag(this.state.items1, e) })
@@ -73,6 +74,7 @@ class CardPyramid extends Component {
                       className="draggable-item"
                       style={{ backgroundColor: this.pickColor() }}
                     >
+                      <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
                     </div>
                   </Draggable>
@@ -86,6 +88,7 @@ class CardPyramid extends Component {
           >
             <Container
               groupName="1"
+              nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items2[i]}
@@ -100,6 +103,7 @@ class CardPyramid extends Component {
                       className="draggable-item"
                       style={{ backgroundColor: this.pickColor() }}
                     >
+                      <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
                     </div>
                   </Draggable>
@@ -108,6 +112,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               groupName="1"
+              nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items3[i]}
@@ -122,6 +127,7 @@ class CardPyramid extends Component {
                       className="draggable-item"
                       style={{ backgroundColor: this.pickColor() }}
                     >
+                      <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
                     </div>
                   </Draggable>
@@ -130,6 +136,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               groupName="1"
+              nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items4[i]}
@@ -144,6 +151,7 @@ class CardPyramid extends Component {
                       className="draggable-item"
                       style={{ backgroundColor: this.pickColor() }}
                     >
+                      <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
                     </div>
                   </Draggable>
