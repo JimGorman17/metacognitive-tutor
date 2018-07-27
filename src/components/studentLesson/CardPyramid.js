@@ -58,17 +58,9 @@ class CardPyramid extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div style={{ opacity: "0.0" }} className="col-md-2 card-container" />
-          <div
-            style={{ boxShadow: "none" }}
-            className="col-md-6 card-container"
-          >
-            In-Progress
-          </div>
-        </div>
-        <div className="row">
-          <div className="card-container col-md-2">
+          <div className="card-container col-md-3">
             <Container
+              groupName="1"
               getChildPayload={i => this.state.items1[i]}
               onDrop={e =>
                 this.setState({ items1: applyDrag(this.state.items1, e) })
@@ -90,9 +82,10 @@ class CardPyramid extends Component {
           </div>
           <div
             style={{ maxHeight: "183.2px" }}
-            className="col-md-6 card-container card-pyramid-master-container"
+            className="col-md-7 card-container card-pyramid-master-container"
           >
             <Container
+              groupName="1"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items2[i]}
@@ -114,6 +107,7 @@ class CardPyramid extends Component {
               })}
             </Container>
             <Container
+              groupName="1"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items3[i]}
@@ -135,6 +129,7 @@ class CardPyramid extends Component {
               })}
             </Container>
             <Container
+              groupName="1"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items4[i]}

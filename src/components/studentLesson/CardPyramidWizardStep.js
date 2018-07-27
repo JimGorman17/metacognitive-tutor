@@ -10,10 +10,11 @@ const CardPyramidWizardStep = (props) => {
     <div className="pyramid-style" style={{marginTop: "2em", marginBottom: "2em"}}>
       <div className="card" style={{opacity: .8}}>
         <div className="card-body">
-          <h5 className="card-title">{Labels.student.wizard_steps.card_pyramid.title}</h5>
+          <h2 className="card-title">{Labels.student.wizard_steps.card_pyramid.title}</h2>
           <p className="card-text">
             OK. Hope you liked the book.<br /><br />
-            {"Let's"} review what you just read.
+            {"Let's"} review what you just read.<br /><br />
+            Assemble a three-level card pyramid by dragging all ideas from left to right.<br /><br />
           </p>
         </div>
       </div>

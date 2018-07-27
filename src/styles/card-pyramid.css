@@ -31,7 +31,13 @@ div.card-pyramid-master-container div.smooth-dnd-container:nth-child(3):after {
 }
 
 .draggable-item {
+  min-width: 4em;
+  max-width: 11em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   z-index: 1 !important;
+  opacity: 1;
 }
 
 /* Below this line, copied from https://raw.githubusercontent.com/kutlugsahin/smooth-dnd-demo/master/src/demo/demo.css on 07/26/2018 */
