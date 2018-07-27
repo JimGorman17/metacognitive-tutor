@@ -67,6 +67,12 @@ class CardPyramid extends Component {
     onChange(QuestionTypeEnum.card_pyramid, 0, {shuffledItems, mainIdeas, supportingIdeas, storyDetails});
   }, 100);
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.answer && JSON.stringify(this.state) !== JSON.stringify(nextProps.answer.answer)) { // https://stackoverflow.com/a/23555773/109941, 07/15/2018
+      this.setState(nextProps.answer.answer);
+    }
+  }
+
   render() {
     return (
       <div className="container">
