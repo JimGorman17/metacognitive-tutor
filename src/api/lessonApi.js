@@ -24,12 +24,12 @@ class LessonApi {
     return post(`lesson/upsert`, lessonModel.convertToApiReady());
   }
 
-  static saveStudentLessonAction(studentLessonAnswerModel) {
+  static saveStudentLessonAnswer(studentLessonAnswerModel) {
     if (!(studentLessonAnswerModel instanceof StudentLessonAnswerModel)) {
       throw 'payload is not of type StudentLessonAnswer.';
     }
 
-    return post(`studentlessonanswer/upsert`, studentLessonAnswerModel);
+    return post(`studentlessonanswer/upsert`, studentLessonAnswerModel.convertToApiReady());
   }
 
   static deleteLesson(deleteLessonModel) {

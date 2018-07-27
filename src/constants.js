@@ -59,7 +59,18 @@ const Labels = {
           grade_label_text: "Grade",
           comments_label_text: "Comments",
           grade_saved_message: "Grade Saved",
-          grade_removed_message: "Grade Removed"
+          grade_removed_message: "Grade Removed",
+          card_pyramid: {
+            main_ideas: "Main Idea(s)",
+            supporting_ideas: "Supporting Idea(s)",
+            story_details: "Story Detail(s)",
+            unused_items: "Unused Item(s)",
+            keys: {
+              main_idea: "main_idea",
+              supporting_idea: "supporting_idea",
+              story_detail: "story_detail"
+            }
+          }
         },
         lesson_form: {
             manage_lesson: {
@@ -118,12 +129,15 @@ const Labels = {
           please_read_the_book: {
             title: "Please Read the Book"
           },
-          important_details_to_review: {
-            title: "Important Details to Review"
+          card_pyramid: {
+            title: "Card Pyramid"
           },
           story_questions: {
             title: "Story Questions",
             your_answers: "Your Answers"
+          },
+          word_scramble: {
+            title: "Word Scramble"
           },
           congratulations: {
             title: "Congratulations"

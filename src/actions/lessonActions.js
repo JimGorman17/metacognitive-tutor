@@ -4,6 +4,7 @@ import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import LessonModel from '../models/Lesson';
 import StudentLessonAnswerModel from '../models/StudentLessonAnswer';
 import YouTubeVideoModel from '../models/YouTubeVideo';
+import {QuestionTypeEnum} from '../constants';
 
 export function loadLessonsSuccess(lessons) {
   return { type: types.LOAD_LESSONS_SUCCESS, lessons};
@@ -36,7 +37,7 @@ function jsonParseLesson(l) {
   lesson.storyDetails = lesson.storyDetails ? JSON.parse(lesson.storyDetails) : [];
   lesson.storyQuestions = lesson.storyQuestions ? JSON.parse(lesson.storyQuestions) : [];
   lesson.importantSentencesForWordScramble = lesson.importantSentencesForWordScramble ? JSON.parse(lesson.importantSentencesForWordScramble) : [];
-  return new LessonModel(lesson)
+  return new LessonModel(lesson);
 }
 
 export function loadLessons(loggedInUser) {
@@ -76,22 +77,28 @@ export function deleteLesson(deleteLessonModel) {
   };
 }
 
+function jsonParseStudentLessonAnswer(sla) {
+  const studentLessonAnswer = Object.assign({}, sla);
+  studentLessonAnswer.answer = studentLessonAnswer.answer && studentLessonAnswer.questionType == QuestionTypeEnum.card_pyramid ? JSON.parse(studentLessonAnswer.answer) : studentLessonAnswer.answer;
+  return new StudentLessonAnswerModel(studentLessonAnswer);
+}
+
 export function loadStudentLessonAnswers(loggedInUser) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
     return lessonApi.getAllStudentLessonAnswersForAStudent(loggedInUser)
-    .then(response => dispatch(loadStudentLessonAnswersForAStudentSuccess(response.data)))
+    .then(response => dispatch(loadStudentLessonAnswersForAStudentSuccess(response.data.map(sla => jsonParseStudentLessonAnswer(sla)))))
     .catch(error => {
       throw(error);
     });
   };
 }
 
-export function saveStudentLessonAction(studentLessonAnswer) {
+export function saveStudentLessonAnswer(studentLessonAnswer) {
   return function (dispatch/*, getState*/) {
     dispatch(beginAjaxCall());
-    return lessonApi.saveStudentLessonAction(studentLessonAnswer).then(response => {
-      const studentLessonAction = new StudentLessonAnswerModel(response.data);
+    return lessonApi.saveStudentLessonAnswer(studentLessonAnswer).then(response => {
+      const studentLessonAction = new StudentLessonAnswerModel(jsonParseStudentLessonAnswer(response.data));
       dispatch(updateStudentLessonAnswerSuccess(studentLessonAction));
     }).catch(error => {
       dispatch(ajaxCallError(error));

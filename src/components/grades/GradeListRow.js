@@ -4,7 +4,7 @@ import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAn
 import FieldGroup from '../common/FieldGroup';
 import {Modal, ButtonToolbar, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap/lib';
 import BootstrapTable from 'react-bootstrap-table-next';
-import {Labels} from '../../constants';
+import {Labels, QuestionTypeEnum} from '../../constants';
 import fillTemplate from 'es6-dynamic-template'; // https://stackoverflow.com/a/51079254/109941, 07/22/2018
 
 class GradeListRow extends React.Component {
@@ -44,10 +44,34 @@ class GradeListRow extends React.Component {
     this.setState({ showModal: false });
   }
 
-  render() {
-    const {index, groupedStudentLessonAnswer} = this.props;
+  renderAnswer = (cell, row/*, rowIndex*/) => {
+    if (row.questionType === QuestionTypeEnum.card_pyramid) {
+      return (
+        <React.Fragment>
+          {Labels.teacher.grades_page.card_pyramid.main_ideas}:<br />
+          <ul>
+            {row.answer.mainIdeas.map(mi => <li key={mi.id}><span className={`badge badge-${mi.id === Labels.teacher.grades_page.card_pyramid.keys.main_idea ? "success" : "danger"}`}>{mi.id}</span>: {mi.data}</li>)}
+          </ul>
+          {Labels.teacher.grades_page.card_pyramid.supporting_ideas}:<br />
+          <ul>
+            {row.answer.supportingIdeas.map(si => <li key={si.id}><span className={`badge badge-${si.id === Labels.teacher.grades_page.card_pyramid.keys.supporting_idea ? "success" : "danger"}`}>{si.id}</span>: {si.data}</li>)}
+          </ul>
+          {Labels.teacher.grades_page.card_pyramid.story_details}:<br />
+          <ul>
+            {row.answer.storyDetails.map(sd => <li key={sd.id}><span className={`badge badge-${sd.id.startsWith(Labels.teacher.grades_page.card_pyramid.keys.story_detail) ? "success" : "danger"}`}>{sd.id}</span>: {sd.data}</li>)}
+          </ul>
+          {Labels.teacher.grades_page.card_pyramid.unused_items}:<br />
+          <ul>
+            {row.answer.shuffledItems.map(si => <li key={si.id}><span className={`badge badge-danger`}>{si.id}</span>: {si.data}</li>)}
+          </ul>
+        </React.Fragment>);
+    }
+    else {
+      return row.answer;
+    }
+  }
 
-    const columns = [
+  columns = [
     {
       dataField: 'id',
       hidden: true
@@ -58,11 +82,24 @@ class GradeListRow extends React.Component {
       headerStyle: { width: '10em' }
     },
     {
+      dataField: 'questionType',
+      hidden: true
+    },
+    {
       dataField: 'answer',
-      text: Labels.teacher.grades_page.column_headers.answer
+      text: Labels.teacher.grades_page.column_headers.answer,
+      formatter: this.renderAnswer.bind(this)
     }];
 
-    const data = groupedStudentLessonAnswer.studentLessonAnswers.slice().sort((a, b) => a.questionId - b.questionId).map((sla, index) => ({id: index, question: sla.question, answer: sla.answer}));
+  render() {
+    const {index, groupedStudentLessonAnswer} = this.props;
+
+    const data = groupedStudentLessonAnswer.studentLessonAnswers.slice().sort((a, b) => a.questionId - b.questionId).map((sla, index) => ({
+      id: index,
+      question: sla.question,
+      questionType: sla.questionType,
+      answer: sla.answer
+    }));
 
     return (
       <React.Fragment>
@@ -79,7 +116,7 @@ class GradeListRow extends React.Component {
             </div>
           </td>
           <td className="col-7">
-            <BootstrapTable keyField='id' data={data} columns={columns} />
+            <BootstrapTable keyField='id' data={data} columns={this.columns} />
           </td>
           <td className="col-2">
             {groupedStudentLessonAnswer.gradeResponse.isGraded
