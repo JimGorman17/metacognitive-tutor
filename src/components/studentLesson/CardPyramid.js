@@ -16,11 +16,11 @@ class CardPyramid extends Component {
         },
         {
           id: "supporting_idea",
-          data: props.supportingIdea
+          data: props.mainIdea //props.supportingIdea
         },
         ...props.storyDetails.map((sd, index) => { return {
           id: `story_detail_${index}`,
-          data: sd
+          data: props.mainIdea //sd
         }})
       ],
       items2: [],
@@ -86,7 +86,7 @@ class CardPyramid extends Component {
           >
             <Container
               groupName="1"
-              style={{ minHeight: "54.4px" }}
+              style={{ minHeight: "15em" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items2[i]}
               onDrop={e =>
@@ -108,7 +108,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               groupName="1"
-              style={{ minHeight: "54.4px" }}
+              style={{ minHeight: "15em" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items3[i]}
               onDrop={e =>
@@ -130,7 +130,7 @@ class CardPyramid extends Component {
             </Container>
             <Container
               groupName="1"
-              style={{ minHeight: "54.4px" }}
+              style={{ minHeight: "15em" }}
               orientation="horizontal"
               getChildPayload={i => this.state.items4[i]}
               onDrop={e =>
