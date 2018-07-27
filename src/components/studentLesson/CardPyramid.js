@@ -8,8 +8,13 @@ class CardPyramid extends Component {
   constructor(props, context) {
     super(props, context);
 
+    const shuffleArray = arr => arr // https://gist.github.com/guilhermepontes/17ae0cc71fa2b13ea8c20c94c5c35dc4, 07/27/2018
+      .map(a => [Math.random(), a])
+      .sort((a, b) => a[0] - b[0])
+      .map(a => a[1]);
+
     this.state = {
-      items1: [
+      shuffledItems: shuffleArray([
         {
           id: "main_idea",
           data: props.mainIdea,
@@ -25,16 +30,16 @@ class CardPyramid extends Component {
           data: sd,
           style: { backgroundColor: this.pickColor() }
         }})
-      ],
-      items2: [],
-      items3: [],
-      items4: []
+      ]),
+      mainIdeas: [],
+      supportingIdeas: [],
+      storyDetails: []
     };
 
     this.pickColor = this.pickColor.bind(this);
   }
 
-  cardColors = [
+  cardColors = [ // https://raw.githubusercontent.com/kutlugsahin/smooth-dnd-demo/master/src/demo/pages/cards.js, 07/27/2018
     "azure",
     "beige",
     "bisque",
@@ -53,10 +58,10 @@ class CardPyramid extends Component {
 
   render() {
     /*console.log(
-      this.state.items1,
-      this.state.items2,
-      this.state.items3,
-      this.state.items4
+      this.state.shuffledItems,
+      this.state.mainIdeas,
+      this.state.supportingIdeas,
+      this.state.storyDetails
     );*/
     return (
       <div className="container">
@@ -65,12 +70,12 @@ class CardPyramid extends Component {
             <Container
               groupName="1"
               nonDragAreaSelector=".info-handle"
-              getChildPayload={i => this.state.items1[i]}
+              getChildPayload={i => this.state.shuffledItems[i]}
               onDrop={e =>
-                this.setState({ items1: applyDrag(this.state.items1, e) })
+                this.setState({ shuffledItems: applyDrag(this.state.shuffledItems, e) })
               }
             >
-              {this.state.items1.map(p => {
+              {this.state.shuffledItems.map(p => {
                 return (
                   <Draggable key={p.id}>
                     <div
@@ -94,12 +99,12 @@ class CardPyramid extends Component {
               nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
-              getChildPayload={i => this.state.items2[i]}
+              getChildPayload={i => this.state.mainIdeas[i]}
               onDrop={e =>
-                this.setState({ items2: applyDrag(this.state.items2, e) })
+                this.setState({ mainIdeas: applyDrag(this.state.mainIdeas, e) })
               }
             >
-              {this.state.items2.map(p => {
+              {this.state.mainIdeas.map(p => {
                 return (
                   <Draggable key={p.id}>
                     <div
@@ -118,12 +123,12 @@ class CardPyramid extends Component {
               nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
-              getChildPayload={i => this.state.items3[i]}
+              getChildPayload={i => this.state.supportingIdeas[i]}
               onDrop={e =>
-                this.setState({ items3: applyDrag(this.state.items3, e) })
+                this.setState({ supportingIdeas: applyDrag(this.state.supportingIdeas, e) })
               }
             >
-              {this.state.items3.map(p => {
+              {this.state.supportingIdeas.map(p => {
                 return (
                   <Draggable key={p.id}>
                     <div
@@ -142,12 +147,12 @@ class CardPyramid extends Component {
               nonDragAreaSelector=".info-handle"
               style={{ minHeight: "54.4px" }}
               orientation="horizontal"
-              getChildPayload={i => this.state.items4[i]}
+              getChildPayload={i => this.state.storyDetails[i]}
               onDrop={e =>
-                this.setState({ items4: applyDrag(this.state.items4, e) })
+                this.setState({ storyDetails: applyDrag(this.state.storyDetails, e) })
               }
             >
-              {this.state.items4.map(p => {
+              {this.state.storyDetails.map(p => {
                 return (
                   <Draggable key={p.id}>
                     <div
