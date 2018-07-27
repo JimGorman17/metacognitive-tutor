@@ -59,7 +59,13 @@ const Labels = {
           grade_label_text: "Grade",
           comments_label_text: "Comments",
           grade_saved_message: "Grade Saved",
-          grade_removed_message: "Grade Removed"
+          grade_removed_message: "Grade Removed",
+          card_pyramid: {
+            main_ideas: "Main Idea(s)",
+            supporting_ideas: "Supporting Idea(s)",
+            story_details: "Story Detail(s)",
+            unused_items: "Unused Item(s)"
+          }
         },
         lesson_form: {
             manage_lesson: {

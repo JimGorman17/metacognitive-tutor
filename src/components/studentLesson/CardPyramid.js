@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Draggable } from "react-smooth-dnd";
 import { applyDrag } from '../../dragAndDropUtils'
 import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
+import CardPyramidItemModel from '../../models/CardPyramidItem';
 import debounce from 'lodash.debounce';
 import {QuestionTypeEnum} from '../../constants';
 import '../../styles/card-pyramid.css';
@@ -19,21 +20,21 @@ class CardPyramid extends Component {
     const {answer} = this.props;
     this.state = answer ? answer.answer : {
       shuffledItems: shuffleArray([
-        {
+        new CardPyramidItemModel ({
           id: "main_idea",
           data: props.mainIdea,
           style: { backgroundColor: this.pickColor() }
-        },
-        {
+        }),
+        new CardPyramidItemModel ({
           id: "supporting_idea",
           data: props.supportingIdea,
           style: { backgroundColor: this.pickColor() }
-        },
-        ...props.storyDetails.map((sd, index) => { return {
+        }),
+        ...props.storyDetails.map((sd, index) => { return new CardPyramidItemModel ({
           id: `story_detail_${index}`,
           data: sd,
           style: { backgroundColor: this.pickColor() }
-        }})
+        })})
       ]),
       mainIdeas: [],
       supportingIdeas: [],

@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import { withRouter } from "react-router-dom";
 import LoginModel from '../../models/Login';
 import GroupedStudentLessonAnswerModel from '../../models/GroupedStudentLessonAnswer';
+import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import GradeModel from '../../models/Grade';
 import UpsertGradeModel from '../../models/UpsertGrade';
 import DeleteGradeModel from '../../models/DeleteGrade';
-import {Labels} from '../../constants';
+import {Labels, QuestionTypeEnum} from '../../constants';
 import lessonApi from '../../api/lessonApi';
 import gradeApi from '../../api/gradeApi';
 import toastr from 'toastr';
@@ -72,10 +73,22 @@ class GradesPage extends React.Component {
     const {loggedInUser, lessonId} = this.props;
 
     return lessonApi.getAllStudentLessonAnswersForATeacher(loggedInUser, lessonId)
-      .then((response) => this.setState({groupedStudentLessonAnswers: response.data.map(d => new GroupedStudentLessonAnswerModel(d))}))
+      .then((response) => this.setState({groupedStudentLessonAnswers: response.data.map(d => this.jsonParseGroupedStudentLessonAnswers(d))}))
       .catch(error => {
         toastr.error(error);
       });
+  }
+
+  jsonParseGroupedStudentLessonAnswers = (gsla) => {
+    const groupedStudentLessonAnswer = Object.assign({}, gsla);
+    groupedStudentLessonAnswer.studentLessonAnswers = groupedStudentLessonAnswer.studentLessonAnswers.map(sla => {
+      const parsedStudentLessonAnswer = Object.assign({}, sla);
+      if (sla.questionType == QuestionTypeEnum.card_pyramid) {
+        parsedStudentLessonAnswer.answer = JSON.parse(parsedStudentLessonAnswer.answer);
+      }
+      return new StudentLessonAnswerModel(parsedStudentLessonAnswer);
+    });
+    return new GroupedStudentLessonAnswerModel(groupedStudentLessonAnswer);
   }
 
   render() {
