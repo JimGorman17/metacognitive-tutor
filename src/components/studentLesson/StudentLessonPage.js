@@ -77,7 +77,7 @@ class StudentLessonPage extends React.Component {
     const {studentLessonAnswers} = this.state;
     const studentLessonAnswersToSave = studentLessonAnswers.map(sla => new StudentLessonAnswerModel(Object.assign({}, sla, {student: this.props.loggedInUser})));
 
-    let requests = studentLessonAnswersToSave.map(sla => new Promise((resolve, reject) => this.props.actions.saveStudentLessonAction(sla).then(() => resolve()).catch((error) => reject(error)))); // https://stackoverflow.com/a/18983245/109941, 07/21/2018
+    let requests = studentLessonAnswersToSave.map(sla => new Promise((resolve, reject) => this.props.actions.saveStudentLessonAnswer(sla).then(() => resolve()).catch((error) => reject(error)))); // https://stackoverflow.com/a/18983245/109941, 07/21/2018
     Promise.all(requests)
       .then(() => {
         toastr.success(Labels.student.lesson_page.answers_saved_success_message)

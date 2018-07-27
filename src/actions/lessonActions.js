@@ -94,11 +94,11 @@ export function loadStudentLessonAnswers(loggedInUser) {
   };
 }
 
-export function saveStudentLessonAction(studentLessonAnswer) {
+export function saveStudentLessonAnswer(studentLessonAnswer) {
   return function (dispatch/*, getState*/) {
     dispatch(beginAjaxCall());
-    return lessonApi.saveStudentLessonAction(studentLessonAnswer).then(response => {
-      const studentLessonAction = new StudentLessonAnswerModel(response.data);
+    return lessonApi.saveStudentLessonAnswer(studentLessonAnswer).then(response => {
+      const studentLessonAction = new StudentLessonAnswerModel(jsonParseStudentLessonAnswer(response.data));
       dispatch(updateStudentLessonAnswerSuccess(studentLessonAction));
     }).catch(error => {
       dispatch(ajaxCallError(error));

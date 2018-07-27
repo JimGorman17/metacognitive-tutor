@@ -1,4 +1,5 @@
 import LoginModel from './Login';
+import {QuestionTypeEnum} from '../constants';
 
 export default class StudentLessonAnswer {
   constructor(params) {
@@ -21,5 +22,11 @@ export default class StudentLessonAnswer {
     this.student = params && params.student ? new LoginModel(params.student) : new LoginModel();
     this.provider = this.student ? this.student.provider : null;
     this.providerId = this.student ? this.student.providerId : null;
+  }
+
+  convertToApiReady(){
+    return Object.assign({}, this, {
+      answer: this.answer && this.questionType == QuestionTypeEnum.card_pyramid ? JSON.stringify(this.answer) : this.answer
+    });
   }
 }
