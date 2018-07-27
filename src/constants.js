@@ -64,7 +64,12 @@ const Labels = {
             main_ideas: "Main Idea(s)",
             supporting_ideas: "Supporting Idea(s)",
             story_details: "Story Detail(s)",
-            unused_items: "Unused Item(s)"
+            unused_items: "Unused Item(s)",
+            keys: {
+              main_idea: "main_idea",
+              supporting_idea: "supporting_idea",
+              story_detail: "story_detail"
+            }
           }
         },
         lesson_form: {

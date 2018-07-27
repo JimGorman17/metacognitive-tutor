@@ -5,7 +5,7 @@ import { applyDrag } from '../../dragAndDropUtils'
 import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import CardPyramidItemModel from '../../models/CardPyramidItem';
 import debounce from 'lodash.debounce';
-import {QuestionTypeEnum} from '../../constants';
+import {Labels, QuestionTypeEnum} from '../../constants';
 import '../../styles/card-pyramid.css';
 
 class CardPyramid extends Component {
@@ -21,17 +21,17 @@ class CardPyramid extends Component {
     this.state = answer ? answer.answer : {
       shuffledItems: shuffleArray([
         new CardPyramidItemModel ({
-          id: "main_idea",
+          id: Labels.teacher.grades_page.card_pyramid.keys.main_idea,
           data: props.mainIdea,
           style: { backgroundColor: this.pickColor() }
         }),
         new CardPyramidItemModel ({
-          id: "supporting_idea",
+          id: Labels.teacher.grades_page.card_pyramid.keys.supporting_idea,
           data: props.supportingIdea,
           style: { backgroundColor: this.pickColor() }
         }),
         ...props.storyDetails.map((sd, index) => { return new CardPyramidItemModel ({
-          id: `story_detail_${index}`,
+          id: `${Labels.teacher.grades_page.card_pyramid.keys.story_detail}_${index + 1}`,
           data: sd,
           style: { backgroundColor: this.pickColor() }
         })})

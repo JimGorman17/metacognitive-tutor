@@ -50,19 +50,19 @@ class GradeListRow extends React.Component {
         <React.Fragment>
           {Labels.teacher.grades_page.card_pyramid.main_ideas}:<br />
           <ul>
-            {row.answer.mainIdeas.map(mi => <li key={mi.id}>{mi.data}</li>)}
+            {row.answer.mainIdeas.map(mi => <li key={mi.id}><span className={`badge badge-${mi.id === Labels.teacher.grades_page.card_pyramid.keys.main_idea ? "success" : "danger"}`}>{mi.id}</span>: {mi.data}</li>)}
           </ul>
           {Labels.teacher.grades_page.card_pyramid.supporting_ideas}:<br />
           <ul>
-            {row.answer.supportingIdeas.map(si => <li key={si.id}>{si.data}</li>)}
+            {row.answer.supportingIdeas.map(si => <li key={si.id}><span className={`badge badge-${si.id === Labels.teacher.grades_page.card_pyramid.keys.supporting_idea ? "success" : "danger"}`}>{si.id}</span>: {si.data}</li>)}
           </ul>
           {Labels.teacher.grades_page.card_pyramid.story_details}:<br />
           <ul>
-            {row.answer.storyDetails.map(sd => <li key={sd.id}>{sd.data}</li>)}
+            {row.answer.storyDetails.map(sd => <li key={sd.id}><span className={`badge badge-${sd.id.startsWith(Labels.teacher.grades_page.card_pyramid.keys.story_detail) ? "success" : "danger"}`}>{sd.id}</span>: {sd.data}</li>)}
           </ul>
           {Labels.teacher.grades_page.card_pyramid.unused_items}:<br />
           <ul>
-            {row.answer.shuffledItems.map(si => <li key={si.id}>{si.data}</li>)}
+            {row.answer.shuffledItems.map(si => <li key={si.id}><span className={`badge badge-danger`}>{si.id}</span>: {si.data}</li>)}
           </ul>
         </React.Fragment>);
     }
