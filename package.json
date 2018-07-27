@@ -35,6 +35,7 @@
     "font-awesome": "4.7.0",
     "jquery": "2.2.3",
     "jsonp": "0.2.1",
+    "lodash.debounce": "4.0.8",
     "object-assign": "4.1.0",
     "react": "16.2.0",
     "react-bootstrap": "0.32.1",

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Container, Draggable } from "react-smooth-dnd";
 import { applyDrag } from '../../dragAndDropUtils'
+import debounce from 'lodash.debounce';
+import {QuestionTypeEnum} from '../../constants';
 import '../../styles/card-pyramid.css';
 
 class CardPyramid extends Component {
@@ -36,7 +38,7 @@ class CardPyramid extends Component {
       storyDetails: []
     };
 
-    this.pickColor = this.pickColor.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   cardColors = [ // https://raw.githubusercontent.com/kutlugsahin/smooth-dnd-demo/master/src/demo/pages/cards.js, 07/27/2018
@@ -50,19 +52,20 @@ class CardPyramid extends Component {
     "ghostwhite",
     "ivory",
     "khaki"
-  ];
+  ]
+
   pickColor = () => {
     let rand = Math.floor(Math.random() * 10);
     return this.cardColors[rand];
-  };
+  }
+
+  onChange = debounce(() => {
+    const {onChange} = this.props;
+    const {mainIdeas, supportingIdeas, storyDetails} = this.state;
+    onChange(QuestionTypeEnum.card_pyramid, 0, {mainIdeas, supportingIdeas, storyDetails});
+  }, 100);
 
   render() {
-    /*console.log(
-      this.state.shuffledItems,
-      this.state.mainIdeas,
-      this.state.supportingIdeas,
-      this.state.storyDetails
-    );*/
     return (
       <div className="container">
         <div className="row">
@@ -72,7 +75,7 @@ class CardPyramid extends Component {
               nonDragAreaSelector=".info-handle"
               getChildPayload={i => this.state.shuffledItems[i]}
               onDrop={e =>
-                this.setState({ shuffledItems: applyDrag(this.state.shuffledItems, e) })
+                this.setState(previousState =>{ return { shuffledItems: applyDrag(previousState.shuffledItems, e) } }, () => this.onChange())
               }
             >
               {this.state.shuffledItems.map(p => {
@@ -101,7 +104,7 @@ class CardPyramid extends Component {
               orientation="horizontal"
               getChildPayload={i => this.state.mainIdeas[i]}
               onDrop={e =>
-                this.setState({ mainIdeas: applyDrag(this.state.mainIdeas, e) })
+                this.setState(previousState => { return { mainIdeas: applyDrag(previousState.mainIdeas, e) } }, () => this.onChange())
               }
             >
               {this.state.mainIdeas.map(p => {
@@ -125,7 +128,7 @@ class CardPyramid extends Component {
               orientation="horizontal"
               getChildPayload={i => this.state.supportingIdeas[i]}
               onDrop={e =>
-                this.setState({ supportingIdeas: applyDrag(this.state.supportingIdeas, e) })
+                this.setState(previousState => { return { supportingIdeas: applyDrag(previousState.supportingIdeas, e) } }, () => this.onChange())
               }
             >
               {this.state.supportingIdeas.map(p => {
@@ -149,7 +152,7 @@ class CardPyramid extends Component {
               orientation="horizontal"
               getChildPayload={i => this.state.storyDetails[i]}
               onDrop={e =>
-                this.setState({ storyDetails: applyDrag(this.state.storyDetails, e) })
+                this.setState(previousState => { return { storyDetails: applyDrag(previousState.storyDetails, e) } }, () => this.onChange())
               }
             >
               {this.state.storyDetails.map(p => {
@@ -176,7 +179,8 @@ class CardPyramid extends Component {
 CardPyramid.propTypes = {
   mainIdea: PropTypes.string.isRequired,
   supportingIdea: PropTypes.string.isRequired,
-  storyDetails: PropTypes.array.isRequired
+  storyDetails: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CardPyramid;

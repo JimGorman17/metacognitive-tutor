@@ -5,7 +5,7 @@ import {Labels} from '../../constants';
 import '../../styles/card-pyramid.css';
 
 const CardPyramidWizardStep = (props) => {
-  const {mainIdea, supportingIdea, storyDetails} = props;
+  const {mainIdea, supportingIdea, storyDetails, onChange} = props;
   return(
     <div className="pyramid-style" style={{marginTop: "2em", marginBottom: "2em"}}>
       <div className="card" style={{opacity: .8}}>
@@ -18,7 +18,7 @@ const CardPyramidWizardStep = (props) => {
           </p>
         </div>
       </div>
-      <CardPyramid mainIdea={mainIdea} supportingIdea={supportingIdea} storyDetails={storyDetails} />
+      <CardPyramid mainIdea={mainIdea} supportingIdea={supportingIdea} storyDetails={storyDetails} onChange={onChange} />
     </div>
   );
 };
@@ -26,7 +26,8 @@ const CardPyramidWizardStep = (props) => {
 CardPyramidWizardStep.propTypes = {
   mainIdea: PropTypes.string.isRequired,
   supportingIdea: PropTypes.string.isRequired,
-  storyDetails: PropTypes.array.isRequired
+  storyDetails: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default CardPyramidWizardStep;
