@@ -12,15 +12,18 @@ class CardPyramid extends Component {
       items1: [
         {
           id: "main_idea",
-          data: props.mainIdea
+          data: props.mainIdea,
+          style: { backgroundColor: this.pickColor() }
         },
         {
           id: "supporting_idea",
-          data: props.supportingIdea
+          data: props.supportingIdea,
+          style: { backgroundColor: this.pickColor() }
         },
         ...props.storyDetails.map((sd, index) => { return {
           id: `story_detail_${index}`,
-          data: sd
+          data: sd,
+          style: { backgroundColor: this.pickColor() }
         }})
       ],
       items2: [],
@@ -72,7 +75,7 @@ class CardPyramid extends Component {
                   <Draggable key={p.id}>
                     <div
                       className="draggable-item"
-                      style={{ backgroundColor: this.pickColor() }}
+                      style={p.style}
                     >
                       <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
@@ -101,7 +104,7 @@ class CardPyramid extends Component {
                   <Draggable key={p.id}>
                     <div
                       className="draggable-item"
-                      style={{ backgroundColor: this.pickColor() }}
+                      style={p.style}
                     >
                       <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
@@ -125,7 +128,7 @@ class CardPyramid extends Component {
                   <Draggable key={p.id}>
                     <div
                       className="draggable-item"
-                      style={{ backgroundColor: this.pickColor() }}
+                      style={p.style}
                     >
                       <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
@@ -149,7 +152,7 @@ class CardPyramid extends Component {
                   <Draggable key={p.id}>
                     <div
                       className="draggable-item"
-                      style={{ backgroundColor: this.pickColor() }}
+                      style={p.style}
                     >
                       <i title={p.data} style={{marginRight: ".4em"}} className={`fa fa-info-circle fa-fw info-handle`} aria-hidden="true" />
                       {p.data}
