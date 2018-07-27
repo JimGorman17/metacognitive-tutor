@@ -25,7 +25,7 @@ const WordScrambleWizardStep = (props) => {
 };
 
 WordScrambleWizardStep.propTypes = {
-  sentences: PropTypes.arrayOf(PropTypes.instanceOf(PropTypes.string)).isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string).isRequired,
   answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   onChange: PropTypes.func.isRequired
 };

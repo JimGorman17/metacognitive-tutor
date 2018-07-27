@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-// import { Container, Draggable } from "react-smooth-dnd";
-// import { applyDrag } from '../../dragAndDropUtils'
+import { Container, Draggable } from "react-smooth-dnd";
+import { applyDrag } from '../../dragAndDropUtils'
 import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
-// import WordScrambleItemModel from '../../models/WordScrambleItem';
-// import {Labels, QuestionTypeEnum} from '../../constants';
+import WordScrambleItemModel from '../../models/WordScrambleItem';
+import {QuestionTypeEnum} from '../../constants';
 import '../../styles/word-scramble.css';
 
 class WordScramble extends Component {
@@ -19,12 +19,11 @@ class WordScramble extends Component {
     const shuffleSentence = s => {
       const sentenceAsString = s.replace(/\.+$/, ""); // Delete trailing periods. https://stackoverflow.com/a/20925205/109941, 07/27/2017
       const sentenceAsArray = sentenceAsString.match(/\S+/g) || []; // Split on whitespace. https://stackoverflow.com/a/14912552/109941, 07/27/2018
-      return shuffleArray(sentenceAsArray);
+      return shuffleArray(sentenceAsArray.map((w, index) => new WordScrambleItemModel({id: index + 1, data: w, style: { backgroundColor: this.pickColor() } })));
     };
 
     const {answers, sentences} = this.props;
-    debugger; // eslint-disable-line
-    this.state = {sentences: answers.length ? answers : sentences.map(s => shuffleSentence(s))};
+    this.state = {sentences: answers.length ? answers : Object.assign({}, sentences.map(s => shuffleSentence(s)))};
   }
 
   cardColors = [ // https://raw.githubusercontent.com/kutlugsahin/smooth-dnd-demo/master/src/demo/pages/cards.js, 07/27/2018
@@ -45,19 +44,52 @@ class WordScramble extends Component {
     return this.cardColors[rand];
   }
 
+  onChange = () => {
+    const {onChange} = this.props;
+    const {sentences} = this.state;
+    onChange(QuestionTypeEnum.word_scramble, 0, sentences);
+  };
+
   render() {
     const {sentences} = this.state;
-    debugger; // eslint-disable-line
     return (
-      <React.Fragment>
-        {sentences}
-      </React.Fragment>
+      <div>
+        {Object.keys(sentences).map((key) => { return (
+          <div key={key}
+          className="card-container"
+          style={{width: "auto", opacity: ".85"}}
+          >
+            <Container
+              groupName={key.toString()}
+              orientation="horizontal"
+              getChildPayload={i => this.state.sentences[key][i]}
+              onDrop={e =>
+                this.setState(previousState =>{ return { key: applyDrag(previousState.sentences[key], e) } }, () => this.onChange())
+              }
+            >
+              {sentences[key].map(w => {
+                return (
+                  <Draggable key={w.id}>
+                    <div
+                      className="draggable-item"
+                      style={w.style}
+                    >
+                      {w.data}
+                    </div>
+                  </Draggable>
+                );
+              })}
+            </Container>
+          </div>
+        );
+      })}
+      </div>
     );
   }
 }
 
 WordScramble.propTypes = {
-  sentences: PropTypes.arrayOf(PropTypes.instanceOf(PropTypes.string)).isRequired,
+  sentences: PropTypes.arrayOf(PropTypes.string).isRequired,
   answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   onChange: PropTypes.func.isRequired
 };
