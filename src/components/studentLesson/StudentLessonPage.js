@@ -14,6 +14,7 @@ import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import WelcomeWizardStep from './WelcomeWizardStep';
 import PleaseReadTheBookWizardStep from './PleaseReadTheBookWizardStep';
 import CardPyramidWizardStep from './CardPyramidWizardStep';
+import WordScrambleWizardStep from './WordScrambleWizardStep';
 import CongratulationsWizardStep from './CongratulationsWizardStep';
 import toastr from 'toastr';
 
@@ -113,6 +114,7 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
         {name: Labels.student.wizard_steps.card_pyramid.title, component: <CardPyramidWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} onChange={this.updateStudentLessonAnswers} answer={studentLessonAnswers.find(sla => sla.questionType === QuestionTypeEnum.card_pyramid)} />},
+        {name: Labels.student.wizard_steps.word_scramble.title, component: <WordScrambleWizardStep onChange={this.updateStudentLessonAnswers} sentences={lesson.importantSentencesForWordScramble} answers={studentLessonAnswers.filter(sla => sla.questionType === QuestionTypeEnum.word_scramble)} />},
         {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} answers={studentLessonAnswers.slice().filter(sla => sla.questionType === QuestionTypeEnum.story_question).sort((a, b) => { return a.questionId - b.questionId})} onChange={this.updateStudentLessonAnswers} />},
         {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
