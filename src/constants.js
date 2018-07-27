@@ -125,6 +125,9 @@ const Labels = {
             title: "Story Questions",
             your_answers: "Your Answers"
           },
+          word_scramble: {
+            title: "Word Scramble"
+          },
           congratulations: {
             title: "Congratulations"
           }

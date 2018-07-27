@@ -60,7 +60,20 @@ class StudentLessonPage extends React.Component {
       });
     } else {
       const {lesson, loggedInUser} = this.props;
-      const question = lesson.storyQuestions[questionId - 1];
+      let question = "";
+      switch(questionType) {
+        case QuestionTypeEnum.story_question:
+          question = lesson.storyQuestions[questionId - 1];
+          break;
+        case QuestionTypeEnum.card_pyramid:
+          question = Labels.student.wizard_steps.card_pyramid.title;
+          break;
+        case QuestionTypeEnum.word_scramble:
+          question = Labels.student.wizard_steps.word_scramble.title;
+          break;
+        default:
+          throw `Not Implemented questionType: ${questionType}`;
+      }
 
       newStudentLessonAnswers = [
         ...studentLessonAnswers.filter(sla => sla.questionId !== questionId),
