@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import CardPyramid from './CardPyramid';
 import {Labels} from '../../constants';
 import '../../styles/card-pyramid.css';
 
 const CardPyramidWizardStep = (props) => {
-  const {mainIdea, supportingIdea, storyDetails, onChange} = props;
+  const {mainIdea, supportingIdea, storyDetails, answer, onChange} = props;
   return(
     <div className="pyramid-style" style={{marginTop: "2em", marginBottom: "2em"}}>
       <div className="card" style={{opacity: .8}}>
@@ -18,7 +19,7 @@ const CardPyramidWizardStep = (props) => {
           </p>
         </div>
       </div>
-      <CardPyramid mainIdea={mainIdea} supportingIdea={supportingIdea} storyDetails={storyDetails} onChange={onChange} />
+      <CardPyramid mainIdea={mainIdea} supportingIdea={supportingIdea} storyDetails={storyDetails} answer={answer} onChange={onChange} />
     </div>
   );
 };
@@ -27,6 +28,7 @@ CardPyramidWizardStep.propTypes = {
   mainIdea: PropTypes.string.isRequired,
   supportingIdea: PropTypes.string.isRequired,
   storyDetails: PropTypes.array.isRequired,
+  answer: PropTypes.instanceOf(StudentLessonAnswerModel),
   onChange: PropTypes.func.isRequired
 };
 

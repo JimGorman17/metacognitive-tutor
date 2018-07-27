@@ -9,7 +9,7 @@ const StoryQuestionsWizardStep = (props) => {
   return(
     <div style={{marginTop: "2em", marginBottom: "2em"}}>
       <h2>{Labels.student.wizard_steps.story_questions.title}</h2>
-      <p>OK. {"Let's"} answers some questions about what you just read.</p>
+      <p>OK. {"Let's"} answer some questions about what you just read.</p>
       <ol>{questions.map((q, index) =>
         <li key={index}>
           <FormGroup style={{marginTop: "1.5em"}} controlId="formControlsTextarea">

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Container, Draggable } from "react-smooth-dnd";
 import { applyDrag } from '../../dragAndDropUtils'
+import StudentLessonAnswerModel from '../../models/StudentLessonAnswer';
 import debounce from 'lodash.debounce';
 import {QuestionTypeEnum} from '../../constants';
 import '../../styles/card-pyramid.css';
@@ -15,7 +16,8 @@ class CardPyramid extends Component {
       .sort((a, b) => a[0] - b[0])
       .map(a => a[1]);
 
-    this.state = {
+    const {answer} = this.props;
+    this.state = answer ? answer.answer : {
       shuffledItems: shuffleArray([
         {
           id: "main_idea",
@@ -61,8 +63,8 @@ class CardPyramid extends Component {
 
   onChange = debounce(() => {
     const {onChange} = this.props;
-    const {mainIdeas, supportingIdeas, storyDetails} = this.state;
-    onChange(QuestionTypeEnum.card_pyramid, 0, {mainIdeas, supportingIdeas, storyDetails});
+    const {shuffledItems, mainIdeas, supportingIdeas, storyDetails} = this.state;
+    onChange(QuestionTypeEnum.card_pyramid, 0, {shuffledItems, mainIdeas, supportingIdeas, storyDetails});
   }, 100);
 
   render() {
@@ -180,7 +182,8 @@ CardPyramid.propTypes = {
   mainIdea: PropTypes.string.isRequired,
   supportingIdea: PropTypes.string.isRequired,
   storyDetails: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired,
+  answer: PropTypes.instanceOf(StudentLessonAnswerModel),
+  onChange: PropTypes.func.isRequired
 };
 
 export default CardPyramid;

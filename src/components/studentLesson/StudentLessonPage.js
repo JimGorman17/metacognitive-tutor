@@ -59,10 +59,6 @@ class StudentLessonPage extends React.Component {
         return sla;
       });
     } else {
-      if (questionType != QuestionTypeEnum.story_question) {
-        throw `Not Implemented questionType: ${questionType}`;
-      }
-
       const {lesson, loggedInUser} = this.props;
       const question = lesson.storyQuestions[questionId - 1];
 
@@ -103,7 +99,7 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.the_hook.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theHookYouTubeVideo} />},
         {name: Labels.student.wizard_steps.two_vocabulary_words.title, component: <YouTubeVideoWizardStep youTubeVideo={lesson.theTwoVocabularyWordsYouTubeVideo} />},
         {name: Labels.student.wizard_steps.please_read_the_book.title, component: <PleaseReadTheBookWizardStep bookTitle={lesson.bookTitle} bookAmazonUrl={lesson.bookAmazonUrl} />},
-        {name: Labels.student.wizard_steps.card_pyramid.title, component: <CardPyramidWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} onChange={this.updateStudentLessonAnswers} />},
+        {name: Labels.student.wizard_steps.card_pyramid.title, component: <CardPyramidWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} onChange={this.updateStudentLessonAnswers} answer={studentLessonAnswers.find(sla => sla.questionType === QuestionTypeEnum.card_pyramid)} />},
         {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} answers={studentLessonAnswers.slice().filter(sla => sla.questionType === QuestionTypeEnum.story_question).sort((a, b) => { return a.questionId - b.questionId})} onChange={this.updateStudentLessonAnswers} />},
         {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
