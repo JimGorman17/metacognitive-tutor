@@ -57,7 +57,7 @@ class WordScramble extends Component {
         {Object.keys(sentences).map((key) => { return (
           <div key={key}
           className="card-container"
-          style={{width: "auto", opacity: ".85"}}
+          style={{width: "auto", backgroundColor: "rgba(243, 243, 243, .55)"}}
           >
             <Container
               groupName={key.toString()}
