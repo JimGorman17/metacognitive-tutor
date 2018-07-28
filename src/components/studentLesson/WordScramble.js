@@ -64,7 +64,8 @@ class WordScramble extends Component {
               orientation="horizontal"
               getChildPayload={i => this.state.sentences[key][i]}
               onDrop={e =>
-                this.setState(previousState =>{ return { key: applyDrag(previousState.sentences[key], e) } }, () => this.onChange())
+                this.setState(previousState => {
+                  return { sentences: Object.assign({}, previousState.sentences, {[key]: applyDrag(previousState.sentences[key], e)}) } }, () => this.onChange())
               }
             >
               {sentences[key].map(w => {
