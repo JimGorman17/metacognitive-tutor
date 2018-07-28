@@ -83,7 +83,7 @@ class GradesPage extends React.Component {
     const groupedStudentLessonAnswer = Object.assign({}, gsla);
     groupedStudentLessonAnswer.studentLessonAnswers = groupedStudentLessonAnswer.studentLessonAnswers.map(sla => {
       const parsedStudentLessonAnswer = Object.assign({}, sla);
-      if (sla.questionType == QuestionTypeEnum.card_pyramid) {
+      if (0 <= [QuestionTypeEnum.card_pyramid, QuestionTypeEnum.word_scramble].indexOf(sla.questionType)) {
         parsedStudentLessonAnswer.answer = JSON.parse(parsedStudentLessonAnswer.answer);
       }
       return new StudentLessonAnswerModel(parsedStudentLessonAnswer);

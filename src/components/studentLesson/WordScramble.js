@@ -22,8 +22,8 @@ class WordScramble extends Component {
       return shuffleArray(sentenceAsArray.map((w, index) => new WordScrambleItemModel({id: index + 1, data: w, style: { backgroundColor: this.pickColor() } })));
     };
 
-    const {answers, sentences} = this.props;
-    this.state = {sentences: answers.length ? answers : Object.assign({}, sentences.map(s => shuffleSentence(s)))};
+    const {answer, sentences} = this.props;
+    this.state = {sentences: answer ? answer.answer : Object.assign({}, sentences.map(s => shuffleSentence(s)))};
   }
 
   cardColors = [ // https://raw.githubusercontent.com/kutlugsahin/smooth-dnd-demo/master/src/demo/pages/cards.js, 07/27/2018
@@ -91,7 +91,7 @@ class WordScramble extends Component {
 
 WordScramble.propTypes = {
   sentences: PropTypes.arrayOf(PropTypes.string).isRequired,
-  answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
+  answer: PropTypes.instanceOf(StudentLessonAnswerModel),
   onChange: PropTypes.func.isRequired
 };
 

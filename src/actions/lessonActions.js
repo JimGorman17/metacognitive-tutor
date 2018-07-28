@@ -79,7 +79,7 @@ export function deleteLesson(deleteLessonModel) {
 
 function jsonParseStudentLessonAnswer(sla) {
   const studentLessonAnswer = Object.assign({}, sla);
-  studentLessonAnswer.answer = studentLessonAnswer.answer && studentLessonAnswer.questionType == QuestionTypeEnum.card_pyramid ? JSON.parse(studentLessonAnswer.answer) : studentLessonAnswer.answer;
+  studentLessonAnswer.answer = studentLessonAnswer.answer && 0 <= [QuestionTypeEnum.card_pyramid, QuestionTypeEnum.word_scramble].indexOf(studentLessonAnswer.questionType) ? JSON.parse(studentLessonAnswer.answer) : studentLessonAnswer.answer;
   return new StudentLessonAnswerModel(studentLessonAnswer);
 }
 

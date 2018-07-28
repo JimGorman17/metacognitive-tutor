@@ -6,7 +6,7 @@ import {Labels} from '../../constants';
 import '../../styles/word-scramble.css';
 
 const WordScrambleWizardStep = (props) => {
-  const {sentences, answers, onChange} = props;
+  const {sentences, answer, onChange} = props;
   return(
     <div className="word-scramble-style" style={{marginTop: "2em", marginBottom: "2em"}}>
       <div className="card" style={{opacity: .85}}>
@@ -19,14 +19,14 @@ const WordScrambleWizardStep = (props) => {
           </p>
         </div>
       </div>
-      <WordScramble sentences={sentences} answers={answers} onChange={onChange} />
+      <WordScramble sentences={sentences} answer={answer} onChange={onChange} />
     </div>
   );
 };
 
 WordScrambleWizardStep.propTypes = {
   sentences: PropTypes.arrayOf(PropTypes.string).isRequired,
-  answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
+  answer: PropTypes.instanceOf(StudentLessonAnswerModel),
   onChange: PropTypes.func.isRequired
 };
 
