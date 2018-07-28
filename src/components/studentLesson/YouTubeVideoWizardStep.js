@@ -12,11 +12,18 @@ const YouTubeVideoWizardStep = (props) => {
     }
   };
 
-  const {youTubeVideo} = props;
+  const {youTubeVideo, explanationText} = props;
   const videoId = youTubeVideo.videoId ? youTubeVideo.videoId : (youTubeVideo.url.indexOf("?v=") !== -1 ? youTubeVideo.url.substring(youTubeVideo.url.indexOf("?v=") + 3): youTubeVideo.url.substring(youTubeVideo.url.lastIndexOf('/') + 1));
 
   return(
     <div style={{marginTop: "2em", marginBottom: "2em"}}>
+      {explanationText &&
+      <div className="card">
+        <div className="card-body">
+          {explanationText}
+        </div>
+      </div>
+      }
       <YouTube
           videoId={videoId}
           opts={opts}
@@ -26,7 +33,8 @@ const YouTubeVideoWizardStep = (props) => {
 };
 
 YouTubeVideoWizardStep.propTypes = {
-  youTubeVideo: PropTypes.instanceOf(YouTubeVideoModel)
+  youTubeVideo: PropTypes.instanceOf(YouTubeVideoModel),
+  explanationText: PropTypes.string
 };
 
 export default YouTubeVideoWizardStep;

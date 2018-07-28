@@ -116,6 +116,8 @@ class StudentLessonPage extends React.Component {
         {name: Labels.student.wizard_steps.card_pyramid.title, component: <CardPyramidWizardStep mainIdea={lesson.mainIdea} supportingIdea={lesson.supportingIdea} storyDetails={lesson.storyDetails} onChange={this.updateStudentLessonAnswers} answer={studentLessonAnswers.find(sla => sla.questionType === QuestionTypeEnum.card_pyramid)} />},
         {name: Labels.student.wizard_steps.word_scramble.title, component: <WordScrambleWizardStep onChange={this.updateStudentLessonAnswers} sentences={lesson.importantSentencesForWordScramble} answer={studentLessonAnswers.find(sla => sla.questionType === QuestionTypeEnum.word_scramble)} />},
         {name: Labels.student.wizard_steps.story_questions.title, component: <StoryQuestionsWizardStep questions={lesson.storyQuestions} answers={studentLessonAnswers.slice().filter(sla => sla.questionType === QuestionTypeEnum.story_question).sort((a, b) => { return a.questionId - b.questionId})} onChange={this.updateStudentLessonAnswers} />},
+        {name: Labels.student.wizard_steps.enunciation_video_1.title, component: <YouTubeVideoWizardStep explanationText={Labels.student.wizard_steps.enunciation_video_1.explanation} youTubeVideo={lesson.enunciationVideo1} />},
+        {name: Labels.student.wizard_steps.enunciation_video_2.title, component: <YouTubeVideoWizardStep explanationText={Labels.student.wizard_steps.enunciation_video_2.explanation} youTubeVideo={lesson.enunciationVideo2} />},
         {name: Labels.student.wizard_steps.congratulations.title, component: <CongratulationsWizardStep bookTitle={lesson.bookTitle} lessonAuthor={lesson.lessonAuthor} />}
       ];
 

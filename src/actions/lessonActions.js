@@ -34,6 +34,8 @@ function jsonParseLesson(l) {
   const lesson = Object.assign({}, l);
   lesson.theHookYouTubeVideo = lesson.theHookYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theHookYouTubeVideo)) : new YouTubeVideoModel();
   lesson.theTwoVocabularyWordsYouTubeVideo = lesson.theTwoVocabularyWordsYouTubeVideo ? new YouTubeVideoModel(JSON.parse(lesson.theTwoVocabularyWordsYouTubeVideo)) : new YouTubeVideoModel();
+  lesson.enunciationVideo1 = lesson.enunciationVideo1 ? new YouTubeVideoModel(JSON.parse(lesson.enunciationVideo1)) : new YouTubeVideoModel();
+  lesson.enunciationVideo2 = lesson.enunciationVideo2 ? new YouTubeVideoModel(JSON.parse(lesson.enunciationVideo2)) : new YouTubeVideoModel();
   lesson.storyDetails = lesson.storyDetails ? JSON.parse(lesson.storyDetails) : [];
   lesson.storyQuestions = lesson.storyQuestions ? JSON.parse(lesson.storyQuestions) : [];
   lesson.importantSentencesForWordScramble = lesson.importantSentencesForWordScramble ? JSON.parse(lesson.importantSentencesForWordScramble) : [];
