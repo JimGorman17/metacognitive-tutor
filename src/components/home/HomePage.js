@@ -14,7 +14,7 @@ class HomePage extends React.Component {
         </div>
         <div className="row mb-4">
           <div className="col-md-5">
-            <Image src="../../images/teacher_teaching_kids_how_to_read.jpg" alt={Labels.home.image_description} />
+            <Image src={require('../../images/teacher_teaching_kids_how_to_read.jpg')} alt={Labels.home.image_description} />
           </div>
           <div className="col-md-7">
             {Labels.app_description}

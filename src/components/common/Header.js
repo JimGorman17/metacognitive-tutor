@@ -21,7 +21,7 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
                   <div className="container">
                     <div className="row">
                       <div className="col-2">
-                        <Image src="../../images/reading-72-214313.png" alt={Labels.app_title} style={{width: "auto", maxHeight: "55%", marginTop: "-.25em"}} />
+                        <Image src={require('../../images/reading-72-214313.png')} alt={Labels.app_title} style={{width: "auto", maxHeight: "55%", marginTop: "-.25em"}} />
                       </div>
                       <div className="col-10">
                         <h4>{Labels.app_title}</h4>
