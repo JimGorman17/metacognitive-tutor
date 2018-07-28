@@ -26,7 +26,7 @@ export default class StudentLessonAnswer {
 
   convertToApiReady(){
     return Object.assign({}, this, {
-      answer: this.answer && this.questionType == QuestionTypeEnum.card_pyramid ? JSON.stringify(this.answer) : this.answer
+      answer: this.answer && 0 <= [QuestionTypeEnum.card_pyramid, QuestionTypeEnum.word_scramble].indexOf(this.questionType) ? JSON.stringify(this.answer) : this.answer
     });
   }
 }

@@ -28,7 +28,7 @@ const StoryQuestionsWizardStep = (props) => {
 };
 
 StoryQuestionsWizardStep.propTypes = {
-  questions: PropTypes.array.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.string).isRequired,
   answers: PropTypes.arrayOf(PropTypes.instanceOf(StudentLessonAnswerModel)).isRequired,
   onChange: PropTypes.func.isRequired
 };
