@@ -65,8 +65,17 @@ class GradeListRow extends React.Component {
             {row.answer.shuffledItems.map(si => <li key={si.id}><span className={`badge badge-danger`}>{si.id}</span>: {si.data}</li>)}
           </ul>
         </React.Fragment>);
-    }
-    else {
+    } else if (row.questionType === QuestionTypeEnum.word_scramble) {
+      return (
+        <React.Fragment>
+          {Object.keys(row.answer).map((key) => {
+            const wordIds = row.answer[key].map(w => w.id);
+            return (
+              <div key={parseInt(key, 10) + 1}><span className={`badge badge-${wordIds.slice().sort().toString() == wordIds.toString() ? "success" : "danger"}`}>{`${parseInt(key, 10) + 1}.`}</span>{" "}{row.answer[key].map((w, index) => <span key={index}>{0 < index && " "}{w.data}</span>)}.</div>
+            );
+          })}
+        </React.Fragment>);
+    } else {
       return row.answer;
     }
   }
