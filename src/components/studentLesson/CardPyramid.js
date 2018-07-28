@@ -78,7 +78,7 @@ class CardPyramid extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="card-container col-md-3">
+          <div className="card-container col-md-3" style={{backgroundColor: "rgba(243, 243, 243, .95)"}}>
             <Container
               groupName="1"
               nonDragAreaSelector=".info-handle"
@@ -103,7 +103,7 @@ class CardPyramid extends Component {
             </Container>
           </div>
           <div
-            style={{ maxHeight: "183.2px" }}
+            style={{ maxHeight: "183.2px", backgroundColor: "rgba(243, 243, 243, .95)" }}
             className="col-md-7 card-container card-pyramid-master-container"
           >
             <Container

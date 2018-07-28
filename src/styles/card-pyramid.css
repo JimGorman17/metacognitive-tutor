@@ -12,21 +12,21 @@ div.card-pyramid-master-container div {
 div.card-pyramid-master-container div.smooth-dnd-container:nth-child(1):after {
   content: "Drop the Main Idea(s) here";
   position: absolute;
-  top: 0;
+  top: 1.4em;
   left: 0;
 }
 
 div.card-pyramid-master-container div.smooth-dnd-container:nth-child(2):after {
   content: "Drop the Supporting Idea(s) here";
   position: absolute;
-  top: 0;
+  top: 1.4em;
   left: 0;
 }
 
 div.card-pyramid-master-container div.smooth-dnd-container:nth-child(3):after {
   content: "Drop the Story Detail(s) here";
   position: absolute;
-  top: 0;
+  top: 1.4em;
   left: 0;
 }
 
