@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LoadingDots from './LoadingDots';
 import {Labels, LoginTypeEnum} from '../../constants';
 import LoginModel from '../../models/Login';
+import {Image} from 'react-bootstrap/lib';
 import {connect} from 'react-redux';
 
 const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-line
@@ -11,12 +12,29 @@ const Header = ({loading, loginStatus, loggedInUser}) => { // eslint-disable-lin
     <div>
       <header className="py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
-          <div className="col-4 pt-1"/>
-          <div className="col-4 text-center">
-            <h4>{Labels.app_title}</h4>
+          <div className="col-3 pt-1"/>
+          <div className="col-6 text-center">
+            <div className="container">
+              <div className="row">
+                <div className="col-1" />
+                <div className="col-10" style={{marginBottom: "-3em"}}>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-2">
+                        <Image src="../../images/reading-72-214313.png" alt={Labels.app_title} style={{width: "auto", maxHeight: "55%", marginTop: "-.25em"}} />
+                      </div>
+                      <div className="col-10">
+                        <h4>{Labels.app_title}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-1" />
+              </div>
+            </div>
             {loading && <LoadingDots interval={100} dots={20}/>}
           </div>
-          <div className="col-4 d-flex justify-content-end align-items-center">
+          <div className="col-3 d-flex justify-content-end align-items-center">
             <NavLink onClick={() => { if (loginStatus){ location.reload(true); } }} to="/login" className="btn btn-sm btn-outline-secondary"><i className={`fa ${loginStatus ? "fa-sign-out" : "fa-sign-in"} fa-fw`} aria-hidden="true" />&nbsp; {loginStatus ? Labels.logout.title : Labels.login.title}</NavLink>
           </div>
         </div>

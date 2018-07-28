@@ -38,6 +38,20 @@ const LessonForm = ({lesson, onSave, onChange, saving, errors}) => {
         onChange={onChange}
         error={errors.theTwoVocabularyWordsYouTubeVideo} />
 
+      <YouTubeVideoInput
+        name="enunciationVideo1"
+        label={Labels.teacher.lesson_form.manage_lesson.enunciationVideo1}
+        value={lesson.enunciationVideo1}
+        onChange={onChange}
+        error={errors.enunciationVideo1} />
+
+      <YouTubeVideoInput
+        name="enunciationVideo2"
+        label={Labels.teacher.lesson_form.manage_lesson.enunciationVideo2}
+        value={lesson.enunciationVideo2}
+        onChange={onChange}
+        error={errors.enunciationVideo2} />
+
       <TextInput
         name="mainIdea"
         label={Labels.teacher.lesson_form.manage_lesson.main_idea}

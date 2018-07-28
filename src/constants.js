@@ -86,6 +86,8 @@ const Labels = {
                 book_amazon_url: "Amazon Url",
                 the_hook: "The Hook",
                 the_two_vocabulary_words_you_tube_video: "The Two Vocabulary Words",
+                enunciationVideo1: "Enunciation Video 1",
+                enunciationVideo2: "Enunciation Video 2",
                 main_idea: "Main Idea",
                 supporting_idea: "Supporting Idea",
                 story_details: "Story Details",
@@ -138,6 +140,14 @@ const Labels = {
           },
           word_scramble: {
             title: "Word Scrambles"
+          },
+          enunciation_video_1: {
+            title: "Enunciation Video 1",
+            explanation: "OK. Now let's practice speaking some of the words that you read in the story.",
+          },
+          enunciation_video_2: {
+            title: "Enunciation Video 2",
+            explanation: "Let's practice some more.",
           },
           congratulations: {
             title: "Congratulations"
